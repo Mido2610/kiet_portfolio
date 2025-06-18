@@ -10,36 +10,58 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_animate: ^4.5.2 
-  # Add animations to widgets
+  # State management
+  flutter_hooks: ^0.21.2
+  riverpod: ^2.6.1
+  hooks_riverpod: ^2.6.1
 
-  flutter_hooks: ^0.21.2 
-  # State management with hooks
+  # UI & Animations
+  google_fonts: ^6.2.1
+  animated_text_kit: ^4.2.3
+  lottie: ^3.3.1
+  flutter_svg: ^2.2.0
+  flutter_staggered_animations: ^1.1.1
+  flutter_animate: ^4.5.2
 
-  go_router: ^15.2.0 
-  # App navigation and routing
+  # Responsive & Navigation
+  responsive_framework: ^1.5.1
+  go_router: ^15.2.0
+  scroll_to_index: ^3.0.1
 
-  google_fonts: ^6.2.1 
-  # Use Google Fonts
+  # Utils
+  url_launcher: ^6.3.1
 
-  lottie: ^3.3.1 
-  # Play Lottie animations
+  # Data Models
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
 
-  responsive_framework: ^1.5.1 
-  # Make app responsive
-
-  rive: ^0.13.20 
-  # Interactive animations
-
-  url_launcher: ^6.3.1 
-  # Open links and URLs
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^5.0.0 
-  # Code quality rules
-  
+
+  # Code Generation
+  build_runner: ^2.4.7
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
+
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/icons/
+    - assets/videos/
+  
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter-Black.ttf
+          weight: 900
