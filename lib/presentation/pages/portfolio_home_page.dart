@@ -6,8 +6,6 @@ import 'package:kiet_portfolio/presentation/sections/contact_section.dart';
 import 'package:kiet_portfolio/presentation/widgets/navigation/custom_navbar.dart';
 import '../sections/hero_section.dart';
 import '../sections/skills_section.dart';
-import '../sections/projects_section.dart';
-import '../sections/work_experience_section.dart';
 import '../../core/themes/app_colors.dart';
 
 class PortfolioHomePage extends HookConsumerWidget {
@@ -78,16 +76,16 @@ class PortfolioHomePage extends HookConsumerWidget {
                   Container(key: sectionKeys[2], child: const SkillsSection()),
 
                   // Section 3: Projects
-                  Container(
-                    key: sectionKeys[3],
-                    child: const FeaturedProjectsSection(),
-                  ),
+                  // Container(
+                  //   key: sectionKeys[3],
+                  //   child: const FeaturedProjectsSection(),
+                  // ),
 
-                  // Section 4: Experience
-                  Container(
-                    key: sectionKeys[4],
-                    child: const WorkExperienceSection(),
-                  ),
+                  // // Section 4: Experience
+                  // Container(
+                  //   key: sectionKeys[4],
+                  //   child: const WorkExperienceSection(),
+                  // ),
 
                   // Section 5: Contact
                   Container(key: sectionKeys[5], child: const ContactSection()),

@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-ProjectModel _$ProjectModelFromJson(Map<String, dynamic> json) {
-  return _ProjectModel.fromJson(json);
+Project _$ProjectFromJson(Map<String, dynamic> json) {
+  return _Project.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ProjectModel {
+mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -37,22 +37,19 @@ mixin _$ProjectModel {
   List<String> get keyFeatures => throw _privateConstructorUsedError;
   String get longDescription => throw _privateConstructorUsedError;
 
-  /// Serializes this ProjectModel to a JSON map.
+  /// Serializes this Project to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of ProjectModel
+  /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ProjectModelCopyWith<ProjectModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $ProjectCopyWith<Project> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ProjectModelCopyWith<$Res> {
-  factory $ProjectModelCopyWith(
-    ProjectModel value,
-    $Res Function(ProjectModel) then,
-  ) = _$ProjectModelCopyWithImpl<$Res, ProjectModel>;
+abstract class $ProjectCopyWith<$Res> {
+  factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
+      _$ProjectCopyWithImpl<$Res, Project>;
   @useResult
   $Res call({
     String id,
@@ -74,16 +71,16 @@ abstract class $ProjectModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
-    implements $ProjectModelCopyWith<$Res> {
-  _$ProjectModelCopyWithImpl(this._value, this._then);
+class _$ProjectCopyWithImpl<$Res, $Val extends Project>
+    implements $ProjectCopyWith<$Res> {
+  _$ProjectCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ProjectModel
+  /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -188,12 +185,11 @@ class _$ProjectModelCopyWithImpl<$Res, $Val extends ProjectModel>
 }
 
 /// @nodoc
-abstract class _$$ProjectModelImplCopyWith<$Res>
-    implements $ProjectModelCopyWith<$Res> {
-  factory _$$ProjectModelImplCopyWith(
-    _$ProjectModelImpl value,
-    $Res Function(_$ProjectModelImpl) then,
-  ) = __$$ProjectModelImplCopyWithImpl<$Res>;
+abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
+  factory _$$ProjectImplCopyWith(
+    _$ProjectImpl value,
+    $Res Function(_$ProjectImpl) then,
+  ) = __$$ProjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -216,15 +212,15 @@ abstract class _$$ProjectModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ProjectModelImplCopyWithImpl<$Res>
-    extends _$ProjectModelCopyWithImpl<$Res, _$ProjectModelImpl>
-    implements _$$ProjectModelImplCopyWith<$Res> {
-  __$$ProjectModelImplCopyWithImpl(
-    _$ProjectModelImpl _value,
-    $Res Function(_$ProjectModelImpl) _then,
+class __$$ProjectImplCopyWithImpl<$Res>
+    extends _$ProjectCopyWithImpl<$Res, _$ProjectImpl>
+    implements _$$ProjectImplCopyWith<$Res> {
+  __$$ProjectImplCopyWithImpl(
+    _$ProjectImpl _value,
+    $Res Function(_$ProjectImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of ProjectModel
+  /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -246,7 +242,7 @@ class __$$ProjectModelImplCopyWithImpl<$Res>
     Object? longDescription = null,
   }) {
     return _then(
-      _$ProjectModelImpl(
+      _$ProjectImpl(
         id:
             null == id
                 ? _value.id
@@ -329,8 +325,8 @@ class __$$ProjectModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ProjectModelImpl implements _ProjectModel {
-  const _$ProjectModelImpl({
+class _$ProjectImpl implements _Project {
+  const _$ProjectImpl({
     required this.id,
     required this.title,
     required this.description,
@@ -350,8 +346,8 @@ class _$ProjectModelImpl implements _ProjectModel {
        _screenshots = screenshots,
        _keyFeatures = keyFeatures;
 
-  factory _$ProjectModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProjectModelImplFromJson(json);
+  factory _$ProjectImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectImplFromJson(json);
 
   @override
   final String id;
@@ -411,14 +407,14 @@ class _$ProjectModelImpl implements _ProjectModel {
 
   @override
   String toString() {
-    return 'ProjectModel(id: $id, title: $title, description: $description, imageUrl: $imageUrl, technologies: $technologies, githubUrl: $githubUrl, liveUrl: $liveUrl, category: $category, isFeatured: $isFeatured, videoUrl: $videoUrl, screenshots: $screenshots, clientName: $clientName, projectDuration: $projectDuration, keyFeatures: $keyFeatures, longDescription: $longDescription)';
+    return 'Project(id: $id, title: $title, description: $description, imageUrl: $imageUrl, technologies: $technologies, githubUrl: $githubUrl, liveUrl: $liveUrl, category: $category, isFeatured: $isFeatured, videoUrl: $videoUrl, screenshots: $screenshots, clientName: $clientName, projectDuration: $projectDuration, keyFeatures: $keyFeatures, longDescription: $longDescription)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProjectModelImpl &&
+            other is _$ProjectImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
@@ -475,22 +471,22 @@ class _$ProjectModelImpl implements _ProjectModel {
     longDescription,
   );
 
-  /// Create a copy of ProjectModel
+  /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
-      __$$ProjectModelImplCopyWithImpl<_$ProjectModelImpl>(this, _$identity);
+  _$$ProjectImplCopyWith<_$ProjectImpl> get copyWith =>
+      __$$ProjectImplCopyWithImpl<_$ProjectImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProjectModelImplToJson(this);
+    return _$$ProjectImplToJson(this);
   }
 }
 
-abstract class _ProjectModel implements ProjectModel {
-  const factory _ProjectModel({
+abstract class _Project implements Project {
+  const factory _Project({
     required final String id,
     required final String title,
     required final String description,
@@ -506,10 +502,9 @@ abstract class _ProjectModel implements ProjectModel {
     final String projectDuration,
     final List<String> keyFeatures,
     final String longDescription,
-  }) = _$ProjectModelImpl;
+  }) = _$ProjectImpl;
 
-  factory _ProjectModel.fromJson(Map<String, dynamic> json) =
-      _$ProjectModelImpl.fromJson;
+  factory _Project.fromJson(Map<String, dynamic> json) = _$ProjectImpl.fromJson;
 
   @override
   String get id;
@@ -542,10 +537,10 @@ abstract class _ProjectModel implements ProjectModel {
   @override
   String get longDescription;
 
-  /// Create a copy of ProjectModel
+  /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProjectModelImplCopyWith<_$ProjectModelImpl> get copyWith =>
+  _$$ProjectImplCopyWith<_$ProjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

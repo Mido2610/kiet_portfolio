@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kiet_portfolio/presentation/providers/portfolio_provider.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
 
@@ -33,15 +35,24 @@ class CustomNavigationBar extends HookWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildLogo(),
-          if (!isMobile) _buildNavigationItems(),
-          if (isMobile) _buildMobileMenuButton(),
+          const _LogoWidget(),
+          if (!isMobile)
+            NavigationItemsWidget(
+              currentSection: currentSection,
+              onNavigateToSection: onNavigateToSection,
+            ),
+          if (isMobile) const MobileMenuButtonWidget(),
         ],
       ),
     );
   }
+}
 
-  Widget _buildLogo() {
+class _LogoWidget extends StatelessWidget {
+  const _LogoWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return const Text(
       'KN',
       style: TextStyle(
@@ -51,8 +62,20 @@ class CustomNavigationBar extends HookWidget {
       ),
     );
   }
+}
 
-  Widget _buildNavigationItems() {
+class NavigationItemsWidget extends StatelessWidget {
+  final int currentSection;
+  final Function(int) onNavigateToSection;
+
+  const NavigationItemsWidget({
+    super.key,
+    required this.currentSection,
+    required this.onNavigateToSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final sections = [
       'Home',
       'About',
@@ -71,73 +94,108 @@ class CustomNavigationBar extends HookWidget {
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: _buildNavItem(
-                title,
-                isActive,
-                () => onNavigateToSection(index),
+              child: NavigationItemWidget(
+                title: title,
+                isActive: isActive,
+                onTap: () => onNavigateToSection(index),
               ),
             );
           }).toList(),
     );
   }
+}
 
-  Widget _buildNavItem(String title, bool isActive, VoidCallback onTap) {
-    return HookBuilder(
-      builder: (context) {
-        final hoverController = useAnimationController(
-          duration: const Duration(milliseconds: 200),
-        );
+class NavigationItemWidget extends HookWidget {
+  final String title;
+  final bool isActive;
+  final VoidCallback onTap;
 
-        final hoverAnimation = useAnimation(
-          Tween<double>(begin: 1.0, end: 1.1).animate(hoverController),
-        );
+  const NavigationItemWidget({
+    super.key,
+    required this.title,
+    required this.isActive,
+    required this.onTap,
+  });
 
-        return MouseRegion(
-          onEnter: (_) => hoverController.forward(),
-          onExit: (_) => hoverController.reverse(),
-          child: Transform.scale(
-            scale: hoverAnimation,
-            child: GestureDetector(
-              onTap: onTap,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color:
-                      isActive
-                          ? AppColors.accent.withOpacity(0.1)
-                          : Colors.transparent,
-                  borderRadius: BorderRadius.circular(20),
-                  border:
-                      isActive
-                          ? Border.all(color: AppColors.accent.withOpacity(0.3))
-                          : null,
-                ),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: isActive ? AppColors.accent : AppColors.textPrimary,
-                    fontSize: 16,
-                    fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-                  ),
-                ),
+  @override
+  Widget build(BuildContext context) {
+    final hoverController = useAnimationController(
+      duration: const Duration(milliseconds: 200),
+    );
+
+    final hoverAnimation = useAnimation(
+      Tween<double>(begin: 1.0, end: 1.1).animate(hoverController),
+    );
+
+    return MouseRegion(
+      onEnter: (_) => hoverController.forward(),
+      onExit: (_) => hoverController.reverse(),
+      child: Transform.scale(
+        scale: hoverAnimation,
+        child: GestureDetector(
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color:
+                  isActive
+                      ? AppColors.accent.withAlpha((0.1 * 255).round())
+                      : Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              border:
+                  isActive
+                      ? Border.all(
+                        color: AppColors.accent.withAlpha((0.3 * 255).round()),
+                      )
+                      : null,
+            ),
+            child: Text(
+              title,
+              style: TextStyle(
+                color: isActive ? AppColors.accent : AppColors.textPrimary,
+                fontSize: 16,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
+}
 
-  Widget _buildMobileMenuButton() {
-    return IconButton(
-      onPressed: () {
-        // TODO: Show mobile menu
-      },
-      icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+class MobileMenuButtonWidget extends ConsumerWidget {
+  const MobileMenuButtonWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isMenuOpen = ref.watch(isMenuOpenProvider);
+
+    return GestureDetector(
+      onTap: () => ref.read(portfolioProvider.notifier).toggleMenu(),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: AppColors.accent.withAlpha((0.2 * 255).round()),
+            width: 1,
+          ),
+        ),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: Icon(
+            isMenuOpen ? Icons.close : Icons.menu,
+            key: ValueKey(isMenuOpen),
+            color: AppColors.textPrimary,
+            size: 24,
+          ),
+        ),
+      ),
     );
   }
 }

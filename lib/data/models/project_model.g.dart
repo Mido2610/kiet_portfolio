@@ -6,8 +6,8 @@ part of 'project_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProjectModelImpl _$$ProjectModelImplFromJson(Map<String, dynamic> json) =>
-    _$ProjectModelImpl(
+_$ProjectImpl _$$ProjectImplFromJson(Map<String, dynamic> json) =>
+    _$ProjectImpl(
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -36,7 +36,7 @@ _$ProjectModelImpl _$$ProjectModelImplFromJson(Map<String, dynamic> json) =>
       longDescription: json['longDescription'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$ProjectModelImplToJson(_$ProjectModelImpl instance) =>
+Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

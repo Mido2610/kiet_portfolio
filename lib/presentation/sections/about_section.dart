@@ -12,7 +12,6 @@ class AboutSection extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scrollController = useScrollController();
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 1500),
     );

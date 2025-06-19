@@ -4,8 +4,8 @@ part 'project_model.freezed.dart';
 part 'project_model.g.dart';
 
 @freezed
-class ProjectModel with _$ProjectModel {
-  const factory ProjectModel({
+class Project with _$Project {
+  const factory Project({
     required String id,
     required String title,
     required String description,
@@ -21,10 +21,10 @@ class ProjectModel with _$ProjectModel {
     @Default('') String projectDuration,
     @Default([]) List<String> keyFeatures,
     @Default('') String longDescription,
-  }) = _ProjectModel;
+  }) = _Project;
 
-  factory ProjectModel.fromJson(Map<String, dynamic> json) =>
-      _$ProjectModelFromJson(json);
+  factory Project.fromJson(Map<String, dynamic> json) =>
+      _$ProjectFromJson(json);
 }
 
 enum ProjectCategory {

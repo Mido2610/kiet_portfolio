@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-ExperienceModel _$ExperienceModelFromJson(Map<String, dynamic> json) {
-  return _ExperienceModel.fromJson(json);
+Experience _$ExperienceFromJson(Map<String, dynamic> json) {
+  return _Experience.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ExperienceModel {
+mixin _$Experience {
   String get id => throw _privateConstructorUsedError;
   String get company => throw _privateConstructorUsedError;
   String get position => throw _privateConstructorUsedError;
@@ -32,22 +32,22 @@ mixin _$ExperienceModel {
   String get location => throw _privateConstructorUsedError;
   String get employmentType => throw _privateConstructorUsedError;
 
-  /// Serializes this ExperienceModel to a JSON map.
+  /// Serializes this Experience to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of ExperienceModel
+  /// Create a copy of Experience
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ExperienceModelCopyWith<ExperienceModel> get copyWith =>
+  $ExperienceCopyWith<Experience> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExperienceModelCopyWith<$Res> {
-  factory $ExperienceModelCopyWith(
-    ExperienceModel value,
-    $Res Function(ExperienceModel) then,
-  ) = _$ExperienceModelCopyWithImpl<$Res, ExperienceModel>;
+abstract class $ExperienceCopyWith<$Res> {
+  factory $ExperienceCopyWith(
+    Experience value,
+    $Res Function(Experience) then,
+  ) = _$ExperienceCopyWithImpl<$Res, Experience>;
   @useResult
   $Res call({
     String id,
@@ -64,16 +64,16 @@ abstract class $ExperienceModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExperienceModelCopyWithImpl<$Res, $Val extends ExperienceModel>
-    implements $ExperienceModelCopyWith<$Res> {
-  _$ExperienceModelCopyWithImpl(this._value, this._then);
+class _$ExperienceCopyWithImpl<$Res, $Val extends Experience>
+    implements $ExperienceCopyWith<$Res> {
+  _$ExperienceCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ExperienceModel
+  /// Create a copy of Experience
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -148,12 +148,12 @@ class _$ExperienceModelCopyWithImpl<$Res, $Val extends ExperienceModel>
 }
 
 /// @nodoc
-abstract class _$$ExperienceModelImplCopyWith<$Res>
-    implements $ExperienceModelCopyWith<$Res> {
-  factory _$$ExperienceModelImplCopyWith(
-    _$ExperienceModelImpl value,
-    $Res Function(_$ExperienceModelImpl) then,
-  ) = __$$ExperienceModelImplCopyWithImpl<$Res>;
+abstract class _$$ExperienceImplCopyWith<$Res>
+    implements $ExperienceCopyWith<$Res> {
+  factory _$$ExperienceImplCopyWith(
+    _$ExperienceImpl value,
+    $Res Function(_$ExperienceImpl) then,
+  ) = __$$ExperienceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -171,15 +171,15 @@ abstract class _$$ExperienceModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ExperienceModelImplCopyWithImpl<$Res>
-    extends _$ExperienceModelCopyWithImpl<$Res, _$ExperienceModelImpl>
-    implements _$$ExperienceModelImplCopyWith<$Res> {
-  __$$ExperienceModelImplCopyWithImpl(
-    _$ExperienceModelImpl _value,
-    $Res Function(_$ExperienceModelImpl) _then,
+class __$$ExperienceImplCopyWithImpl<$Res>
+    extends _$ExperienceCopyWithImpl<$Res, _$ExperienceImpl>
+    implements _$$ExperienceImplCopyWith<$Res> {
+  __$$ExperienceImplCopyWithImpl(
+    _$ExperienceImpl _value,
+    $Res Function(_$ExperienceImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of ExperienceModel
+  /// Create a copy of Experience
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -196,7 +196,7 @@ class __$$ExperienceModelImplCopyWithImpl<$Res>
     Object? employmentType = null,
   }) {
     return _then(
-      _$ExperienceModelImpl(
+      _$ExperienceImpl(
         id:
             null == id
                 ? _value.id
@@ -254,8 +254,8 @@ class __$$ExperienceModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ExperienceModelImpl implements _ExperienceModel {
-  const _$ExperienceModelImpl({
+class _$ExperienceImpl implements _Experience {
+  const _$ExperienceImpl({
     required this.id,
     required this.company,
     required this.position,
@@ -269,8 +269,8 @@ class _$ExperienceModelImpl implements _ExperienceModel {
   }) : _technologies = technologies,
        _achievements = achievements;
 
-  factory _$ExperienceModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ExperienceModelImplFromJson(json);
+  factory _$ExperienceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExperienceImplFromJson(json);
 
   @override
   final String id;
@@ -311,14 +311,14 @@ class _$ExperienceModelImpl implements _ExperienceModel {
 
   @override
   String toString() {
-    return 'ExperienceModel(id: $id, company: $company, position: $position, duration: $duration, description: $description, technologies: $technologies, logoUrl: $logoUrl, achievements: $achievements, location: $location, employmentType: $employmentType)';
+    return 'Experience(id: $id, company: $company, position: $position, duration: $duration, description: $description, technologies: $technologies, logoUrl: $logoUrl, achievements: $achievements, location: $location, employmentType: $employmentType)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ExperienceModelImpl &&
+            other is _$ExperienceImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.company, company) || other.company == company) &&
             (identical(other.position, position) ||
@@ -358,25 +358,22 @@ class _$ExperienceModelImpl implements _ExperienceModel {
     employmentType,
   );
 
-  /// Create a copy of ExperienceModel
+  /// Create a copy of Experience
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ExperienceModelImplCopyWith<_$ExperienceModelImpl> get copyWith =>
-      __$$ExperienceModelImplCopyWithImpl<_$ExperienceModelImpl>(
-        this,
-        _$identity,
-      );
+  _$$ExperienceImplCopyWith<_$ExperienceImpl> get copyWith =>
+      __$$ExperienceImplCopyWithImpl<_$ExperienceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ExperienceModelImplToJson(this);
+    return _$$ExperienceImplToJson(this);
   }
 }
 
-abstract class _ExperienceModel implements ExperienceModel {
-  const factory _ExperienceModel({
+abstract class _Experience implements Experience {
+  const factory _Experience({
     required final String id,
     required final String company,
     required final String position,
@@ -387,10 +384,10 @@ abstract class _ExperienceModel implements ExperienceModel {
     final List<String> achievements,
     final String location,
     final String employmentType,
-  }) = _$ExperienceModelImpl;
+  }) = _$ExperienceImpl;
 
-  factory _ExperienceModel.fromJson(Map<String, dynamic> json) =
-      _$ExperienceModelImpl.fromJson;
+  factory _Experience.fromJson(Map<String, dynamic> json) =
+      _$ExperienceImpl.fromJson;
 
   @override
   String get id;
@@ -413,10 +410,10 @@ abstract class _ExperienceModel implements ExperienceModel {
   @override
   String get employmentType;
 
-  /// Create a copy of ExperienceModel
+  /// Create a copy of Experience
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ExperienceModelImplCopyWith<_$ExperienceModelImpl> get copyWith =>
+  _$$ExperienceImplCopyWith<_$ExperienceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:kiet_portfolio/data/models/portfolio_state.dart';
+import 'package:kiet_portfolio/data/models/skill_model.dart';
 import 'package:kiet_portfolio/presentation/cards/skill_cards.dart';
-import 'package:kiet_portfolio/presentation/providers/portfolio_provider.dart';
+import 'package:kiet_portfolio/presentation/providers/skills_provider.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
-
 import '../animations/fade_in_up.dart';
 
 class SkillsSection extends HookConsumerWidget {
@@ -15,17 +14,22 @@ class SkillsSection extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final portfolioState = ref.watch(portfolioProvider);
+    final skillsState = ref.watch(skillsProvider);
+    final filteredSkills = ref.watch(filteredSkillsProvider);
+    final skillCategories = ref.watch(skillCategoriesProvider);
+
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 2000),
     );
 
     final isVisible = useState(false);
-    final selectedCategory = useState('All');
-
-    final skillCategories = ['All', 'Frontend', 'Backend', 'Tools', 'Design'];
 
     useEffect(() {
+      // Load skills when component mounts
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(skillsProvider.notifier).loadingSkills();
+      });
+
       void checkVisibility() {
         if (!isVisible.value) {
           isVisible.value = true;
@@ -44,28 +48,210 @@ class SkillsSection extends HookConsumerWidget {
         children: [
           FadeInUp(
             delay: const Duration(milliseconds: 200),
-            child: _buildSectionHeader(context),
+            child: const _SkillsSectionHeaderWidget(),
           ),
           const SizedBox(height: 40),
           FadeInUp(
             delay: const Duration(milliseconds: 400),
-            child: _buildCategoryFilter(skillCategories, selectedCategory),
+            child: _SkillsCategoryFilterWidget(
+              selectedCategory: skillsState.selectedCategory,
+              categories: skillCategories,
+              onCategorySelected: (category) {
+                ref.read(skillsProvider.notifier).setSelectedCategory(category);
+              },
+            ),
           ),
           const SizedBox(height: 60),
-          if (portfolioState.isLoading)
+          if (skillsState.isLoading)
             const CircularProgressIndicator(color: AppColors.accent)
+          else if (skillsState.error != null)
+            Text(
+              'Error: ${skillsState.error}',
+              style: const TextStyle(color: Colors.red),
+            )
           else
-            _buildSkillsGrid(
-              context,
-              _getFilteredSkills(portfolioState.skills, selectedCategory.value),
-              animationController,
+            _SkillGridCardWidget(
+              animationController: animationController,
+              skills: filteredSkills,
             ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildSectionHeader(BuildContext context) {
+class _SkillsCategoryFilterWidget extends StatelessWidget {
+  final List<String> categories;
+  final String selectedCategory;
+  final Function(String) onCategorySelected;
+
+  const _SkillsCategoryFilterWidget({
+    required this.categories,
+    required this.selectedCategory,
+    required this.onCategorySelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            categories.map((category) {
+              final isSelected = selectedCategory == category;
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: _SkillsCategoryChipWidget(
+                  category: category,
+                  isSelected: isSelected,
+                  onTap: () => onCategorySelected(category),
+                ),
+              );
+            }).toList(),
+      ),
+    );
+  }
+}
+
+class _SkillsCategoryChipWidget extends StatelessWidget {
+  final String category;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _SkillsCategoryChipWidget({
+    required this.category,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return HookBuilder(
+      builder: (context) {
+        final hoverController = useAnimationController(
+          duration: const Duration(milliseconds: 200),
+        );
+
+        final hoverAnimation = useAnimation(
+          Tween<double>(begin: 1.0, end: 1.05).animate(hoverController),
+        );
+
+        return MouseRegion(
+          onEnter: (_) => hoverController.forward(),
+          onExit: (_) => hoverController.reverse(),
+          child: Transform.scale(
+            scale: hoverAnimation,
+            child: GestureDetector(
+              onTap: onTap,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  gradient:
+                      isSelected
+                          ? const LinearGradient(
+                            colors: [AppColors.accent, AppColors.accentLight],
+                          )
+                          : null,
+                  color: isSelected ? null : AppColors.surface,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color:
+                        isSelected
+                            ? Colors.transparent
+                            : AppColors.accent.withAlpha((0.3 * 255).round()),
+                    width: 1,
+                  ),
+                  boxShadow:
+                      isSelected
+                          ? [
+                            BoxShadow(
+                              color: AppColors.accent.withAlpha(
+                                (0.3 * 255).round(),
+                              ),
+                              blurRadius: 15,
+                              offset: const Offset(0, 5),
+                            ),
+                          ]
+                          : null,
+                ),
+                child: Text(
+                  category,
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : AppColors.textPrimary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SkillGridCardWidget extends StatelessWidget {
+  final List<Skill> skills;
+  final AnimationController animationController;
+
+  const _SkillGridCardWidget({
+    required this.skills,
+    required this.animationController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final crossAxisCount = ResponsiveHelper.getGridCrossAxisCount(context);
+
+    return AnimationLimiter(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 1200,
+        ),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
+            mainAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
+            childAspectRatio: ResponsiveHelper.isMobile(context) ? 1.1 : 1.0,
+          ),
+          itemCount: skills.length,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: const Duration(milliseconds: 500),
+              columnCount: crossAxisCount,
+              child: SlideAnimation(
+                verticalOffset: 50.0,
+                child: FadeInAnimation(
+                  child: SkillCard(
+                    skill: skills[index],
+                    animationController: animationController,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _SkillsSectionHeaderWidget extends StatelessWidget {
+  const _SkillsSectionHeaderWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
@@ -113,148 +299,5 @@ class SkillsSection extends HookConsumerWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildCategoryFilter(
-    List<String> categories,
-    ValueNotifier<String> selectedCategory,
-  ) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:
-            categories.map((category) {
-              final isSelected = selectedCategory.value == category;
-
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: _buildCategoryChip(category, isSelected, () {
-                  selectedCategory.value = category;
-                }),
-              );
-            }).toList(),
-      ),
-    );
-  }
-
-  Widget _buildCategoryChip(
-    String category,
-    bool isSelected,
-    VoidCallback onTap,
-  ) {
-    return HookBuilder(
-      builder: (context) {
-        final hoverController = useAnimationController(
-          duration: const Duration(milliseconds: 200),
-        );
-
-        final hoverAnimation = useAnimation(
-          Tween<double>(begin: 1.0, end: 1.05).animate(hoverController),
-        );
-
-        return MouseRegion(
-          onEnter: (_) => hoverController.forward(),
-          onExit: (_) => hoverController.reverse(),
-          child: Transform.scale(
-            scale: hoverAnimation,
-            child: GestureDetector(
-              onTap: onTap,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  gradient:
-                      isSelected
-                          ? const LinearGradient(
-                            colors: [AppColors.accent, AppColors.accentLight],
-                          )
-                          : null,
-                  color: isSelected ? null : AppColors.surface,
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-                    color:
-                        isSelected
-                            ? Colors.transparent
-                            : AppColors.accent.withAlpha((0.3 * 255).round()),
-                    width: 1,
-                  ),
-                  boxShadow:
-                      isSelected
-                          ? [
-                            BoxShadow(
-                              color: AppColors.accent.withAlpha((0.3 * 255).round()),
-                              blurRadius: 15,
-                              offset: const Offset(0, 5),
-                            ),
-                          ]
-                          : null,
-                ),
-                child: Text(
-                  category,
-                  style: TextStyle(
-                    color:
-                        isSelected ? AppColors.primary : AppColors.textPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildSkillsGrid(
-    BuildContext context,
-    List<Skill> skills,
-    AnimationController controller,
-  ) {
-    final crossAxisCount = ResponsiveHelper.getGridCrossAxisCount(context);
-
-    return AnimationLimiter(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 1200,
-        ),
-        child: GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
-            mainAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
-            childAspectRatio: ResponsiveHelper.isMobile(context) ? 1.1 : 1.0,
-          ),
-          itemCount: skills.length,
-          itemBuilder: (context, index) {
-            return AnimationConfiguration.staggeredGrid(
-              position: index,
-              duration: const Duration(milliseconds: 500),
-              columnCount: crossAxisCount,
-              child: SlideAnimation(
-                verticalOffset: 50.0,
-                child: FadeInAnimation(
-                  child: SkillCard(
-                    skill: skills[index],
-                    animationController: controller,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  List<Skill> _getFilteredSkills(List<Skill> skills, String category) {
-    if (category == 'All') return skills;
-    return skills.where((skill) => skill.category == category).toList();
   }
 }

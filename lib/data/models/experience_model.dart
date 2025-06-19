@@ -4,8 +4,8 @@ part 'experience_model.freezed.dart';
 part 'experience_model.g.dart';
 
 @freezed
-class ExperienceModel with _$ExperienceModel {
-  const factory ExperienceModel({
+class Experience with _$Experience {
+  const factory Experience({
     required String id,
     required String company,
     required String position,
@@ -16,8 +16,8 @@ class ExperienceModel with _$ExperienceModel {
     @Default([]) List<String> achievements,
     @Default('') String location,
     @Default('') String employmentType,
-  }) = _ExperienceModel;
+  }) = _Experience;
 
-  factory ExperienceModel.fromJson(Map<String, dynamic> json) =>
-      _$ExperienceModelFromJson(json);
+  factory Experience.fromJson(Map<String, dynamic> json) =>
+      _$ExperienceFromJson(json);
 }

@@ -6,7 +6,7 @@ import '../../../core/utils/responsive_utils.dart';
 import '../../../data/models/experience_model.dart';
 
 class ExperienceTimelineCard extends HookWidget {
-  final ExperienceModel experience;
+  final Experience experience;
   final bool isLeft;
   final bool showConnector;
 

@@ -7,7 +7,7 @@ import '../../../data/models/project_model.dart';
 import '../widgets/common/glass_morphism_container.dart';
 
 class ProjectShowcaseCard extends HookWidget {
-  final ProjectModel project;
+  final Project project;
   final VoidCallback? onTap;
 
   const ProjectShowcaseCard({
