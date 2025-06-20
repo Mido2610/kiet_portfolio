@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Web with correct base-href
-        run: flutter build web --base-href "/kiet_portfolio/" --web-renderer canvaskit
+        run: flutter build web --base-href "/kiet_portfolio/"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
