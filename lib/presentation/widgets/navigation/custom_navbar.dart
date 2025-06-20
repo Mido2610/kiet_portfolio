@@ -80,7 +80,6 @@ class NavigationItemsWidget extends StatelessWidget {
       'Home',
       'About',
       'Skills',
-      'Projects',
       'Experience',
       'Contact',
     ];

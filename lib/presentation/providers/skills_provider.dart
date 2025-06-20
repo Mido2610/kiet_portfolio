@@ -5,10 +5,17 @@ import 'package:kiet_portfolio/presentation/state_management/state/skills_state.
 import '../../data/models/skill_model.dart';
 import '../../data/repositories/portfolio_repository.dart';
 
+// Repository provider
+final portfolioRepositoryProvider = Provider<PortfolioRepository>(
+  (ref) => PortfolioRepository(),
+);
+
+// Main skills provider
 final skillsProvider = StateNotifierProvider<SkillsNotifier, SkillsState>(
   (ref) => SkillsNotifier(ref.watch(portfolioRepositoryProvider)),
 );
 
+// Filtered skills provider
 final filteredSkillsProvider = Provider<List<Skill>>((ref) {
   final skillsState = ref.watch(skillsProvider);
   final selectedCategory = skillsState.selectedCategory;
@@ -31,10 +38,7 @@ final filteredSkillsProvider = Provider<List<Skill>>((ref) {
   }).toList();
 });
 
+// Danh mục kỹ năng
 final skillCategoriesProvider = Provider<List<String>>((ref) {
   return ['All', 'Languages', 'Frameworks', 'Tools'];
 });
-
-final portfolioRepositoryProvider = Provider<PortfolioRepository>(
-  (ref) => PortfolioRepository(),
-);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:kiet_portfolio/core/utils/size.dart';
 import 'package:kiet_portfolio/data/models/skill_model.dart';
 import 'package:kiet_portfolio/presentation/cards/skill_cards.dart';
 import 'package:kiet_portfolio/presentation/providers/skills_provider.dart';
@@ -27,7 +28,7 @@ class SkillsSection extends HookConsumerWidget {
     useEffect(() {
       // Load skills when component mounts
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(skillsProvider.notifier).loadingSkills();
+        ref.read(skillsProvider.notifier).loadSkills();
       });
 
       void checkVisibility() {
@@ -50,7 +51,7 @@ class SkillsSection extends HookConsumerWidget {
             delay: const Duration(milliseconds: 200),
             child: const _SkillsSectionHeaderWidget(),
           ),
-          const SizedBox(height: 40),
+          SizedBoxCommon.height40,
           FadeInUp(
             delay: const Duration(milliseconds: 400),
             child: _SkillsCategoryFilterWidget(
@@ -61,7 +62,7 @@ class SkillsSection extends HookConsumerWidget {
               },
             ),
           ),
-          const SizedBox(height: 60),
+          SizedBoxCommon.height60,
           if (skillsState.isLoading)
             const CircularProgressIndicator(color: AppColors.accent)
           else if (skillsState.error != null)
@@ -183,8 +184,14 @@ class _SkillsCategoryChipWidget extends StatelessWidget {
                 child: Text(
                   category,
                   style: TextStyle(
-                    color: isSelected ? Colors.white : AppColors.textPrimary,
-                    fontSize: 14,
+                    color:
+                        isSelected ? AppColors.surface : AppColors.textPrimary,
+                    fontSize: ResponsiveHelper.getResponsiveFontSize(
+                      context,
+                      mobile: 14,
+                      tablet: 16,
+                      desktop: 16,
+                    ),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -213,7 +220,7 @@ class _SkillGridCardWidget extends StatelessWidget {
     return AnimationLimiter(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 1200,
+          maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 1000,
         ),
         child: GridView.builder(
           shrinkWrap: true,
@@ -255,7 +262,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Skills & Technologies',
+          'Technologies',
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -268,7 +275,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 16),
+        SizedBoxCommon.height16,
         Container(
           width: 80,
           height: 4,
@@ -279,11 +286,11 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBoxCommon.height20,
         Container(
           constraints: const BoxConstraints(maxWidth: 600),
           child: Text(
-            'Here are the technologies and tools I use to bring ideas to life. I\'m always learning and expanding my skillset.',
+            'Here are the technologies and tools which I regularly work with.',
             style: TextStyle(
               fontSize: ResponsiveHelper.getResponsiveFontSize(
                 context,

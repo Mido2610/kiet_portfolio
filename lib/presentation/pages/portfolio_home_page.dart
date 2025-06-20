@@ -75,13 +75,7 @@ class PortfolioHomePage extends HookConsumerWidget {
                   // Section 2: Skills
                   Container(key: sectionKeys[2], child: const SkillsSection()),
 
-                  // Section 3: Projects
-                  // Container(
-                  //   key: sectionKeys[3],
-                  //   child: const FeaturedProjectsSection(),
-                  // ),
-
-                  // // Section 4: Experience
+                  // Section 4: Experience
                   // Container(
                   //   key: sectionKeys[4],
                   //   child: const WorkExperienceSection(),

@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:kiet_portfolio/presentation/animations/fade_in_up.dart';
+import 'package:kiet_portfolio/presentation/animations/slide_in_left.dart';
+import 'package:kiet_portfolio/presentation/animations/typing_animation.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/glass_container.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_utils.dart';
@@ -15,7 +17,7 @@ class AboutSection extends HookConsumerWidget {
     final animationController = useAnimationController(
       duration: const Duration(milliseconds: 1500),
     );
-    
+
     final isVisible = useState(false);
 
     useEffect(() {
@@ -24,7 +26,7 @@ class AboutSection extends HookConsumerWidget {
         if (renderBox != null) {
           final position = renderBox.localToGlobal(Offset.zero);
           final screenHeight = MediaQuery.of(context).size.height;
-          
+
           if (position.dy < screenHeight * 0.8 && !isVisible.value) {
             isVisible.value = true;
             animationController.forward();
@@ -39,40 +41,62 @@ class AboutSection extends HookConsumerWidget {
     return Container(
       width: double.infinity,
       padding: ResponsiveUtils.getSectionPadding(context),
-      child: ResponsiveUtils.isMobile(context)
-          ? _buildMobileLayout(context, animationController)
-          : _buildDesktopLayout(context, animationController),
+      child:
+          ResponsiveUtils.isMobile(context)
+              ? AboutMobileLayout(animationController: animationController)
+              : AboutDesktopLayout(animationController: animationController),
     );
   }
+}
 
-  Widget _buildDesktopLayout(BuildContext context, AnimationController controller) {
+class AboutDesktopLayout extends StatelessWidget {
+  final AnimationController animationController;
+
+  const AboutDesktopLayout({super.key, required this.animationController});
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           flex: 2,
-          child: _buildImageSection(controller),
+          child: AboutImageSection(controller: animationController),
         ),
         const SizedBox(width: 80),
         Expanded(
           flex: 3,
-          child: _buildContentSection(context, controller),
+          child: AboutContentSection(controller: animationController),
         ),
       ],
     );
   }
+}
 
-  Widget _buildMobileLayout(BuildContext context, AnimationController controller) {
+class AboutMobileLayout extends StatelessWidget {
+  final AnimationController animationController;
+
+  const AboutMobileLayout({super.key, required this.animationController});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildImageSection(controller),
+        AboutImageSection(controller: animationController),
         const SizedBox(height: 40),
-        _buildContentSection(context, controller),
+        AboutContentSection(controller: animationController),
       ],
     );
   }
+}
 
-  Widget _buildImageSection(AnimationController controller) {
+class AboutImageSection extends StatelessWidget {
+  final AnimationController controller;
+
+  const AboutImageSection({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
     return FadeInUp(
       delay: const Duration(milliseconds: 200),
       child: SizedBox(
@@ -122,43 +146,66 @@ class AboutSection extends HookConsumerWidget {
               ),
             ),
             // Floating Elements
-            _buildFloatingElements(),
+            const AboutFloatingElements(),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildFloatingElements() {
+class AboutFloatingElements extends StatelessWidget {
+  const AboutFloatingElements({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         Positioned(
           top: 20,
           right: 20,
-          child: _buildFloatingCard(
-            icon: Icons.code,
-            text: '3+ Years',
-            subtitle: 'Experience',
+          child: SlideInLeft(
+            delay: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: 800),
+            child: AboutFloatingCard(
+              icon: Icons.work_history,
+              text: '1+ Years',
+              subtitle: 'Experience',
+            ),
           ),
         ),
         Positioned(
           bottom: 20,
           left: 20,
-          child: _buildFloatingCard(
-            icon: Icons.apps,
-            text: '50+',
-            subtitle: 'Projects',
+          child: SlideInLeft(
+            delay: const Duration(milliseconds: 1200),
+            duration: const Duration(milliseconds: 800),
+            child: AboutFloatingCard(
+              icon: Icons.code,
+              text: '10+',
+              subtitle: 'Technologies',
+            ),
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildFloatingCard({
-    required IconData icon,
-    required String text,
-    required String subtitle,
-  }) {
+class AboutFloatingCard extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final String subtitle;
+
+  const AboutFloatingCard({
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return GlassContainer(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -173,11 +220,7 @@ class AboutSection extends HookConsumerWidget {
               ),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(
-              icon,
-              color: AppColors.primary,
-              size: 20,
-            ),
+            child: Icon(icon, color: AppColors.primary, size: 20),
           ),
           const SizedBox(width: 12),
           Column(
@@ -205,40 +248,52 @@ class AboutSection extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildContentSection(BuildContext context, AnimationController controller) {
+class AboutContentSection extends StatelessWidget {
+  final AnimationController controller;
+
+  const AboutContentSection({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FadeInUp(
           delay: const Duration(milliseconds: 400),
-          child: _buildSectionTitle(context),
+          child: AboutSectionTitle(),
         ),
         const SizedBox(height: 32),
         FadeInUp(
           delay: const Duration(milliseconds: 600),
-          child: _buildDescription(context),
+          child: _DescriptionWidget(),
         ),
         const SizedBox(height: 40),
         FadeInUp(
           delay: const Duration(milliseconds: 800),
-          child: _buildHighlights(),
+          child: _HightlightsWidget(),
         ),
         const SizedBox(height: 40),
         FadeInUp(
           delay: const Duration(milliseconds: 1000),
-          child: _buildPersonalInfo(),
+          child: _PersonalInfoWidget(),
         ),
       ],
     );
   }
+}
 
-  Widget _buildSectionTitle(BuildContext context) {
+class AboutSectionTitle extends StatelessWidget {
+  const AboutSectionTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'About Me',
+        TypingAnimation(
+          text: 'About Me',
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -249,6 +304,8 @@ class AboutSection extends HookConsumerWidget {
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
           ),
+          typingSpeed: const Duration(milliseconds: 100),
+          delay: const Duration(milliseconds: 300),
         ),
         const SizedBox(height: 8),
         Container(
@@ -265,7 +322,17 @@ class AboutSection extends HookConsumerWidget {
     );
   }
 
-  Widget _buildDescription(BuildContext context) {
+
+
+
+}
+
+
+class _DescriptionWidget extends StatelessWidget {
+  const _DescriptionWidget();
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -313,8 +380,13 @@ class AboutSection extends HookConsumerWidget {
       ],
     );
   }
+}
 
-  Widget _buildHighlights() {
+class _HightlightsWidget extends StatelessWidget {
+  const _HightlightsWidget();
+
+  @override
+  Widget build(BuildContext context) {
     final highlights = [
       {'icon': Icons.mobile_friendly, 'text': 'Cross-Platform Development'},
       {'icon': Icons.speed, 'text': 'Performance Optimization'},
@@ -336,31 +408,40 @@ class AboutSection extends HookConsumerWidget {
         const SizedBox(height: 20),
         AnimationLimiter(
           child: Column(
-            children: highlights.asMap().entries.map((entry) {
-              final index = entry.key;
-              final highlight = entry.value;
-              
-              return AnimationConfiguration.staggeredList(
-                position: index,
-                duration: const Duration(milliseconds: 300),
-                child: SlideAnimation(
-                  verticalOffset: 20,
-                  child: FadeInAnimation(
-                    child: _buildHighlightItem(
-                      highlight['icon'] as IconData,
-                      highlight['text'] as String,
+            children:
+                highlights.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final highlight = entry.value;
+
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 300),
+                    child: SlideAnimation(
+                      verticalOffset: 20,
+                      child: FadeInAnimation(
+                        child: _HighlightItemWidget(
+                          icon: highlight['icon'] as IconData,
+                          text: highlight['text'] as String,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildHighlightItem(IconData icon, String text) {
+class _HighlightItemWidget extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const _HighlightItemWidget({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -376,11 +457,7 @@ class AboutSection extends HookConsumerWidget {
             ),
           ),
           const SizedBox(width: 16),
-          Icon(
-            icon,
-            color: AppColors.accent,
-            size: 20,
-          ),
+          Icon(icon, color: AppColors.accent, size: 20),
           const SizedBox(width: 12),
           Text(
             text,
@@ -394,8 +471,13 @@ class AboutSection extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildPersonalInfo() {
+class _PersonalInfoWidget extends StatelessWidget {
+  const _PersonalInfoWidget();
+
+  @override
+  Widget build(BuildContext context) {
     final personalInfo = [
       {'label': 'Location', 'value': 'Ho Chi Minh City, Vietnam'},
       {'label': 'Languages', 'value': 'Vietnamese, English'},

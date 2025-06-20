@@ -7,10 +7,10 @@ class SkillsNotifier extends StateNotifier<SkillsState> {
   final PortfolioRepository _repository;
 
   SkillsNotifier(this._repository) : super(const SkillsState()) {
-    loadingSkills();
+    loadSkills();
   }
 
-  FutureOr<void> loadingSkills() async {
+  FutureOr<void> loadSkills() async {
     state = state.copyWith(isLoading: true, error: null);
     try {
       final skills = await _repository.getSkills();
@@ -25,6 +25,6 @@ class SkillsNotifier extends StateNotifier<SkillsState> {
   }
 
   FutureOr<void> refreshSkills() async {
-    await loadingSkills();
+    await loadSkills();
   }
 }
