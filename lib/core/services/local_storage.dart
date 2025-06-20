@@ -18,6 +18,8 @@ abstract class LocalStorage {
   Future<void> clear();
   Future<bool> containsKey(String key);
   Future<Set<String>> getKeys();
+  Future<void> saveLanguage(String language);
+  Future<String> getLanguage();
 }
 
 class SharedPreferencesService implements LocalStorage {
@@ -149,10 +151,12 @@ class SharedPreferencesService implements LocalStorage {
     return await getString('app_theme') ?? 'light';
   }
 
+  @override
   Future<void> saveLanguage(String language) async {
     await setString('app_language', language);
   }
 
+  @override
   Future<String> getLanguage() async {
     return await getString('app_language') ?? 'en';
   }
@@ -164,6 +168,7 @@ class SharedPreferencesService implements LocalStorage {
   Future<bool> isFirstLaunch() async {
     return await getBool('is_first_launch') ?? true;
   }
+  
 
   // Cache management
   Future<void> setCacheData(String key, Map<String, dynamic> data, {Duration? expiry}) async {

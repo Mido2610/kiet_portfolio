@@ -8,6 +8,7 @@ import 'package:kiet_portfolio/presentation/animations/typing_animation.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/glass_container.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_utils.dart';
+import '../../../core/utils/common.dart';
 
 class AboutSection extends HookConsumerWidget {
   const AboutSection({super.key});
@@ -169,8 +170,8 @@ class AboutFloatingElements extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             child: AboutFloatingCard(
               icon: Icons.work_history,
-              text: '1+ Years',
-              subtitle: 'Experience',
+              text: l10n.yearsExperience,
+              subtitle: l10n.experienceLabel,
             ),
           ),
         ),
@@ -182,8 +183,8 @@ class AboutFloatingElements extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             child: AboutFloatingCard(
               icon: Icons.code,
-              text: '10+',
-              subtitle: 'Technologies',
+              text: l10n.technologiesCount,
+              subtitle: l10n.technologies,
             ),
           ),
         ),
@@ -293,7 +294,7 @@ class AboutSectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TypingAnimation(
-          text: 'About Me',
+          text: l10n.aboutMe,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -321,12 +322,7 @@ class AboutSectionTitle extends StatelessWidget {
       ],
     );
   }
-
-
-
-
 }
-
 
 class _DescriptionWidget extends StatelessWidget {
   const _DescriptionWidget();
@@ -337,7 +333,7 @@ class _DescriptionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Passionate Flutter Developer',
+          l10n.passionateFlutterDeveloper,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -351,7 +347,7 @@ class _DescriptionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'I\'m a dedicated Flutter developer with over 3 years of experience creating beautiful, performant mobile applications. My journey started with a fascination for clean code and pixel-perfect designs, and has evolved into a passion for building user-centric digital experiences.',
+          l10n.aboutDescription1,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -365,7 +361,7 @@ class _DescriptionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'I specialize in cross-platform mobile development, state management, and creating seamless user interfaces. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.',
+          l10n.aboutDescription2,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -388,18 +384,18 @@ class _HightlightsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final highlights = [
-      {'icon': Icons.mobile_friendly, 'text': 'Cross-Platform Development'},
-      {'icon': Icons.speed, 'text': 'Performance Optimization'},
-      {'icon': Icons.design_services, 'text': 'UI/UX Implementation'},
-      {'icon': Icons.cloud, 'text': 'Backend Integration'},
+      {'icon': Icons.mobile_friendly, 'text': l10n.crossPlatformDevelopment},
+      {'icon': Icons.speed, 'text': l10n.performanceOptimization},
+      {'icon': Icons.design_services, 'text': l10n.uiUxImplementation},
+      {'icon': Icons.cloud, 'text': l10n.backendIntegration},
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'What I Do Best',
-          style: TextStyle(
+        Text(
+          l10n.whatIDooBest,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: AppColors.textPrimary,
@@ -479,10 +475,10 @@ class _PersonalInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personalInfo = [
-      {'label': 'Location', 'value': 'Ho Chi Minh City, Vietnam'},
-      {'label': 'Languages', 'value': 'Vietnamese, English'},
-      {'label': 'Interests', 'value': 'Technology, Design, Travel'},
-      {'label': 'Status', 'value': 'Available for Freelance'},
+      {'label': l10n.location, 'value': l10n.locationValue},
+      {'label': l10n.languages, 'value': l10n.languagesValue},
+      {'label': l10n.interests, 'value': l10n.interestsValue},
+      {'label': l10n.status, 'value': l10n.statusValue},
     ];
 
     return GlassContainer(
@@ -490,9 +486,9 @@ class _PersonalInfoWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Personal Information',
-            style: TextStyle(
+          Text(
+            l10n.personalInformation,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: AppColors.textPrimary,

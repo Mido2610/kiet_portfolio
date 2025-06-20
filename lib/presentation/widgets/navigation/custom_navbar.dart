@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kiet_portfolio/presentation/providers/portfolio_provider.dart';
+import 'package:kiet_portfolio/presentation/widgets/common/language_switcher.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
+import '../../../core/utils/common.dart';
 
 class CustomNavigationBar extends HookWidget {
   final int currentSection;
@@ -36,12 +38,22 @@ class CustomNavigationBar extends HookWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const _LogoWidget(),
-          if (!isMobile)
+          if (!isMobile) ...[
             NavigationItemsWidget(
               currentSection: currentSection,
               onNavigateToSection: onNavigateToSection,
             ),
-          if (isMobile) const MobileMenuButtonWidget(),
+            const LanguageSwitcher(),
+          ],
+          if (isMobile) ...[
+            Row(
+              children: [
+                const LanguageSwitcher(),
+                const SizedBox(width: 12),
+                const MobileMenuButtonWidget(),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -76,13 +88,7 @@ class NavigationItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = [
-      'Home',
-      'About',
-      'Skills',
-      'Experience',
-      'Contact',
-    ];
+    final sections = [l10n.home, l10n.about, l10n.skills, l10n.experience, l10n.contact];
 
     return Row(
       children:

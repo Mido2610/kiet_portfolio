@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kiet_portfolio/l10n/localization.dart';
 import 'package:kiet_portfolio/presentation/sections/about_section.dart';
 import 'package:kiet_portfolio/presentation/sections/contact_section.dart';
 import 'package:kiet_portfolio/presentation/widgets/navigation/custom_navbar.dart';
@@ -13,6 +14,7 @@ class PortfolioHomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+        Localization().init(context);
     final scrollController = useScrollController();
     final sectionKeys = useMemoized(
       () => List.generate(6, (index) => GlobalKey()),

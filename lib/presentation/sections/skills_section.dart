@@ -9,6 +9,7 @@ import 'package:kiet_portfolio/presentation/providers/skills_provider.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../animations/fade_in_up.dart';
+import '../../../core/utils/common.dart';
 
 class SkillsSection extends HookConsumerWidget {
   const SkillsSection({super.key});
@@ -262,7 +263,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Technologies',
+          l10n.technologiesTitle,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -290,7 +291,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
         Container(
           constraints: const BoxConstraints(maxWidth: 600),
           child: Text(
-            'Here are the technologies and tools which I regularly work with.',
+            l10n.skillsDescription,
             style: TextStyle(
               fontSize: ResponsiveHelper.getResponsiveFontSize(
                 context,

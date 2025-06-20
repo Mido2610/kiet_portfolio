@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../core/themes/app_colors.dart';
 import '../../core/utils/responsive_helper.dart';
+import '../../core/utils/common.dart';
 
 class ContactSection extends HookWidget {
   const ContactSection({super.key});
@@ -14,7 +15,7 @@ class ContactSection extends HookWidget {
       child: Column(
         children: [
           Text(
-            'Get In Touch',
+            l10n.getInTouch,
             style: TextStyle(
               fontSize: ResponsiveHelper.getResponsiveFontSize(
                 context,
@@ -30,8 +31,8 @@ class ContactSection extends HookWidget {
           Container(
             constraints: const BoxConstraints(maxWidth: 600),
             child: Text(
-              'I\'m always open to discussing new opportunities and interesting projects. Feel free to reach out!',
-              style: TextStyle(
+              l10n.contactDescription,
+              style: const TextStyle(
                 fontSize: 18,
                 color: AppColors.textSecondary,
                 height: 1.6,
@@ -48,9 +49,9 @@ class ContactSection extends HookWidget {
               ),
               borderRadius: BorderRadius.circular(30),
             ),
-            child: const Text(
-              'Contact Me',
-              style: TextStyle(
+            child: Text(
+              l10n.contactMeButton,
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

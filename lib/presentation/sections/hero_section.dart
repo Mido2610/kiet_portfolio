@@ -7,6 +7,7 @@ import 'package:kiet_portfolio/presentation/widgets/common/animated_button.dart'
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../../../core/constants/app_constants.dart';
+import '../../../core/utils/common.dart';
 
 class HeroSection extends HookConsumerWidget {
   final Function(int) onNavigateToSection;
@@ -52,29 +53,39 @@ class HeroSection extends HookConsumerWidget {
     return Container(
       height: MediaQuery.of(context).size.height,
       padding: padding,
-      child:
-          isMobile
-              ? _buildMobileLayout(
-                context,
-                fadeAnimation,
-                slideAnimation,
-                scaleAnimation,
-              )
-              : _buildDesktopLayout(
-                context,
-                fadeAnimation,
-                slideAnimation,
-                scaleAnimation,
-              ),
+      child: isMobile
+          ? HeroMobileLayoutWidget(
+              fadeAnimation: fadeAnimation,
+              slideAnimation: slideAnimation,
+              scaleAnimation: scaleAnimation,
+              onNavigateToSection: onNavigateToSection,
+            )
+          : HeroDesktopLayoutWidget(
+              fadeAnimation: fadeAnimation,
+              slideAnimation: slideAnimation,
+              scaleAnimation: scaleAnimation,
+              onNavigateToSection: onNavigateToSection,
+            ),
     );
   }
+}
 
-  Widget _buildDesktopLayout(
-    BuildContext context,
-    Animation<double> fadeAnimation,
-    Animation<Offset> slideAnimation,
-    Animation<double> scaleAnimation,
-  ) {
+class HeroDesktopLayoutWidget extends StatelessWidget {
+  final Animation<double> fadeAnimation;
+  final Animation<Offset> slideAnimation;
+  final Animation<double> scaleAnimation;
+  final Function(int) onNavigateToSection;
+
+  const HeroDesktopLayoutWidget({
+    super.key,
+    required this.fadeAnimation,
+    required this.slideAnimation,
+    required this.scaleAnimation,
+    required this.onNavigateToSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -83,7 +94,7 @@ class HeroSection extends HookConsumerWidget {
             position: slideAnimation,
             child: FadeTransition(
               opacity: fadeAnimation,
-              child: _buildHeroContent(context),
+              child: HeroContentWidget(onNavigateToSection: onNavigateToSection),
             ),
           ),
         ),
@@ -91,47 +102,65 @@ class HeroSection extends HookConsumerWidget {
           flex: 2,
           child: AnimatedBuilder(
             animation: scaleAnimation,
-            builder:
-                (context, child) =>
-                    Transform.scale(scale: scaleAnimation.value, child: child),
-            child: _buildHeroAnimation(),
+            builder: (context, child) =>
+                Transform.scale(scale: scaleAnimation.value, child: child),
+            child: const HeroAnimationWidget(),
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildMobileLayout(
-    BuildContext context,
-    Animation<double> fadeAnimation,
-    Animation<Offset> slideAnimation,
-    Animation<double> scaleAnimation,
-  ) {
+class HeroMobileLayoutWidget extends StatelessWidget {
+  final Animation<double> fadeAnimation;
+  final Animation<Offset> slideAnimation;
+  final Animation<double> scaleAnimation;
+  final Function(int) onNavigateToSection;
+
+  const HeroMobileLayoutWidget({
+    super.key,
+    required this.fadeAnimation,
+    required this.slideAnimation,
+    required this.scaleAnimation,
+    required this.onNavigateToSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         AnimatedBuilder(
           animation: scaleAnimation,
-          builder:
-              (context, child) =>
-                  Transform.scale(scale: scaleAnimation.value, child: child),
-          child: _buildHeroAnimation(),
+          builder: (context, child) =>
+              Transform.scale(scale: scaleAnimation.value, child: child),
+          child: const HeroAnimationWidget(),
         ),
         const SizedBox(height: 40),
         AnimatedBuilder(
           animation: slideAnimation,
-          builder:
-              (context, child) => Transform.translate(
-                offset: slideAnimation.value,
-                child: FadeTransition(opacity: fadeAnimation, child: child),
-              ),
-          child: _buildHeroContent(context),
+          builder: (context, child) => Transform.translate(
+            offset: slideAnimation.value,
+            child: FadeTransition(opacity: fadeAnimation, child: child),
+          ),
+          child: HeroContentWidget(onNavigateToSection: onNavigateToSection),
         ),
       ],
     );
   }
+}
 
-  Widget _buildHeroContent(BuildContext context) {
+class HeroContentWidget extends StatelessWidget {
+  final Function(int) onNavigateToSection;
+
+  const HeroContentWidget({
+    super.key,
+    required this.onNavigateToSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final isMobile = ResponsiveHelper.isMobile(context);
     final textAlign = isMobile ? TextAlign.center : TextAlign.start;
 
@@ -141,7 +170,7 @@ class HeroSection extends HookConsumerWidget {
           isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
-          'Hi there! 👋 I\'m',
+          l10n.hiThereIm,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -156,7 +185,7 @@ class HeroSection extends HookConsumerWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Kiet Nguyen',
+          l10n.kietNguyen,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -171,23 +200,28 @@ class HeroSection extends HookConsumerWidget {
           textAlign: textAlign,
         ),
         const SizedBox(height: 24),
-        _buildAnimatedText(context),
+        const HeroAnimatedTextWidget(),
         const SizedBox(height: 32),
-        _buildDescription(context),
+        const HeroDescriptionWidget(),
         const SizedBox(height: 40),
-        _buildCTAButtons(context),
+        HeroCTAButtonsWidget(onNavigateToSection: onNavigateToSection),
         const SizedBox(height: 32),
-        _buildSocialLinks(),
+        const HeroSocialLinksWidget(),
       ],
     );
   }
+}
 
-  Widget _buildAnimatedText(BuildContext context) {
+class HeroAnimatedTextWidget extends StatelessWidget {
+  const HeroAnimatedTextWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: ResponsiveHelper.isMobile(context) ? 60 : 80,
       child: AnimatedTextKit(
         animatedTexts:
-            ['Flutter Developer', 'Mobile App Developer', 'UI/UX Enthusiast']
+            [l10n.flutterDeveloper, l10n.mobileAppDeveloper, l10n.uiUxEnthusiast]
                 .map(
                   (text) => TypewriterAnimatedText(
                     text,
@@ -212,15 +246,19 @@ class HeroSection extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildDescription(BuildContext context) {
+class HeroDescriptionWidget extends StatelessWidget {
+  const HeroDescriptionWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
         maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 600,
       ),
       child: Text(
-        'I create beautiful, functional, and user-friendly mobile applications using Flutter. '
-        'With a passion for clean code and modern design, I bring ideas to life through technology.',
+        l10n.heroDescription,
         style: TextStyle(
           fontSize: ResponsiveHelper.getResponsiveFontSize(
             context,
@@ -231,15 +269,24 @@ class HeroSection extends HookConsumerWidget {
           color: AppColors.textSecondary,
           height: 1.6,
         ),
-        textAlign:
-            ResponsiveHelper.isMobile(context)
-                ? TextAlign.center
-                : TextAlign.start,
+        textAlign: ResponsiveHelper.isMobile(context)
+            ? TextAlign.center
+            : TextAlign.start,
       ),
     );
   }
+}
 
-  Widget _buildCTAButtons(BuildContext context) {
+class HeroCTAButtonsWidget extends StatelessWidget {
+  final Function(int) onNavigateToSection;
+
+  const HeroCTAButtonsWidget({
+    super.key,
+    required this.onNavigateToSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     final isMobile = ResponsiveHelper.isMobile(context);
 
     if (isMobile) {
@@ -248,7 +295,7 @@ class HeroSection extends HookConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: AnimatedButton(
-              text: 'View My Work',
+              text: l10n.viewMyWork,
               onPressed: () => onNavigateToSection(3),
               isPrimary: true,
               icon: Icons.work,
@@ -258,7 +305,7 @@ class HeroSection extends HookConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: AnimatedButton(
-              text: 'Contact Me',
+              text: l10n.contactMe,
               onPressed: () => onNavigateToSection(5),
               isPrimary: false,
               icon: Icons.mail,
@@ -271,7 +318,7 @@ class HeroSection extends HookConsumerWidget {
     return Row(
       children: [
         AnimatedButton(
-          text: 'View My Work',
+          text: l10n.viewMyWork,
           onPressed: () => onNavigateToSection(3),
           isPrimary: true,
           icon: Icons.work,
@@ -279,7 +326,7 @@ class HeroSection extends HookConsumerWidget {
         ),
         const SizedBox(width: 20),
         AnimatedButton(
-          text: 'Contact Me',
+          text: l10n.contactMe,
           onPressed: () => onNavigateToSection(5),
           isPrimary: false,
           icon: Icons.mail,
@@ -288,87 +335,114 @@ class HeroSection extends HookConsumerWidget {
       ],
     );
   }
+}
 
-  Widget _buildSocialLinks() {
+class HeroSocialLinksWidget extends StatelessWidget {
+  const HeroSocialLinksWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     final socialLinks = [
-      {'icon': Icons.code, 'url': AppConstants.github, 'label': 'GitHub'},
-      {'icon': Icons.work, 'url': AppConstants.linkedin, 'label': 'LinkedIn'},
+      {'icon': Icons.code, 'url': AppConstants.github, 'label': l10n.github},
+      {'icon': Icons.work, 'url': AppConstants.linkedin, 'label': l10n.linkedin},
       {
         'icon': Icons.email,
         'url': 'mailto:${AppConstants.email}',
-        'label': 'Email',
+        'label': l10n.email,
       },
     ];
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children:
-          socialLinks.map((social) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: HookBuilder(
-                builder: (context) {
-                  final hoverController = useAnimationController(
-                    duration: AppConstants.fastDuration,
-                  );
-
-                  final hoverAnimation = Tween<double>(
-                    begin: 1.0,
-                    end: 1.1,
-                  ).animate(hoverController);
-                  return MouseRegion(
-                    onEnter: (_) => hoverController.forward(),
-                    onExit: (_) => hoverController.reverse(),
-                    child: AnimatedBuilder(
-                      animation: hoverAnimation,
-                      builder:
-                          (context, child) => Transform.scale(
-                            scale: hoverAnimation.value,
-                            child: child,
-                          ),
-                      child: GestureDetector(
-                        onTap: () {
-                          // Handle URL launch
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: AppColors.surface,
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                              color: AppColors.accent.withAlpha(
-                                (0.2 * 255).round(),
-                              ),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.accent.withAlpha(
-                                  (0.1 * 255).round(),
-                                ),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            social['icon'] as IconData,
-                            color: AppColors.accent,
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          }).toList(),
+      children: socialLinks.map((social) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: HeroSocialLinkItemWidget(
+            icon: social['icon'] as IconData,
+            url: social['url'] as String,
+            label: social['label'] as String,
+          ),
+        );
+      }).toList(),
     );
   }
+}
 
-  Widget _buildHeroAnimation() {
+class HeroSocialLinkItemWidget extends HookWidget {
+  final IconData icon;
+  final String url;
+  final String label;
+
+  const HeroSocialLinkItemWidget({
+    super.key,
+    required this.icon,
+    required this.url,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final hoverController = useAnimationController(
+      duration: AppConstants.fastDuration,
+    );
+
+    final hoverAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.1,
+    ).animate(hoverController);
+
+    return MouseRegion(
+      onEnter: (_) => hoverController.forward(),
+      onExit: (_) => hoverController.reverse(),
+      child: AnimatedBuilder(
+        animation: hoverAnimation,
+        builder: (context, child) => Transform.scale(
+          scale: hoverAnimation.value,
+          child: child,
+        ),
+        child: GestureDetector(
+          onTap: () {
+            // Handle URL launch
+          },
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.circular(25),
+              border: Border.all(
+                color: AppColors.accent.withAlpha(
+                  (0.2 * 255).round(),
+                ),
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.accent.withAlpha(
+                    (0.1 * 255).round(),
+                  ),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.accent,
+              size: 24,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HeroAnimationWidget extends StatelessWidget {
+  const HeroAnimationWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 500),
       child: Lottie.asset(
