@@ -3,7 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kiet_portfolio/presentation/sections/about_section.dart';
 import 'package:kiet_portfolio/presentation/sections/contact_section.dart';
-import 'package:kiet_portfolio/presentation/widgets/navigation/custom_navbar.dart';
+import 'package:kiet_portfolio/presentation/widgets/navigation/horizontal_navigation_bar.dart';
+import 'package:kiet_portfolio/presentation/widgets/navigation/vertical_navigation_menu.dart';
 import '../sections/hero_section.dart';
 import '../sections/skills_section.dart';
 import '../../core/themes/app_colors.dart';
@@ -89,6 +90,7 @@ class PortfolioHomePage extends HookConsumerWidget {
           ),
 
           // Navigation Bar
+          // Nav bar
           Positioned(
             top: 0,
             left: 0,
@@ -102,6 +104,13 @@ class PortfolioHomePage extends HookConsumerWidget {
                     context,
                   ),
             ),
+          ),
+
+          VerticalNavigationMenu(
+            currentSection: currentSection.value,
+            onNavigateToSection:
+                (sectionIndex) =>
+                    _navigateToSection(scrollController, sectionIndex, context),
           ),
         ],
       ),

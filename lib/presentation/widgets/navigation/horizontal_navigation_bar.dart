@@ -89,7 +89,7 @@ class NavigationItemsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     final sections = [
       localizations.home,
       localizations.about,
