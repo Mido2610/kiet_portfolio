@@ -32,28 +32,12 @@ mixin _$PortfolioState {
   bool get isTabletView => throw _privateConstructorUsedError;
   bool get isDesktopView =>
       throw _privateConstructorUsedError; // App Settings & Preferences
-  bool get enableAnimations => throw _privateConstructorUsedError;
-  bool get enableParallax => throw _privateConstructorUsedError;
-  bool get enableSoundEffects => throw _privateConstructorUsedError;
-  bool get enableNotifications => throw _privateConstructorUsedError;
-  bool get enableAnalytics => throw _privateConstructorUsedError;
-  bool get enableCookies => throw _privateConstructorUsedError;
-  bool get enableLazyLoading => throw _privateConstructorUsedError;
-  bool get enableImageOptimization =>
-      throw _privateConstructorUsedError; // Localization & Accessibility
-  String get language => throw _privateConstructorUsedError;
-  double get fontSize =>
-      throw _privateConstructorUsedError; // Font size multiplier
-  bool get enableHighContrast => throw _privateConstructorUsedError;
-  bool get enableReducedMotion =>
+  bool get enableLazyLoading =>
       throw _privateConstructorUsedError; // Global Error & Success Handling
   String? get error => throw _privateConstructorUsedError;
   String? get successMessage =>
       throw _privateConstructorUsedError; // App State & Lifecycle
   bool get isInitialized => throw _privateConstructorUsedError;
-  bool get isOnline => throw _privateConstructorUsedError;
-  bool get isFirstLaunch => throw _privateConstructorUsedError;
-  DateTime? get lastUpdated => throw _privateConstructorUsedError;
 
   /// Serializes this PortfolioState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -81,24 +65,10 @@ abstract class $PortfolioStateCopyWith<$Res> {
     bool isMobileView,
     bool isTabletView,
     bool isDesktopView,
-    bool enableAnimations,
-    bool enableParallax,
-    bool enableSoundEffects,
-    bool enableNotifications,
-    bool enableAnalytics,
-    bool enableCookies,
     bool enableLazyLoading,
-    bool enableImageOptimization,
-    String language,
-    double fontSize,
-    bool enableHighContrast,
-    bool enableReducedMotion,
     String? error,
     String? successMessage,
     bool isInitialized,
-    bool isOnline,
-    bool isFirstLaunch,
-    DateTime? lastUpdated,
   });
 }
 
@@ -125,24 +95,10 @@ class _$PortfolioStateCopyWithImpl<$Res, $Val extends PortfolioState>
     Object? isMobileView = null,
     Object? isTabletView = null,
     Object? isDesktopView = null,
-    Object? enableAnimations = null,
-    Object? enableParallax = null,
-    Object? enableSoundEffects = null,
-    Object? enableNotifications = null,
-    Object? enableAnalytics = null,
-    Object? enableCookies = null,
     Object? enableLazyLoading = null,
-    Object? enableImageOptimization = null,
-    Object? language = null,
-    Object? fontSize = null,
-    Object? enableHighContrast = null,
-    Object? enableReducedMotion = null,
     Object? error = freezed,
     Object? successMessage = freezed,
     Object? isInitialized = null,
-    Object? isOnline = null,
-    Object? isFirstLaunch = null,
-    Object? lastUpdated = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -186,65 +142,10 @@ class _$PortfolioStateCopyWithImpl<$Res, $Val extends PortfolioState>
                     ? _value.isDesktopView
                     : isDesktopView // ignore: cast_nullable_to_non_nullable
                         as bool,
-            enableAnimations:
-                null == enableAnimations
-                    ? _value.enableAnimations
-                    : enableAnimations // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableParallax:
-                null == enableParallax
-                    ? _value.enableParallax
-                    : enableParallax // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableSoundEffects:
-                null == enableSoundEffects
-                    ? _value.enableSoundEffects
-                    : enableSoundEffects // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableNotifications:
-                null == enableNotifications
-                    ? _value.enableNotifications
-                    : enableNotifications // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableAnalytics:
-                null == enableAnalytics
-                    ? _value.enableAnalytics
-                    : enableAnalytics // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableCookies:
-                null == enableCookies
-                    ? _value.enableCookies
-                    : enableCookies // ignore: cast_nullable_to_non_nullable
-                        as bool,
             enableLazyLoading:
                 null == enableLazyLoading
                     ? _value.enableLazyLoading
                     : enableLazyLoading // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableImageOptimization:
-                null == enableImageOptimization
-                    ? _value.enableImageOptimization
-                    : enableImageOptimization // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            language:
-                null == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as String,
-            fontSize:
-                null == fontSize
-                    ? _value.fontSize
-                    : fontSize // ignore: cast_nullable_to_non_nullable
-                        as double,
-            enableHighContrast:
-                null == enableHighContrast
-                    ? _value.enableHighContrast
-                    : enableHighContrast // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            enableReducedMotion:
-                null == enableReducedMotion
-                    ? _value.enableReducedMotion
-                    : enableReducedMotion // ignore: cast_nullable_to_non_nullable
                         as bool,
             error:
                 freezed == error
@@ -261,21 +162,6 @@ class _$PortfolioStateCopyWithImpl<$Res, $Val extends PortfolioState>
                     ? _value.isInitialized
                     : isInitialized // ignore: cast_nullable_to_non_nullable
                         as bool,
-            isOnline:
-                null == isOnline
-                    ? _value.isOnline
-                    : isOnline // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isFirstLaunch:
-                null == isFirstLaunch
-                    ? _value.isFirstLaunch
-                    : isFirstLaunch // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            lastUpdated:
-                freezed == lastUpdated
-                    ? _value.lastUpdated
-                    : lastUpdated // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
           )
           as $Val,
     );
@@ -300,24 +186,10 @@ abstract class _$$PortfolioStateImplCopyWith<$Res>
     bool isMobileView,
     bool isTabletView,
     bool isDesktopView,
-    bool enableAnimations,
-    bool enableParallax,
-    bool enableSoundEffects,
-    bool enableNotifications,
-    bool enableAnalytics,
-    bool enableCookies,
     bool enableLazyLoading,
-    bool enableImageOptimization,
-    String language,
-    double fontSize,
-    bool enableHighContrast,
-    bool enableReducedMotion,
     String? error,
     String? successMessage,
     bool isInitialized,
-    bool isOnline,
-    bool isFirstLaunch,
-    DateTime? lastUpdated,
   });
 }
 
@@ -343,24 +215,10 @@ class __$$PortfolioStateImplCopyWithImpl<$Res>
     Object? isMobileView = null,
     Object? isTabletView = null,
     Object? isDesktopView = null,
-    Object? enableAnimations = null,
-    Object? enableParallax = null,
-    Object? enableSoundEffects = null,
-    Object? enableNotifications = null,
-    Object? enableAnalytics = null,
-    Object? enableCookies = null,
     Object? enableLazyLoading = null,
-    Object? enableImageOptimization = null,
-    Object? language = null,
-    Object? fontSize = null,
-    Object? enableHighContrast = null,
-    Object? enableReducedMotion = null,
     Object? error = freezed,
     Object? successMessage = freezed,
     Object? isInitialized = null,
-    Object? isOnline = null,
-    Object? isFirstLaunch = null,
-    Object? lastUpdated = freezed,
   }) {
     return _then(
       _$PortfolioStateImpl(
@@ -404,65 +262,10 @@ class __$$PortfolioStateImplCopyWithImpl<$Res>
                 ? _value.isDesktopView
                 : isDesktopView // ignore: cast_nullable_to_non_nullable
                     as bool,
-        enableAnimations:
-            null == enableAnimations
-                ? _value.enableAnimations
-                : enableAnimations // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableParallax:
-            null == enableParallax
-                ? _value.enableParallax
-                : enableParallax // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableSoundEffects:
-            null == enableSoundEffects
-                ? _value.enableSoundEffects
-                : enableSoundEffects // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableNotifications:
-            null == enableNotifications
-                ? _value.enableNotifications
-                : enableNotifications // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableAnalytics:
-            null == enableAnalytics
-                ? _value.enableAnalytics
-                : enableAnalytics // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableCookies:
-            null == enableCookies
-                ? _value.enableCookies
-                : enableCookies // ignore: cast_nullable_to_non_nullable
-                    as bool,
         enableLazyLoading:
             null == enableLazyLoading
                 ? _value.enableLazyLoading
                 : enableLazyLoading // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableImageOptimization:
-            null == enableImageOptimization
-                ? _value.enableImageOptimization
-                : enableImageOptimization // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        language:
-            null == language
-                ? _value.language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as String,
-        fontSize:
-            null == fontSize
-                ? _value.fontSize
-                : fontSize // ignore: cast_nullable_to_non_nullable
-                    as double,
-        enableHighContrast:
-            null == enableHighContrast
-                ? _value.enableHighContrast
-                : enableHighContrast // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        enableReducedMotion:
-            null == enableReducedMotion
-                ? _value.enableReducedMotion
-                : enableReducedMotion // ignore: cast_nullable_to_non_nullable
                     as bool,
         error:
             freezed == error
@@ -479,21 +282,6 @@ class __$$PortfolioStateImplCopyWithImpl<$Res>
                 ? _value.isInitialized
                 : isInitialized // ignore: cast_nullable_to_non_nullable
                     as bool,
-        isOnline:
-            null == isOnline
-                ? _value.isOnline
-                : isOnline // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isFirstLaunch:
-            null == isFirstLaunch
-                ? _value.isFirstLaunch
-                : isFirstLaunch // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        lastUpdated:
-            freezed == lastUpdated
-                ? _value.lastUpdated
-                : lastUpdated // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
       ),
     );
   }
@@ -511,24 +299,10 @@ class _$PortfolioStateImpl implements _PortfolioState {
     this.isMobileView = false,
     this.isTabletView = false,
     this.isDesktopView = false,
-    this.enableAnimations = true,
-    this.enableParallax = true,
-    this.enableSoundEffects = true,
-    this.enableNotifications = true,
-    this.enableAnalytics = true,
-    this.enableCookies = true,
     this.enableLazyLoading = true,
-    this.enableImageOptimization = true,
-    this.language = 'en',
-    this.fontSize = 1.0,
-    this.enableHighContrast = false,
-    this.enableReducedMotion = false,
     this.error,
     this.successMessage,
     this.isInitialized = false,
-    this.isOnline = false,
-    this.isFirstLaunch = false,
-    this.lastUpdated,
   });
 
   factory _$PortfolioStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -564,42 +338,7 @@ class _$PortfolioStateImpl implements _PortfolioState {
   // App Settings & Preferences
   @override
   @JsonKey()
-  final bool enableAnimations;
-  @override
-  @JsonKey()
-  final bool enableParallax;
-  @override
-  @JsonKey()
-  final bool enableSoundEffects;
-  @override
-  @JsonKey()
-  final bool enableNotifications;
-  @override
-  @JsonKey()
-  final bool enableAnalytics;
-  @override
-  @JsonKey()
-  final bool enableCookies;
-  @override
-  @JsonKey()
   final bool enableLazyLoading;
-  @override
-  @JsonKey()
-  final bool enableImageOptimization;
-  // Localization & Accessibility
-  @override
-  @JsonKey()
-  final String language;
-  @override
-  @JsonKey()
-  final double fontSize;
-  // Font size multiplier
-  @override
-  @JsonKey()
-  final bool enableHighContrast;
-  @override
-  @JsonKey()
-  final bool enableReducedMotion;
   // Global Error & Success Handling
   @override
   final String? error;
@@ -609,18 +348,10 @@ class _$PortfolioStateImpl implements _PortfolioState {
   @override
   @JsonKey()
   final bool isInitialized;
-  @override
-  @JsonKey()
-  final bool isOnline;
-  @override
-  @JsonKey()
-  final bool isFirstLaunch;
-  @override
-  final DateTime? lastUpdated;
 
   @override
   String toString() {
-    return 'PortfolioState(currentSection: $currentSection, scrollOffset: $scrollOffset, isAutoScrolling: $isAutoScrolling, isMenuOpen: $isMenuOpen, isLoading: $isLoading, isMobileView: $isMobileView, isTabletView: $isTabletView, isDesktopView: $isDesktopView, enableAnimations: $enableAnimations, enableParallax: $enableParallax, enableSoundEffects: $enableSoundEffects, enableNotifications: $enableNotifications, enableAnalytics: $enableAnalytics, enableCookies: $enableCookies, enableLazyLoading: $enableLazyLoading, enableImageOptimization: $enableImageOptimization, language: $language, fontSize: $fontSize, enableHighContrast: $enableHighContrast, enableReducedMotion: $enableReducedMotion, error: $error, successMessage: $successMessage, isInitialized: $isInitialized, isOnline: $isOnline, isFirstLaunch: $isFirstLaunch, lastUpdated: $lastUpdated)';
+    return 'PortfolioState(currentSection: $currentSection, scrollOffset: $scrollOffset, isAutoScrolling: $isAutoScrolling, isMenuOpen: $isMenuOpen, isLoading: $isLoading, isMobileView: $isMobileView, isTabletView: $isTabletView, isDesktopView: $isDesktopView, enableLazyLoading: $enableLazyLoading, error: $error, successMessage: $successMessage, isInitialized: $isInitialized)';
   }
 
   @override
@@ -644,49 +375,18 @@ class _$PortfolioStateImpl implements _PortfolioState {
                 other.isTabletView == isTabletView) &&
             (identical(other.isDesktopView, isDesktopView) ||
                 other.isDesktopView == isDesktopView) &&
-            (identical(other.enableAnimations, enableAnimations) ||
-                other.enableAnimations == enableAnimations) &&
-            (identical(other.enableParallax, enableParallax) ||
-                other.enableParallax == enableParallax) &&
-            (identical(other.enableSoundEffects, enableSoundEffects) ||
-                other.enableSoundEffects == enableSoundEffects) &&
-            (identical(other.enableNotifications, enableNotifications) ||
-                other.enableNotifications == enableNotifications) &&
-            (identical(other.enableAnalytics, enableAnalytics) ||
-                other.enableAnalytics == enableAnalytics) &&
-            (identical(other.enableCookies, enableCookies) ||
-                other.enableCookies == enableCookies) &&
             (identical(other.enableLazyLoading, enableLazyLoading) ||
                 other.enableLazyLoading == enableLazyLoading) &&
-            (identical(
-                  other.enableImageOptimization,
-                  enableImageOptimization,
-                ) ||
-                other.enableImageOptimization == enableImageOptimization) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
-            (identical(other.fontSize, fontSize) ||
-                other.fontSize == fontSize) &&
-            (identical(other.enableHighContrast, enableHighContrast) ||
-                other.enableHighContrast == enableHighContrast) &&
-            (identical(other.enableReducedMotion, enableReducedMotion) ||
-                other.enableReducedMotion == enableReducedMotion) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.successMessage, successMessage) ||
                 other.successMessage == successMessage) &&
             (identical(other.isInitialized, isInitialized) ||
-                other.isInitialized == isInitialized) &&
-            (identical(other.isOnline, isOnline) ||
-                other.isOnline == isOnline) &&
-            (identical(other.isFirstLaunch, isFirstLaunch) ||
-                other.isFirstLaunch == isFirstLaunch) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated));
+                other.isInitialized == isInitialized));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
+  int get hashCode => Object.hash(
     runtimeType,
     currentSection,
     scrollOffset,
@@ -696,25 +396,11 @@ class _$PortfolioStateImpl implements _PortfolioState {
     isMobileView,
     isTabletView,
     isDesktopView,
-    enableAnimations,
-    enableParallax,
-    enableSoundEffects,
-    enableNotifications,
-    enableAnalytics,
-    enableCookies,
     enableLazyLoading,
-    enableImageOptimization,
-    language,
-    fontSize,
-    enableHighContrast,
-    enableReducedMotion,
     error,
     successMessage,
     isInitialized,
-    isOnline,
-    isFirstLaunch,
-    lastUpdated,
-  ]);
+  );
 
   /// Create a copy of PortfolioState
   /// with the given fields replaced by the non-null parameter values.
@@ -743,24 +429,10 @@ abstract class _PortfolioState implements PortfolioState {
     final bool isMobileView,
     final bool isTabletView,
     final bool isDesktopView,
-    final bool enableAnimations,
-    final bool enableParallax,
-    final bool enableSoundEffects,
-    final bool enableNotifications,
-    final bool enableAnalytics,
-    final bool enableCookies,
     final bool enableLazyLoading,
-    final bool enableImageOptimization,
-    final String language,
-    final double fontSize,
-    final bool enableHighContrast,
-    final bool enableReducedMotion,
     final String? error,
     final String? successMessage,
     final bool isInitialized,
-    final bool isOnline,
-    final bool isFirstLaunch,
-    final DateTime? lastUpdated,
   }) = _$PortfolioStateImpl;
 
   factory _PortfolioState.fromJson(Map<String, dynamic> json) =
@@ -784,41 +456,13 @@ abstract class _PortfolioState implements PortfolioState {
   @override
   bool get isDesktopView; // App Settings & Preferences
   @override
-  bool get enableAnimations;
-  @override
-  bool get enableParallax;
-  @override
-  bool get enableSoundEffects;
-  @override
-  bool get enableNotifications;
-  @override
-  bool get enableAnalytics;
-  @override
-  bool get enableCookies;
-  @override
-  bool get enableLazyLoading;
-  @override
-  bool get enableImageOptimization; // Localization & Accessibility
-  @override
-  String get language;
-  @override
-  double get fontSize; // Font size multiplier
-  @override
-  bool get enableHighContrast;
-  @override
-  bool get enableReducedMotion; // Global Error & Success Handling
+  bool get enableLazyLoading; // Global Error & Success Handling
   @override
   String? get error;
   @override
   String? get successMessage; // App State & Lifecycle
   @override
   bool get isInitialized;
-  @override
-  bool get isOnline;
-  @override
-  bool get isFirstLaunch;
-  @override
-  DateTime? get lastUpdated;
 
   /// Create a copy of PortfolioState
   /// with the given fields replaced by the non-null parameter values.

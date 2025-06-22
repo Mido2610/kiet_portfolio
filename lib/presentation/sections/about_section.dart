@@ -170,8 +170,8 @@ class AboutFloatingElements extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             child: AboutFloatingCard(
               icon: Icons.work_history,
-              text: l10n.yearsExperience,
-              subtitle: l10n.experienceLabel,
+              text: l10n(context).yearsExperience,
+              subtitle: l10n(context).experienceLabel,
             ),
           ),
         ),
@@ -183,8 +183,8 @@ class AboutFloatingElements extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             child: AboutFloatingCard(
               icon: Icons.code,
-              text: l10n.technologiesCount,
-              subtitle: l10n.technologies,
+              text: l10n(context).technologiesCount,
+              subtitle: l10n(context).technologies,
             ),
           ),
         ),
@@ -294,7 +294,7 @@ class AboutSectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TypingAnimation(
-          text: l10n.aboutMe,
+          text: l10n(context).aboutMe,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -333,7 +333,7 @@ class _DescriptionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.passionateFlutterDeveloper,
+          l10n(context).passionateFlutterDeveloper,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -347,7 +347,7 @@ class _DescriptionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          l10n.aboutDescription1,
+          l10n(context).aboutDescription1,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -361,7 +361,7 @@ class _DescriptionWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          l10n.aboutDescription2,
+          l10n(context).aboutDescription2,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
               context,
@@ -384,17 +384,17 @@ class _HightlightsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final highlights = [
-      {'icon': Icons.mobile_friendly, 'text': l10n.crossPlatformDevelopment},
-      {'icon': Icons.speed, 'text': l10n.performanceOptimization},
-      {'icon': Icons.design_services, 'text': l10n.uiUxImplementation},
-      {'icon': Icons.cloud, 'text': l10n.backendIntegration},
+      {'icon': Icons.mobile_friendly, 'text': l10n(context).crossPlatformDevelopment},
+      {'icon': Icons.speed, 'text': l10n(context).performanceOptimization},
+      {'icon': Icons.design_services, 'text': l10n(context).uiUxImplementation},
+      {'icon': Icons.cloud, 'text': l10n(context).backendIntegration},
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.whatIDooBest,
+          l10n(context).whatIDooBest,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -475,10 +475,10 @@ class _PersonalInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personalInfo = [
-      {'label': l10n.location, 'value': l10n.locationValue},
-      {'label': l10n.languages, 'value': l10n.languagesValue},
-      {'label': l10n.interests, 'value': l10n.interestsValue},
-      {'label': l10n.status, 'value': l10n.statusValue},
+      {'label': l10n(context).location, 'value': l10n(context).locationValue},
+      {'label': l10n(context).languages, 'value': l10n(context).languagesValue},
+      {'label': l10n(context).interests, 'value': l10n(context).interestsValue},
+      {'label': l10n(context).status, 'value': l10n(context).statusValue},
     ];
 
     return GlassContainer(
@@ -487,7 +487,7 @@ class _PersonalInfoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.personalInformation,
+            l10n(context).personalInformation,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kiet_portfolio/gen/l10n/app_localizations.dart';
 import 'package:kiet_portfolio/presentation/providers/portfolio_provider.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/language_switcher.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
-import '../../../core/utils/common.dart';
 
 class CustomNavigationBar extends HookWidget {
   final int currentSection;
@@ -88,7 +88,15 @@ class NavigationItemsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = [l10n.home, l10n.about, l10n.skills, l10n.experience, l10n.contact];
+    final localizations = AppLocalizations.of(context)!;
+    
+    final sections = [
+      localizations.home,
+      localizations.about,
+      localizations.skills,
+      localizations.experience,
+      localizations.contact,
+    ];
 
     return Row(
       children:

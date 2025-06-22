@@ -38,48 +38,10 @@ final isDesktopViewProvider = Provider<bool>((ref) {
   return ref.watch(portfolioProvider.select((state) => state.isDesktopView));
 });
 
-// Settings Providers
-final enableAnimationsProvider = Provider<bool>((ref) {
-  return ref.watch(
-    portfolioProvider.select((state) => state.animationsEnabled),
-  );
-});
-
-final enableParallaxProvider = Provider<bool>((ref) {
-  return ref.watch(portfolioProvider.select((state) => state.parallaxEnabled));
-});
-
-final fontSizeProvider = Provider<double>((ref) {
-  return ref.watch(portfolioProvider.select((state) => state.fontSize));
-});
-
-final languageProvider = Provider<String>((ref) {
-  return ref.watch(portfolioProvider.select((state) => state.language));
-});
-
-// Accessibility Providers
-final enableHighContrastProvider = Provider<bool>((ref) {
-  return ref.watch(
-    portfolioProvider.select((state) => state.enableHighContrast),
-  );
-});
-
-final enableReducedMotionProvider = Provider<bool>((ref) {
-  return ref.watch(
-    portfolioProvider.select((state) => state.enableReducedMotion),
-  );
-});
-
 // Performance Providers
 final enableLazyLoadingProvider = Provider<bool>((ref) {
   return ref.watch(
-    portfolioProvider.select((state) => state.shouldUseLazyLoading),
-  );
-});
-
-final enableImageOptimizationProvider = Provider<bool>((ref) {
-  return ref.watch(
-    portfolioProvider.select((state) => state.shouldOptimizeImages),
+    portfolioProvider.select((state) => state.enableLazyLoading),
   );
 });
 
@@ -90,14 +52,6 @@ final isLoadingProvider = Provider<bool>((ref) {
 
 final errorProvider = Provider<String?>((ref) {
   return ref.watch(portfolioProvider.select((state) => state.error));
-});
-
-final successMessageProvider = Provider<String?>((ref) {
-  return ref.watch(portfolioProvider.select((state) => state.successMessage));
-});
-
-final isOnlineProvider = Provider<bool>((ref) {
-  return ref.watch(portfolioProvider.select((state) => state.isOnline));
 });
 
 final isInitializedProvider = Provider<bool>((ref) {
@@ -126,21 +80,24 @@ class AppSettingsHelper {
 
   AppSettingsHelper(this._ref);
 
-  void toggleAnimations() =>
-      _ref.read(portfolioProvider.notifier).toggleAnimations();
-  void toggleParallax() =>
-      _ref.read(portfolioProvider.notifier).toggleParallax();
-  void toggleSoundEffects() =>
-      _ref.read(portfolioProvider.notifier).toggleSoundEffects();
-  void toggleNotifications() =>
-      _ref.read(portfolioProvider.notifier).toggleNotifications();
-  void toggleHighContrast() =>
-      _ref.read(portfolioProvider.notifier).toggleHighContrast();
-  void toggleReducedMotion() =>
-      _ref.read(portfolioProvider.notifier).toggleReducedMotion();
-  void setFontSize(double size) =>
-      _ref.read(portfolioProvider.notifier).setFontSize(size);
-  void setLanguage(String lang) =>
-      _ref.read(portfolioProvider.notifier).setLanguage(lang);
-  void resetSettings() => _ref.read(portfolioProvider.notifier).resetSettings();
+  void toggleLazyLoading() =>
+      _ref.read(portfolioProvider.notifier).toggleLazyLoading();
+  void toggleMenu() =>
+      _ref.read(portfolioProvider.notifier).toggleMenu();
+  void closeMenu() =>
+      _ref.read(portfolioProvider.notifier).closeMenu();
+  void updateCurrentSection(int section) =>
+      _ref.read(portfolioProvider.notifier).updateCurrentSection(section);
+  void setAutoScrolling(bool isScrolling) =>
+      _ref.read(portfolioProvider.notifier).setAutoScrolling(isScrolling);
+  void updateDeviceType({
+    required bool isMobile,
+    required bool isTablet,
+    required bool isDesktop,
+  }) =>
+      _ref.read(portfolioProvider.notifier).updateDeviceType(
+        isMobile: isMobile,
+        isTablet: isTablet,
+        isDesktop: isDesktop,
+      );
 }

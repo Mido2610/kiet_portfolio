@@ -263,7 +263,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          l10n.technologiesTitle,
+          l10n(context).technologiesTitle,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -291,7 +291,7 @@ class _SkillsSectionHeaderWidget extends StatelessWidget {
         Container(
           constraints: const BoxConstraints(maxWidth: 600),
           child: Text(
-            l10n.skillsDescription,
+            l10n(context).skillsDescription,
             style: TextStyle(
               fontSize: ResponsiveHelper.getResponsiveFontSize(
                 context,

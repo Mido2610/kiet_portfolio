@@ -170,7 +170,7 @@ class HeroContentWidget extends StatelessWidget {
           isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.hiThereIm,
+          l10n(context).hiThereIm,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -185,7 +185,7 @@ class HeroContentWidget extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          l10n.kietNguyen,
+          l10n(context).kietNguyen,
           style: TextStyle(
             fontSize: ResponsiveHelper.getResponsiveFontSize(
               context,
@@ -221,7 +221,7 @@ class HeroAnimatedTextWidget extends StatelessWidget {
       height: ResponsiveHelper.isMobile(context) ? 60 : 80,
       child: AnimatedTextKit(
         animatedTexts:
-            [l10n.flutterDeveloper, l10n.mobileAppDeveloper, l10n.uiUxEnthusiast]
+            [l10n(context).flutterDeveloper, l10n(context).mobileAppDeveloper, l10n(context).uiUxEnthusiast]
                 .map(
                   (text) => TypewriterAnimatedText(
                     text,
@@ -258,7 +258,7 @@ class HeroDescriptionWidget extends StatelessWidget {
         maxWidth: ResponsiveHelper.isMobile(context) ? double.infinity : 600,
       ),
       child: Text(
-        l10n.heroDescription,
+        l10n(context).heroDescription,
         style: TextStyle(
           fontSize: ResponsiveHelper.getResponsiveFontSize(
             context,
@@ -295,7 +295,7 @@ class HeroCTAButtonsWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: AnimatedButton(
-              text: l10n.viewMyWork,
+              text: l10n(context).viewMyWork,
               onPressed: () => onNavigateToSection(3),
               isPrimary: true,
               icon: Icons.work,
@@ -305,7 +305,7 @@ class HeroCTAButtonsWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: AnimatedButton(
-              text: l10n.contactMe,
+              text: l10n(context).contactMe,
               onPressed: () => onNavigateToSection(5),
               isPrimary: false,
               icon: Icons.mail,
@@ -318,7 +318,7 @@ class HeroCTAButtonsWidget extends StatelessWidget {
     return Row(
       children: [
         AnimatedButton(
-          text: l10n.viewMyWork,
+          text: l10n(context).viewMyWork,
           onPressed: () => onNavigateToSection(3),
           isPrimary: true,
           icon: Icons.work,
@@ -326,7 +326,7 @@ class HeroCTAButtonsWidget extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         AnimatedButton(
-          text: l10n.contactMe,
+          text: l10n(context).contactMe,
           onPressed: () => onNavigateToSection(5),
           isPrimary: false,
           icon: Icons.mail,
@@ -343,12 +343,12 @@ class HeroSocialLinksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final socialLinks = [
-      {'icon': Icons.code, 'url': AppConstants.github, 'label': l10n.github},
-      {'icon': Icons.work, 'url': AppConstants.linkedin, 'label': l10n.linkedin},
+      {'icon': Icons.code, 'url': AppConstants.github, 'label': l10n(context).github},
+      {'icon': Icons.work, 'url': AppConstants.linkedin, 'label': l10n(context).linkedin},
       {
         'icon': Icons.email,
         'url': 'mailto:${AppConstants.email}',
-        'label': l10n.email,
+        'label': l10n(context).email,
       },
     ];
 

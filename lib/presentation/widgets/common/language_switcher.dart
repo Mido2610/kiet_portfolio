@@ -8,7 +8,7 @@ class LanguageSwitcher extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentLocale = ref.watch(localeProvider);
+    final currentLanguage = ref.watch(languageProvider);
 
     return Container(
       decoration: BoxDecoration(
@@ -32,7 +32,7 @@ class LanguageSwitcher extends ConsumerWidget {
               Icon(Icons.language, color: AppColors.accent, size: 18),
               const SizedBox(width: 6),
               Text(
-                currentLocale.languageCode.toUpperCase(),
+                currentLanguage == 'en' ? 'English' : 'Tiếng Việt',
                 style: const TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 12,
@@ -48,26 +48,26 @@ class LanguageSwitcher extends ConsumerWidget {
             ],
           ),
         ),
-        onSelected: (String languageCode) {
-          ref.read(localeProvider.notifier).changeLocale(languageCode);
+        onSelected: (String languageCode) async {
+          // SỬ DỤNG CORE PROVIDER
+          await ref.read(languageNotifierProvider).setLanguage(languageCode);
         },
-        itemBuilder:
-            (BuildContext context) => [
-              _buildLanguageMenuItem(
-                context,
-                'en',
-                '🇺🇸',
-                'English',
-                currentLocale.languageCode == 'en',
-              ),
-              _buildLanguageMenuItem(
-                context,
-                'vi',
-                '🇻🇳',
-                'Tiếng Việt',
-                currentLocale.languageCode == 'vi',
-              ),
-            ],
+        itemBuilder: (BuildContext context) => [
+          _buildLanguageMenuItem(
+            context,
+            'en',
+            '🇺🇸',
+            'English',
+            currentLanguage == 'en'
+          ),
+          _buildLanguageMenuItem(
+            context,
+            'vi',
+            '🇻🇳',
+            'Tiếng Việt',
+            currentLanguage == 'vi',
+          ),
+        ],
       ),
     );
   }

@@ -15,7 +15,7 @@ class ContactSection extends HookWidget {
       child: Column(
         children: [
           Text(
-            l10n.getInTouch,
+            l10n(context).getInTouch,
             style: TextStyle(
               fontSize: ResponsiveHelper.getResponsiveFontSize(
                 context,
@@ -31,7 +31,7 @@ class ContactSection extends HookWidget {
           Container(
             constraints: const BoxConstraints(maxWidth: 600),
             child: Text(
-              l10n.contactDescription,
+              l10n(context).contactDescription,
               style: const TextStyle(
                 fontSize: 18,
                 color: AppColors.textSecondary,
@@ -50,7 +50,7 @@ class ContactSection extends HookWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             child: Text(
-              l10n.contactMeButton,
+              l10n(context).contactMeButton,
               style: const TextStyle(
                 color: AppColors.primary,
                 fontSize: 16,
