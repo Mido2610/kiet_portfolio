@@ -30,11 +30,11 @@
 ### About Me
 ![About Section](assets/images/about_section.png)
 
-### Skills & Experience  
+### Skills
 ![Skills Section](assets/images/skills_section.png)
 
-### Projects Gallery
-![Projects Section](assets/images/projects_section.png)
+### Experience
+![Projects Section](assets/images/experience_section.png)
 
 ### Contact Form
 ![Contact Section](assets/images/contact_section.png)
