@@ -3,7 +3,6 @@
 ![GitHub Repo Size](https://img.shields.io/github/repo-size/mido2610/kiet_portfolio?color=d62936&label=Repo%20Size&style=flat-square)
 ![GitHub Code Size](https://img.shields.io/github/languages/code-size/mido2610/kiet_portfolio?color=e6a400&label=Code%20Size&style=flat-square)
 ![GitHub License](https://img.shields.io/github/license/mido2610/kiet_portfolio?color=eb7005&label=License&style=flat-square)
-![Total Code Lines](https://img.shields.io/tokei/lines/github/mido2610/kiet_portfolio?color=805b3c&label=Total%20Code%20Lines&style=flat-square)
 ![GitHub Commit Activity](https://img.shields.io/github/commit-activity/m/mido2610/kiet_portfolio?color=138a3d&label=Commit%20Activity&style=flat-square)
 ![GitHub Language Count](https://img.shields.io/github/languages/count/mido2610/kiet_portfolio?color=1f77b4&label=Total%20Languages&style=flat-square)
 ![GitHub Top Language](https://img.shields.io/github/languages/top/mido2610/kiet_portfolio?color=7f0c7f&style=flat-square)
