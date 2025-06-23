@@ -138,6 +138,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get skillsDescription => 'Here are the technologies and tools which I regularly work with.';
 
   @override
+  String get message => 'Message';
+
+  @override
+  String get sendMeAMessage => 'Send Me a Message';
+
+  @override
+  String get messageDescription => 'Have a question or want to work together? Send me a message and I\'ll get back to you as soon as possible.';
+
+  @override
   String get getInTouch => 'Get In Touch';
 
   @override

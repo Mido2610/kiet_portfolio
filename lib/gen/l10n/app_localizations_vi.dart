@@ -138,6 +138,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get skillsDescription => 'Đây là những công nghệ và công cụ mà tôi thường xuyên làm việc cùng.';
 
   @override
+  String get message => 'Tin nhắn';
+
+  @override
+  String get sendMeAMessage => 'Gửi tin nhắn cho tôi';
+
+  @override
+  String get messageDescription => 'Có câu hỏi hoặc muốn hợp tác? Gửi tin nhắn cho tôi và tôi sẽ phản hồi sớm nhất có thể.';
+
+  @override
   String get getInTouch => 'Liên hệ với tôi';
 
   @override

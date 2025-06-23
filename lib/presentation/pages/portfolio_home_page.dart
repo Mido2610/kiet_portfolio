@@ -84,7 +84,7 @@ class PortfolioHomePage extends HookConsumerWidget {
                     child: const WorkExperienceSection(),
                   ),
 
-                  // Section 5: Contact
+                  // Section 4: Contact
                   Container(key: sectionKeys[4], child: const ContactSection()),
                 ],
               ),

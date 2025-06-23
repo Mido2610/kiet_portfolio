@@ -49,6 +49,10 @@
   "technologiesTitle": "Technologies",
   "skillsDescription": "Here are the technologies and tools which I regularly work with.",
   
+  "message": "Message",
+  "sendMeAMessage": "Send Me a Message",
+  "messageDescription": "Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.",
+  
   "getInTouch": "Get In Touch",
   "contactDescription": "I'm always open to discussing new opportunities and interesting projects. Feel free to reach out!",
   "contactMeButton": "Contact Me"

@@ -353,6 +353,24 @@ abstract class AppLocalizations {
   /// **'Here are the technologies and tools which I regularly work with.'**
   String get skillsDescription;
 
+  /// No description provided for @message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// No description provided for @sendMeAMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Me a Message'**
+  String get sendMeAMessage;
+
+  /// No description provided for @messageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a question or want to work together? Send me a message and I\'ll get back to you as soon as possible.'**
+  String get messageDescription;
+
   /// No description provided for @getInTouch.
   ///
   /// In en, this message translates to:
