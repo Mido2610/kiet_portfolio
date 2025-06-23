@@ -228,9 +228,9 @@ class _SkillGridCardWidget extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
-            crossAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
-            mainAxisSpacing: ResponsiveHelper.isMobile(context) ? 16 : 24,
-            childAspectRatio: ResponsiveHelper.isMobile(context) ? 1.1 : 1.0,
+            crossAxisSpacing: ResponsiveHelper.isMobile(context) ? 12 : 24,
+            mainAxisSpacing: ResponsiveHelper.isMobile(context) ? 12 : 24,
+            childAspectRatio: ResponsiveHelper.isMobile(context) ? 0.85 : 1.0,
           ),
           itemCount: skills.length,
           itemBuilder: (context, index) {

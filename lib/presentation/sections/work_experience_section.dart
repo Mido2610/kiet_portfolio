@@ -1,191 +1,372 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_hooks/flutter_hooks.dart';
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-// import 'package:kiet_portfolio/core/themes/app_colors.dart';
-// import 'package:kiet_portfolio/data/models/experience_model.dart';
-// import 'package:kiet_portfolio/presentation/state_management/state/portfolio_state.dart';
-// import '../../../core/utils/responsive_utils.dart';
-// import '../cards/experience_timeline_card.dart';
-// import '../animations/fade_in_up.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+import 'package:kiet_portfolio/presentation/cards/experience_timeline_card.dart';
+import 'package:kiet_portfolio/core/themes/app_colors.dart';
+import 'package:kiet_portfolio/core/utils/responsive_utils.dart';
+import '../providers/work_expericen_provider.dart';
+import '../animations/parallax_widget.dart';
 
-// class WorkExperienceSection extends HookConsumerWidget {
-//   const WorkExperienceSection({super.key});
+class WorkExperienceSection extends HookConsumerWidget {
+  const WorkExperienceSection({super.key});
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final portfolioState = ref.watch(portfolioStateProvider);
-//     final animationController = useAnimationController(
-//       duration: const Duration(milliseconds: 1500),
-//     );
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final experiences = ref.watch(sortedExperiencesProvider);
+    final visibleItems = ref.watch(experienceVisibilityProvider);
+    
+    final animationController = useAnimationController(
+      duration: const Duration(milliseconds: 2000),
+    );
+    
+    final pulseController = useAnimationController(
+      duration: const Duration(milliseconds: 1500),
+    );
 
-//     useEffect(() {
-//       animationController.forward();
-//       return null;
-//     }, []);
+    final titleController = useAnimationController(
+      duration: const Duration(milliseconds: 800),
+    );
 
-//     return Container(
-//       width: double.infinity,
-//       padding: ResponsiveUtils.getSectionPadding(context),
-//       child: Column(
-//         children: [
-//           FadeInUp(
-//             delay: const Duration(milliseconds: 200),
-//             child: _buildSectionHeader(context),
-//           ),
-//           const SizedBox(height: 60),
-//           if (portfolioState.isLoading)
-//             const Center(
-//               child: CircularProgressIndicator(color: AppColors.accent),
-//             )
-//           else
-//             _buildExperienceTimeline(context, portfolioState.experiences),
-//         ],
-//       ),
-//     );
-//   }
+    final scrollController = useScrollController();
+    final scrollOffset = useState(0.0);
 
-//   Widget _buildSectionHeader(BuildContext context) {
-//     return Column(
-//       children: [
-//         Text(
-//           'Work Experience',
-//           style: TextStyle(
-//             fontSize: ResponsiveUtils.getResponsiveFontSize(
-//               context,
-//               mobile: 32,
-//               tablet: 40,
-//               desktop: 48,
-//             ),
-//             fontWeight: FontWeight.bold,
-//             color: AppColors.textPrimary,
-//           ),
-//           textAlign: TextAlign.center,
-//         ),
-//         const SizedBox(height: 16),
-//         Container(
-//           width: 80,
-//           height: 4,
-//           decoration: BoxDecoration(
-//             gradient: const LinearGradient(
-//               colors: [AppColors.accent, AppColors.accentLight],
-//             ),
-//             borderRadius: BorderRadius.circular(2),
-//           ),
-//         ),
-//         const SizedBox(height: 24),
-//         Container(
-//           constraints: const BoxConstraints(maxWidth: 600),
-//           child: Text(
-//             'My professional journey and the experiences that shaped my skills in Flutter development.',
-//             style: TextStyle(
-//               fontSize: ResponsiveUtils.getResponsiveFontSize(
-//                 context,
-//                 mobile: 16,
-//                 tablet: 18,
-//                 desktop: 18,
-//               ),
-//               color: AppColors.textSecondary,
-//               height: 1.6,
-//             ),
-//             textAlign: TextAlign.center,
-//           ),
-//         ),
-//       ],
-//     );
-//   }
+    useEffect(() {
+      void listener() {
+        scrollOffset.value = scrollController.offset;
+      }
+      scrollController.addListener(listener);
+      return () => scrollController.removeListener(listener);
+    }, [scrollController]);
 
-//   Widget _buildExperienceTimeline(
-//     BuildContext context,
-//     List<Experience> experiences,
-//   ) {
-//     if (ResponsiveUtils.isMobile(context)) {
-//       return _buildMobileTimeline(experiences);
-//     }
-//     return _buildDesktopTimeline(experiences);
-//   }
+    useEffect(() {
+      Future.delayed(const Duration(milliseconds: 200), () {
+        titleController.forward();
+      });
+      
+      Future.delayed(const Duration(milliseconds: 600), () {
+        animationController.forward();
+      });
+      
+      // Pulse animation loop
+      pulseController.repeat(reverse: true);
+      
+      return () {
+        pulseController.dispose();
+        titleController.dispose();
+      };
+    }, []);
 
-//   Widget _buildMobileTimeline(List<Experience> experiences) {
-//     return AnimationLimiter(
-//       child: Column(
-//         children:
-//             experiences.asMap().entries.map((entry) {
-//               final index = entry.key;
-//               final experience = entry.value;
+    final lineGrowRatio = experiences.isEmpty ? 0.0 : visibleItems.length / experiences.length;
+    final isMobile = ResponsiveUtils.isMobile(context);
+    
+    // Animation values
+    final titleSlideAnimation = Tween<Offset>(
+      begin: const Offset(0, -0.5),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: titleController,
+      curve: Curves.elasticOut,
+    ));
 
-//               return AnimationConfiguration.staggeredList(
-//                 position: index,
-//                 duration: const Duration(milliseconds: 600),
-//                 child: SlideAnimation(
-//                   verticalOffset: 50.0,
-//                   child: FadeInAnimation(
-//                     child: Padding(
-//                       padding: const EdgeInsets.only(bottom: 24),
-//                       child: ExperienceTimelineCard(
-//                         experience: experience,
-//                         isLeft: false,
-//                         showConnector: index < experiences.length - 1,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               );
-//             }).toList(),
-//       ),
-//     );
-//   }
+    final titleOpacityAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: titleController,
+      curve: Curves.easeOut,
+    ));
 
-//   Widget _buildDesktopTimeline(List<Experience> experiences) {
-//     return Stack(
-//       children: [
-//         // Timeline Line
-//         Positioned(
-//           left: 0,
-//           right: 0,
-//           child: Center(
-//             child: Container(
-//               width: 2,
-//               height: experiences.length * 300.0,
-//               decoration: BoxDecoration(
-//                 gradient: const LinearGradient(
-//                   colors: [AppColors.accent, AppColors.accentLight],
-//                   begin: Alignment.topCenter,
-//                   end: Alignment.bottomCenter,
-//                 ),
-//                 borderRadius: BorderRadius.circular(1),
-//               ),
-//             ),
-//           ),
-//         ),
-//         // Experience Cards
-//         Column(
-//           children:
-//               experiences.asMap().entries.map((entry) {
-//                 final index = entry.key;
-//                 final experience = entry.value;
-//                 final isLeft = index % 2 == 0;
+    final lineGradientAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeInOut,
+    ));
 
-//                 return AnimationConfiguration.staggeredList(
-//                   position: index,
-//                   duration: const Duration(milliseconds: 600),
-//                   child: SlideAnimation(
-//                     horizontalOffset: isLeft ? -50.0 : 50.0,
-//                     child: FadeInAnimation(
-//                       child: Container(
-//                         height: 280,
-//                         margin: const EdgeInsets.only(bottom: 20),
-//                         child: ExperienceTimelineCard(
-//                           experience: experience,
-//                           isLeft: isLeft,
-//                           showConnector: true,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 );
-//               }).toList(),
-//         ),
-//       ],
-//     );
-//   }
-// }
+    final pulseAnimation = Tween<double>(
+      begin: 0.8,
+      end: 1.2,
+    ).animate(CurvedAnimation(
+      parent: pulseController,
+      curve: Curves.easeInOut,
+    ));
+
+    return Container(
+      width: double.infinity,
+      padding: ResponsiveUtils.getSectionPadding(context),
+      child: Stack(
+        children: [
+          // Floating particles background
+          Positioned.fill(
+            child: FloatingParticlesWidget(
+              particleCount: 15,
+              particleColor: AppColors.accentLight,
+              minSize: 1.0,
+              maxSize: 3.0,
+              animationDuration: const Duration(seconds: 15),
+            ),
+          ),
+          
+          Column(
+            children: [
+          // Animated Title
+          AnimatedBuilder(
+            animation: titleController,
+            builder: (context, child) {
+              return SlideTransition(
+                position: titleSlideAnimation,
+                child: FadeTransition(
+                  opacity: titleOpacityAnimation,
+                  child: Column(
+                    children: [
+                      Text(
+                        'Work Experience',
+                        style: TextStyle(
+                          fontSize: ResponsiveUtils.getResponsiveFontSize(
+                            context,
+                            mobile: 32,
+                            tablet: 40,
+                            desktop: 48,
+                          ),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        height: 4,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [AppColors.accent, AppColors.accentLight],
+                          ),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 60),
+
+          // Timeline Container with enhanced effects
+          if (experiences.isNotEmpty)
+            SizedBox(
+              height: experiences.length * (isMobile ? 320.0 : 350),
+              child: Stack(
+                children: [
+                  // Background gradient overlay
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.accent.withAlpha((0.05 * 255).round()),
+                          Colors.transparent,
+                          AppColors.accentLight.withAlpha((0.03 * 255).round()),
+                        ],
+                        stops: const [0.0, 0.5, 1.0],
+                      ),
+                    ),
+                  ),
+
+                  // Animated Timeline Line
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: AnimatedBuilder(
+                      animation: Listenable.merge([animationController, lineGradientAnimation]),
+                      builder: (context, child) {
+                        return Stack(
+                          children: [
+                            // Base line
+                            Container(
+                              width: 4,
+                              height: experiences.length * (isMobile ? 320.0 : 350),
+                              decoration: BoxDecoration(
+                                color: AppColors.accent.withAlpha((0.2 * 255).round()),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            ),
+                            
+                            // Animated growing line
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 800),
+                              curve: Curves.easeOutCubic,
+                              width: 4,
+                              height: (experiences.length * (isMobile ? 320.0 : 350.0)) * lineGrowRatio,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    AppColors.accent,
+                                    AppColors.accentLight,
+                                    AppColors.accent.withAlpha((0.8 * 255).round()),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  stops: [
+                                    0.0,
+                                    0.5 + (0.3 * lineGradientAnimation.value),
+                                    1.0,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(2),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.accent.withAlpha((0.4 * 255).round()),
+                                    blurRadius: 8,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            
+                            // Flowing gradient effect
+                            if (lineGrowRatio > 0)
+                              AnimatedBuilder(
+                                animation: pulseAnimation,
+                                builder: (context, child) {
+                                  return Positioned(
+                                    top: ((experiences.length * (isMobile ? 320.0 : 300.0)) * lineGrowRatio) - 20,
+                                    left: -8,
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        gradient: RadialGradient(
+                                          colors: [
+                                            AppColors.accent.withAlpha((0.8 * 255).round()),
+                                            AppColors.accentLight.withAlpha((0.6 * 255).round()),
+                                            Colors.transparent,
+                                          ],
+                                        ),
+                                      ),
+                                      transform: Matrix4.identity()
+                                        ..scale(pulseAnimation.value),
+                                    ),
+                                  );
+                                },
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+
+                  // Experience Cards
+                  ListView.builder(
+                    controller: scrollController,
+                    itemCount: experiences.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final isLeft = index % 2 == 0;
+                      final experience = experiences[index];
+                      final delay = index * 200.0;
+
+                      return VisibilityDetector(
+                        key: Key('exp_$index'),
+                        onVisibilityChanged: (info) {
+                          if (info.visibleFraction > 0.3) {
+                            Future.delayed(Duration(milliseconds: delay.toInt()), () {
+                              ref
+                                  .read(experienceVisibilityProvider.notifier)
+                                  .markVisible(index);
+                            });
+                          }
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 600 + delay.toInt()),
+                          curve: Curves.elasticOut,
+                          transform: Matrix4.identity()
+                            ..translate(
+                              visibleItems.contains(index) 
+                                ? 0.0 
+                                : (isLeft ? -100.0 : 100.0),
+                              0.0,
+                            ),
+                          child: AnimatedOpacity(
+                            opacity: visibleItems.contains(index) ? 1.0 : 0.0,
+                            duration: Duration(milliseconds: 800 + delay.toInt()),
+                            curve: Curves.easeOut,
+                            child: TweenAnimationBuilder<double>(
+                              duration: Duration(milliseconds: 1000 + delay.toInt()),
+                              tween: Tween<double>(
+                                begin: 0.8,
+                                end: visibleItems.contains(index) ? 1.0 : 0.8,
+                              ),
+                              curve: Curves.elasticOut,
+                              builder: (context, scale, child) {
+                                return Transform.scale(
+                                  scale: scale,
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: isMobile ? 25 : 20,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        // Floating particles effect
+                                        if (visibleItems.contains(index))
+                                          ...List.generate(3, (particleIndex) {
+                                            return TweenAnimationBuilder<double>(
+                                              duration: Duration(
+                                                milliseconds: 2000 + (particleIndex * 500),
+                                              ),
+                                              tween: Tween<double>(begin: 0.0, end: 1.0),
+                                              builder: (context, value, child) {
+                                                return Positioned(
+                                                  left: (particleIndex * 100.0) + (value * 50),
+                                                  top: 10 + (particleIndex * 15.0) - (value * 20),
+                                                  child: Opacity(
+                                                    opacity: (1.0 - value) * 0.6,
+                                                    child: Container(
+                                                      width: 4,
+                                                      height: 4,
+                                                      decoration: BoxDecoration(
+                                                        color: AppColors.accentLight,
+                                                        shape: BoxShape.circle,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: AppColors.accentLight.withAlpha((0.5 * 255).round()),
+                                                            blurRadius: 4,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          }),
+                                        
+                                        // Main experience card
+                                        ExperienceTimelineCard(
+                                          experience: experience,
+                                          isLeft: isLeft,
+                                          showConnector: true,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

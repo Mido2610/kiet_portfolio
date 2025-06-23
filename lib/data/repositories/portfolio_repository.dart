@@ -75,4 +75,43 @@ class PortfolioRepository {
     // Return your mock experiences here
     return [];
   }
+
+  // Thêm method này vào PortfolioRepository class
+  Future<List<Experience>> getWorkExperiences() async {
+    await Future.delayed(const Duration(milliseconds: 800));
+
+    return [
+      const Experience(
+        id: '1',
+        company: 'Mmenu',
+        position: 'Frontend Developer',
+        duration: '2024 - Present',
+        description:
+            'Leading mobile app development team, focusing on cross-platform solutions using Flutter. Responsible for architecture decisions, code reviews, and mentoring junior developers.',
+        technologies: [
+          'Flutter',
+          'Firebase',
+          'ReactJS',
+          'Git',
+          'GitLab',
+          'TypeScript',
+          'Dart',
+          'Figma',
+          'VSCode',
+          'JavaScript',
+          'GitHub',
+        ],
+        logoUrl: 'assets/images/mmenu.png',
+        achievements: [
+          'Led development of mobile banking app serving 500K+ users',
+          'Reduced app crash rate from 2.1% to 0.3% through optimization',
+          'Implemented CI/CD pipeline reducing deployment time by 70%',
+          'Mentored 3 junior developers improving team productivity by 25%',
+          'Designed and implemented offline-first architecture',
+        ],
+        location: 'Ho Chi Minh City, Vietnam',
+        employmentType: 'Full-time',
+      ),
+    ];
+  }
 }

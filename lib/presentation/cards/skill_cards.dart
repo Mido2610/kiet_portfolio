@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kiet_portfolio/data/models/skill_model.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/glass_container.dart';
 import '../../../core/themes/app_colors.dart';
+import '../../../core/utils/responsive_helper.dart';
 
 class SkillCard extends HookWidget {
   final Skill skill;
@@ -39,7 +40,7 @@ class SkillCard extends HookWidget {
       child: Transform.scale(
         scale: scaleAnimation,
         child: GlassContainer(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(ResponsiveHelper.isMobile(context) ? 16 : 24),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
@@ -58,15 +59,22 @@ class SkillCard extends HookWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _SkillIconWidget(skill: skill),
-                const SizedBox(height: 16),
+                SizedBox(height: ResponsiveHelper.isMobile(context) ? 12 : 16),
                 Text(
                   skill.name,
-                  style: const TextStyle(
-                    fontSize: 18,
+                  style: TextStyle(
+                    fontSize: ResponsiveHelper.getResponsiveFontSize(
+                      context,
+                      mobile: 14,
+                      tablet: 16,
+                      desktop: 18,
+                    ),
                     fontWeight: FontWeight.bold,
                     color: AppColors.textPrimary,
                   ),
                   textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -83,9 +91,13 @@ class _SkillIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = ResponsiveHelper.isMobile(context);
+    final iconSize = isMobile ? 48.0 : 60.0;
+    final iconPadding = isMobile ? 10.0 : 12.0;
+    
     return Container(
-      width: 60,
-      height: 60,
+      width: iconSize,
+      height: iconSize,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -95,14 +107,14 @@ class _SkillIconWidget extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(isMobile ? 12 : 16),
         border: Border.all(
           color: AppColors.accent.withAlpha((0.3 * 255).round()),
           width: 1,
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(iconPadding),
         child: SvgPicture.asset(skill.iconUrl),
       ),
     );

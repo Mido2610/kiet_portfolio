@@ -3,8 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kiet_portfolio/presentation/sections/about_section.dart';
 import 'package:kiet_portfolio/presentation/sections/contact_section.dart';
+import 'package:kiet_portfolio/presentation/sections/work_experience_section.dart';
 import 'package:kiet_portfolio/presentation/widgets/navigation/horizontal_navigation_bar.dart';
 import 'package:kiet_portfolio/presentation/widgets/navigation/vertical_navigation_menu.dart';
+import 'package:kiet_portfolio/presentation/widgets/common/scroll_to_top_button.dart';
 import '../sections/hero_section.dart';
 import '../sections/skills_section.dart';
 import '../../core/themes/app_colors.dart';
@@ -76,21 +78,27 @@ class PortfolioHomePage extends HookConsumerWidget {
                   // Section 2: Skills
                   Container(key: sectionKeys[2], child: const SkillsSection()),
 
-                  // Section 4: Experience
-                  // Container(
-                  //   key: sectionKeys[4],
-                  //   child: const WorkExperienceSection(),
-                  // ),
+                  // Section 3: Experience
+                  Container(
+                    key: sectionKeys[3],
+                    child: const WorkExperienceSection(),
+                  ),
 
                   // Section 5: Contact
-                  Container(key: sectionKeys[5], child: const ContactSection()),
+                  Container(key: sectionKeys[4], child: const ContactSection()),
                 ],
               ),
             ),
           ),
 
+          // Scroll Progress Indicator
+          ScrollProgressIndicator(
+            scrollController: scrollController,
+            progressColor: AppColors.accent,
+            strokeWidth: 4.0,
+          ),
+
           // Navigation Bar
-          // Nav bar
           Positioned(
             top: 0,
             left: 0,
@@ -106,11 +114,18 @@ class PortfolioHomePage extends HookConsumerWidget {
             ),
           ),
 
+          // Vertical Navigation Menu
           VerticalNavigationMenu(
             currentSection: currentSection.value,
             onNavigateToSection:
                 (sectionIndex) =>
                     _navigateToSection(scrollController, sectionIndex, context),
+          ),
+
+          // Scroll to Top Button
+          ScrollToTopFloatingButton(
+            scrollController: scrollController,
+            tooltip: 'Scroll to top',
           ),
         ],
       ),

@@ -15,12 +15,19 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+SkillsState _$SkillsStateFromJson(Map<String, dynamic> json) {
+  return _SkillsState.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SkillsState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<Skill> get skills => throw _privateConstructorUsedError;
   String get selectedCategory => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+
+  /// Serializes this SkillsState to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of SkillsState
   /// with the given fields replaced by the non-null parameter values.
@@ -156,7 +163,7 @@ class __$$SkillsStateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$SkillsStateImpl implements _SkillsState {
   const _$SkillsStateImpl({
     this.isLoading = false,
@@ -164,6 +171,9 @@ class _$SkillsStateImpl implements _SkillsState {
     this.selectedCategory = 'All',
     this.error,
   }) : _skills = skills;
+
+  factory _$SkillsStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SkillsStateImplFromJson(json);
 
   @override
   @JsonKey()
@@ -201,6 +211,7 @@ class _$SkillsStateImpl implements _SkillsState {
             (identical(other.error, error) || other.error == error));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -217,6 +228,11 @@ class _$SkillsStateImpl implements _SkillsState {
   @pragma('vm:prefer-inline')
   _$$SkillsStateImplCopyWith<_$SkillsStateImpl> get copyWith =>
       __$$SkillsStateImplCopyWithImpl<_$SkillsStateImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SkillsStateImplToJson(this);
+  }
 }
 
 abstract class _SkillsState implements SkillsState {
@@ -226,6 +242,9 @@ abstract class _SkillsState implements SkillsState {
     final String selectedCategory,
     final String? error,
   }) = _$SkillsStateImpl;
+
+  factory _SkillsState.fromJson(Map<String, dynamic> json) =
+      _$SkillsStateImpl.fromJson;
 
   @override
   bool get isLoading;
