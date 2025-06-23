@@ -1,47 +1,59 @@
 # Kiet Nguyen - Portfolio
 
-![GitHub Repo Size](https://img.shields.io/github/repo-size/kietnguyen/kiet_portfolio?color=d62936&label=Repo%20Size&style=flat-square)
-![GitHub Code Size](https://img.shields.io/github/languages/code-size/kietnguyen/kiet_portfolio?color=e6a400&label=Code%20Size&style=flat-square)
-![GitHub License](https://img.shields.io/github/license/kietnguyen/kiet_portfolio?color=eb7005&label=License&style=flat-square)
-![Total Code Lines](https://img.shields.io/tokei/lines/github/kietnguyen/kiet_portfolio?color=805b3c&label=Total%20Code%20Lines&style=flat-square)
-![GitHub Commit Activity](https://img.shields.io/github/commit-activity/m/kietnguyen/kiet_portfolio?color=138a3d&label=Commit%20Activity&style=flat-square)
-![GitHub Language Count](https://img.shields.io/github/languages/count/kietnguyen/kiet_portfolio?color=1f77b4&label=Total%20Languages&style=flat-square)
-![GitHub Top Language](https://img.shields.io/github/languages/top/kietnguyen/kiet_portfolio?color=7f0c7f&style=flat-square)
-![GitHub Issues](https://img.shields.io/github/issues/kietnguyen/kiet_portfolio?color=098f76&label=GitHub%20Issues&style=flat-square)
-![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kietnguyen/kiet_portfolio?color=2c324f&label=GitHub%20Pull%20Requests&style=flat-square)
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/kietnguyen/kiet_portfolio?color=0c22ed&label=CodeFactor%20Grade&style=flat-square)
-![Website Status](https://img.shields.io/website?down_message=Down%20%26%20Offline&label=Website%20Status&up_message=Up%20%26%20Online&url=https%3A%2F%2Fkietnguyen.dev)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/mido2610/kiet_portfolio?color=d62936&label=Repo%20Size&style=flat-square)
+![GitHub Code Size](https://img.shields.io/github/languages/code-size/mido2610/kiet_portfolio?color=e6a400&label=Code%20Size&style=flat-square)
+![GitHub License](https://img.shields.io/github/license/mido2610/kiet_portfolio?color=eb7005&label=License&style=flat-square)
+![Total Code Lines](https://img.shields.io/tokei/lines/github/mido2610/kiet_portfolio?color=805b3c&label=Total%20Code%20Lines&style=flat-square)
+![GitHub Commit Activity](https://img.shields.io/github/commit-activity/m/mido2610/kiet_portfolio?color=138a3d&label=Commit%20Activity&style=flat-square)
+![GitHub Language Count](https://img.shields.io/github/languages/count/mido2610/kiet_portfolio?color=1f77b4&label=Total%20Languages&style=flat-square)
+![GitHub Top Language](https://img.shields.io/github/languages/top/mido2610/kiet_portfolio?color=7f0c7f&style=flat-square)
+![GitHub Issues](https://img.shields.io/github/issues/mido2610/kiet_portfolio?color=098f76&label=GitHub%20Issues&style=flat-square)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/mido2610/kiet_portfolio?color=2c324f&label=GitHub%20Pull%20Requests&style=flat-square)
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/mido2610/kiet_portfolio?color=0c22ed&label=CodeFactor%20Grade&style=flat-square)
+![Website Status](https://img.shields.io/website?down_message=Down%20%26%20Offline&label=Website%20Status&up_message=Up%20%26%20Online&url=https%3A%2F%2Fmido2610.dev)
 
-**Live Preview: 👉🏽 [kietnguyen.dev](https://kietnguyen.dev)**
+**Live Preview: 👉🏽 [kietnguyen](https://mido2610.github.io/kiet_portfolio/)**
 
 ✨ Hello there, I'm Kiet Nguyen. This is my personal portfolio website showcasing my work as a Flutter Developer, built with modern technologies and best practices.
 
 ## 🎬 Captured Moment
 
-*// Add a GIF or screenshot of your portfolio here*
+<div align="center">
 
-## 🌐 Websites
+### 🌟 Portfolio Showcase
 
-<https://kietnguyen.github.io/kiet_portfolio>  
-<https://gh.kietnguyen.dev/kiet_portfolio>  
-<https://kietnguyen.dev>
+![Portfolio Home](assets/images/home_section.png)
 
-## 🎉 Release Status
+<details>
+<summary>📸 View More Screenshots</summary>
 
-Version - v0.1.0  
-Initial release date - January 2025  
-[View all releases](https://github.com/kietnguyen/kiet_portfolio/releases)
+### About Me
+![About Section](assets/images/about_section.png)
 
+### Skills & Experience  
+![Skills Section](assets/images/skills_section.png)
+
+### Projects Gallery
+![Projects Section](assets/images/projects_section.png)
+
+### Contact Form
+![Contact Section](assets/images/contact_section.png)
+
+</details>
+
+*Click above to explore all sections of the portfolio*
+
+</div>
 ## 🍃 Branches
 
 Source Code
 
-- [main](https://github.com/kietnguyen/kiet_portfolio/tree/main) - Stable and latest version of the source code
-- [develop](https://github.com/kietnguyen/kiet_portfolio/tree/develop) - Development and feature branches
+- [main](https://github.com/mido2610/kiet_portfolio/tree/main) - Stable and latest version of the source code
+- [develop](https://github.com/mido2610/kiet_portfolio/tree/develop) - Development and feature branches
 
 Web Build
 
-- [gh-pages](https://github.com/kietnguyen/kiet_portfolio/tree/gh-pages) - Stable and latest version of the web build
+- [gh-pages](https://github.com/mido2610/kiet_portfolio/tree/gh-pages) - Stable and latest version of the web build
 
 ## 💙 Built With
 
@@ -107,7 +119,7 @@ Web Build
 
 ```bash
 # Clone the repository
-git clone https://github.com/kietnguyen/kiet_portfolio.git
+git clone https://github.com/mido2610/kiet_portfolio.git
 
 # Navigate to project directory
 cd kiet_portfolio
@@ -116,7 +128,7 @@ cd kiet_portfolio
 flutter pub get
 
 # Generate code (for Freezed, JSON serialization)
-flutter packages pub run build_runner build
+dart run build_runner build --delete-conflicting-outputs  
 
 # Generate localization files
 flutter gen-l10n
@@ -228,11 +240,10 @@ See the license file for details: [LICENSE](LICENSE)
 ## 👨‍💻 Developed By
 
 **Kiet Nguyen**  
-Flutter Developer  
-[©kietnguyen.dev](https://kietnguyen.dev)
+Flutter Developer
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kietnguyen)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/kietnguyen)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mido2610)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nguyen-kiet-886554299/)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ngtuankiet2610@gmail.com)
 
 ## 💬 Contact
@@ -240,8 +251,7 @@ Flutter Developer
 Feel free to reach out for collaboration, questions, or just to say hi!
 
 **Email**: [ngtuankiet2610@gmail.com](mailto:ngtuankiet2610@gmail.com)  
-**Portfolio**: [kietnguyen.dev](https://kietnguyen.dev)  
-**GitHub**: [@kietnguyen](https://github.com/kietnguyen)
+**GitHub**: [@kietnguyen](https://github.com/Mido2610)
 
 ---
 
