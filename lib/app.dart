@@ -160,7 +160,6 @@ class _InitializedApp extends ConsumerWidget {
         if (child == null) {
           return const SizedBox.shrink();
         }
-        // FORCE REFRESH localization khi locale thay đổi
         Localization.instance.init(context);
 
         return child;

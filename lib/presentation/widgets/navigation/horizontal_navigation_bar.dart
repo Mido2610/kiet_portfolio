@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kiet_portfolio/gen/l10n/app_localizations.dart';
-import 'package:kiet_portfolio/presentation/providers/portfolio_provider.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/language_switcher.dart';
+import 'package:kiet_portfolio/presentation/widgets/navigation/vertical_navigation_menu.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
 
-class CustomNavigationBar extends HookWidget {
+class HorizontalNavigationBar extends HookWidget {
   final int currentSection;
   final Function(int) onNavigateToSection;
 
-  const CustomNavigationBar({
+  const HorizontalNavigationBar({
     super.key,
     required this.currentSection,
     required this.onNavigateToSection,
@@ -50,7 +49,7 @@ class CustomNavigationBar extends HookWidget {
               children: [
                 const LanguageSwitcher(),
                 const SizedBox(width: 12),
-                const MobileMenuButtonWidget(),
+                const MenuButtonWidget(),
               ],
             ),
           ],
@@ -171,41 +170,6 @@ class NavigationItemWidget extends HookWidget {
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MobileMenuButtonWidget extends ConsumerWidget {
-  const MobileMenuButtonWidget({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isMenuOpen = ref.watch(isMenuOpenProvider);
-
-    return GestureDetector(
-      onTap: () => ref.read(portfolioProvider.notifier).toggleMenu(),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: AppColors.accent.withAlpha((0.2 * 255).round()),
-            width: 1,
-          ),
-        ),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          child: Icon(
-            isMenuOpen ? Icons.close : Icons.menu,
-            key: ValueKey(isMenuOpen),
-            color: AppColors.textPrimary,
-            size: 24,
           ),
         ),
       ),

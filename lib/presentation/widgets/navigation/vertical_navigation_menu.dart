@@ -31,7 +31,6 @@ class VerticalNavigationMenu extends ConsumerWidget {
 
     return Stack(
       children: [
-        // Backdrop để đóng menu khi nhấn ra ngoài
         Positioned.fill(
           child: GestureDetector(
             onTap: () => ref.read(portfolioProvider.notifier).toggleMenu(),
@@ -134,6 +133,35 @@ class VerticalNavigationMenu extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class MenuButtonWidget extends ConsumerWidget {
+  const MenuButtonWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () => ref.read(portfolioProvider.notifier).toggleMenu(),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: AppColors.accent.withAlpha((0.2 * 255).round()),
+            width: 1,
+          ),
+        ),
+        child: const Icon(
+          Icons.menu,
+          color: AppColors.textPrimary,
+          size: 24,
+        ),
+      ),
     );
   }
 }

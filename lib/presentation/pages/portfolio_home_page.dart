@@ -95,7 +95,7 @@ class PortfolioHomePage extends HookConsumerWidget {
             top: 0,
             left: 0,
             right: 0,
-            child: CustomNavigationBar(
+            child: HorizontalNavigationBar(
               currentSection: currentSection.value,
               onNavigateToSection:
                   (sectionIndex) => _navigateToSection(
