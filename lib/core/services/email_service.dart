@@ -1,10 +1,11 @@
 import 'package:emailjs/emailjs.dart' as emailjs;
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EmailService {
-  static const String _serviceId = 'YOUR_SERVICE_ID';
-  static const String _templateId = 'YOUR_TEMPLATE_ID';
-  static const String _publicKey = 'YOUR_PUBLIC_KEY';
+  static String get _serviceId => dotenv.env['EMAILJS_SERVICE_ID'] ?? '';
+  static String get _templateId => dotenv.env['EMAILJS_TEMPLATE_ID'] ?? '';
+  static String get _publicKey => dotenv.env['EMAILJS_PUBLIC_KEY'] ?? '';
 
   static Future<bool> sendContactEmail({
     required String name,
@@ -13,20 +14,13 @@ class EmailService {
     required String message,
   }) async {
     try {
-      await emailjs.send(
-        _serviceId,
-        _templateId,
-        {
-          'from_name': name,
-          'from_email': email,
-          'subject': subject,
-          'message': message,
-          'to_email': 'ngtuankiet2610@gmail.com',
-        },
-        const emailjs.Options(
-          publicKey: _publicKey,
-        ),
-      );
+      await emailjs.send(_serviceId, _templateId, {
+        'from_name': name,
+        'from_email': email,
+        'subject': subject,
+        'message': message,
+        'to_email': 'ngtuankiet2610@gmail.com',
+      }, emailjs.Options(publicKey: _publicKey));
       return true;
     } catch (error) {
       if (error is emailjs.EmailJSResponseStatus) {
@@ -63,4 +57,4 @@ Message:
 
 --
 Sent from Portfolio Website
-*/ 
+*/
