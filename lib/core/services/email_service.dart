@@ -6,6 +6,7 @@ class EmailService {
   static String get _serviceId => dotenv.env['EMAILJS_SERVICE_ID'] ?? '';
   static String get _templateId => dotenv.env['EMAILJS_TEMPLATE_ID'] ?? '';
   static String get _publicKey => dotenv.env['EMAILJS_PUBLIC_KEY'] ?? '';
+  static String get _privateKey => dotenv.env['EMAILJS_PRIVATE_KEY'] ?? '';
 
   static Future<bool> sendContactEmail({
     required String name,
@@ -14,23 +15,35 @@ class EmailService {
     required String message,
   }) async {
     try {
-      await emailjs.send(_serviceId, _templateId, {
-        'from_name': name,
-        'from_email': email,
-        'subject': subject,
+      emailjs.init(
+        emailjs.Options(publicKey: _publicKey, privateKey: _privateKey),
+      );
+
+      final templateParams = {
+        'name': name,
+        'email': email,
+        'title': subject,
         'message': message,
-        'to_email': 'ngtuankiet2610@gmail.com',
-      }, emailjs.Options(publicKey: _publicKey));
-      return true;
+      };
+
+      // Gửi email
+      final response = await emailjs.send(
+        _serviceId,
+        _templateId,
+        templateParams,
+      );
+
+      return response.status == 200;
     } catch (error) {
       if (error is emailjs.EmailJSResponseStatus) {
-        debugPrint('ERROR... ${error.status}: ${error.text}');
+        debugPrint('🚨 EmailJS error ${error.status}: ${error.text}');
       }
-      debugPrint('Error sending email: $error');
+
       return false;
     }
   }
 }
+
 
 /*
 HƯỚNG DẪN SETUP EMAILJS:
@@ -38,23 +51,31 @@ HƯỚNG DẪN SETUP EMAILJS:
 1. Đăng ký tài khoản EmailJS tại: https://www.emailjs.com/
 2. Tạo Email Service (Gmail/Outlook)
 3. Tạo Email Template với các biến:
-   - {{from_name}}
-   - {{from_email}} 
-   - {{subject}}
+   - {{name}}
+   - {{email}} 
+   - {{title}}
    - {{message}}
-   - {{to_email}}
 4. Lấy Service ID, Template ID, và Public Key
-5. Thay thế các constant ở trên
+5. Cập nhật file .env
 
-TEMPLATE EMAIL SAMPLE:
-Subject: Portfolio Contact: {{subject}}
+TEMPLATE EMAIL HIỆN TẠI:
+Subject: {{title}}
 
-From: {{from_name}} ({{from_email}})
-Subject: {{subject}}
+A message by {{name}} has been received. Kindly respond at your earliest convenience.
 
-Message:
+Email: {{email}}
+
+Subject Title: {{title}}
+
+{{name}}
+
 {{message}}
 
---
-Sent from Portfolio Website
+API TEST COMMAND:
+emailjs.send("service_varezm7","template_9ilmvyl",{
+  title: "Kiet test",
+  name: "Kiet",
+  email: "kiet0933362664@gmail.com",
+  message: "TESTESTSETESTESTSETes",
+});
 */

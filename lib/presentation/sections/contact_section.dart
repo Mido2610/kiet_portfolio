@@ -123,7 +123,7 @@ class ContactSection extends HookConsumerWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: _buildTextFormField(
+                            child: TextFormFieldWidget(
                               controller: nameController,
                               label: 'Your Name',
                               hint: 'Enter your full name',
@@ -137,7 +137,7 @@ class ContactSection extends HookConsumerWidget {
                           ),
                           const SizedBox(width: 16),
                           Expanded(
-                            child: _buildTextFormField(
+                            child: TextFormFieldWidget(
                               controller: emailController,
                               label: 'Email Address',
                               hint: 'Enter your email',
@@ -158,7 +158,7 @@ class ContactSection extends HookConsumerWidget {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      _buildTextFormField(
+                      TextFormFieldWidget(
                         controller: subjectController,
                         label: 'Subject',
                         hint: 'What is this message about?',
@@ -170,7 +170,7 @@ class ContactSection extends HookConsumerWidget {
                         },
                       ),
                       const SizedBox(height: 20),
-                      _buildTextFormField(
+                      TextFormFieldWidget(
                         controller: messageController,
                         label: 'Message',
                         hint: 'Tell me about your project or question...',
@@ -231,15 +231,28 @@ class ContactSection extends HookConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildTextFormField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    TextInputType? keyboardType,
-    int? maxLines = 1,
-    String? Function(String?)? validator,
-  }) {
+class TextFormFieldWidget extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final String hint;
+  final TextInputType? keyboardType;
+  final int? maxLines;
+  final String? Function(String?)? validator;
+
+  const TextFormFieldWidget({
+    required this.controller,
+    required this.label,
+    required this.hint,
+    this.keyboardType,
+    this.maxLines,
+    this.validator,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
