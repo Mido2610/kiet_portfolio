@@ -36,7 +36,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get hiThereIm => 'Xin chào! 👋 Tôi là';
 
   @override
-  String get kietNguyen => 'Kiệt Nguyễn';
+  String get kietNguyen => 'Nguyễn Tuấn Kiệt';
 
   @override
   String get flutterDeveloper => 'Lập trình viên Flutter';
@@ -45,10 +45,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mobileAppDeveloper => 'Lập trình viên ứng dụng di động';
 
   @override
+  String get frontEndDeveloper => 'Lập trình viên FrontEnd';
+
+  @override
   String get uiUxEnthusiast => 'Người đam mê UI/UX';
 
   @override
-  String get heroDescription => 'Tôi tạo ra những ứng dụng di động đẹp mắt, chức năng và thân thiện với người dùng bằng Flutter. Với niềm đam mê về code sạch và thiết kế hiện đại, tôi biến những ý tưởng thành hiện thực qua công nghệ.';
+  String get heroDescription => 'Tôi chuyên phát triển giao diện web bằng React và xây dựng ứng dụng di động đa nền tảng với Flutter';
 
   @override
   String get viewMyWork => 'Xem công việc của tôi';
@@ -154,4 +157,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get contactMeButton => 'Liên hệ với tôi';
+
+  @override
+  String get englishLanguage => 'Tiếng Anh';
+
+  @override
+  String get vietnameseLanguage => 'Tiếng Việt';
 }

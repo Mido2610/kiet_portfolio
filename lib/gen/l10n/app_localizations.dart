@@ -152,7 +152,7 @@ abstract class AppLocalizations {
   /// No description provided for @kietNguyen.
   ///
   /// In en, this message translates to:
-  /// **'Kiet Nguyen'**
+  /// **'Nguyen Tuan Kiet'**
   String get kietNguyen;
 
   /// No description provided for @flutterDeveloper.
@@ -167,6 +167,12 @@ abstract class AppLocalizations {
   /// **'Mobile App Developer'**
   String get mobileAppDeveloper;
 
+  /// No description provided for @frontEndDeveloper.
+  ///
+  /// In en, this message translates to:
+  /// **'FrontEnd Developer'**
+  String get frontEndDeveloper;
+
   /// No description provided for @uiUxEnthusiast.
   ///
   /// In en, this message translates to:
@@ -176,7 +182,7 @@ abstract class AppLocalizations {
   /// No description provided for @heroDescription.
   ///
   /// In en, this message translates to:
-  /// **'I create beautiful, functional, and user-friendly mobile applications using Flutter. With a passion for clean code and modern design, I bring ideas to life through technology.'**
+  /// **'I craft responsive web interfaces using React and build cross-platform mobile apps with Flutter.'**
   String get heroDescription;
 
   /// No description provided for @viewMyWork.
@@ -388,6 +394,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Contact Me'**
   String get contactMeButton;
+
+  /// No description provided for @englishLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get englishLanguage;
+
+  /// No description provided for @vietnameseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Vietnamese'**
+  String get vietnameseLanguage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

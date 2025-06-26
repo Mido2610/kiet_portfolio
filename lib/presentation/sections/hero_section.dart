@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:lottie/lottie.dart';
+import 'package:kiet_portfolio/core/utils/size.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/animated_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/themes/app_colors.dart';
 import '../../../core/utils/responsive_helper.dart';
 import '../../../core/constants/app_constants.dart';
@@ -53,19 +55,20 @@ class HeroSection extends HookConsumerWidget {
     return Container(
       height: MediaQuery.of(context).size.height,
       padding: padding,
-      child: isMobile
-          ? HeroMobileLayoutWidget(
-              fadeAnimation: fadeAnimation,
-              slideAnimation: slideAnimation,
-              scaleAnimation: scaleAnimation,
-              onNavigateToSection: onNavigateToSection,
-            )
-          : HeroDesktopLayoutWidget(
-              fadeAnimation: fadeAnimation,
-              slideAnimation: slideAnimation,
-              scaleAnimation: scaleAnimation,
-              onNavigateToSection: onNavigateToSection,
-            ),
+      child:
+          isMobile
+              ? HeroMobileLayoutWidget(
+                fadeAnimation: fadeAnimation,
+                slideAnimation: slideAnimation,
+                scaleAnimation: scaleAnimation,
+                onNavigateToSection: onNavigateToSection,
+              )
+              : HeroDesktopLayoutWidget(
+                fadeAnimation: fadeAnimation,
+                slideAnimation: slideAnimation,
+                scaleAnimation: scaleAnimation,
+                onNavigateToSection: onNavigateToSection,
+              ),
     );
   }
 }
@@ -94,7 +97,9 @@ class HeroDesktopLayoutWidget extends StatelessWidget {
             position: slideAnimation,
             child: FadeTransition(
               opacity: fadeAnimation,
-              child: HeroContentWidget(onNavigateToSection: onNavigateToSection),
+              child: HeroContentWidget(
+                onNavigateToSection: onNavigateToSection,
+              ),
             ),
           ),
         ),
@@ -102,8 +107,9 @@ class HeroDesktopLayoutWidget extends StatelessWidget {
           flex: 2,
           child: AnimatedBuilder(
             animation: scaleAnimation,
-            builder: (context, child) =>
-                Transform.scale(scale: scaleAnimation.value, child: child),
+            builder:
+                (context, child) =>
+                    Transform.scale(scale: scaleAnimation.value, child: child),
             child: const HeroAnimationWidget(),
           ),
         ),
@@ -133,17 +139,19 @@ class HeroMobileLayoutWidget extends StatelessWidget {
       children: [
         AnimatedBuilder(
           animation: scaleAnimation,
-          builder: (context, child) =>
-              Transform.scale(scale: scaleAnimation.value, child: child),
+          builder:
+              (context, child) =>
+                  Transform.scale(scale: scaleAnimation.value, child: child),
           child: const HeroAnimationWidget(),
         ),
-        const SizedBox(height: 40),
+        SizedBoxCommon.height40,
         AnimatedBuilder(
           animation: slideAnimation,
-          builder: (context, child) => Transform.translate(
-            offset: slideAnimation.value,
-            child: FadeTransition(opacity: fadeAnimation, child: child),
-          ),
+          builder:
+              (context, child) => Transform.translate(
+                offset: slideAnimation.value,
+                child: FadeTransition(opacity: fadeAnimation, child: child),
+              ),
           child: HeroContentWidget(onNavigateToSection: onNavigateToSection),
         ),
       ],
@@ -154,10 +162,7 @@ class HeroMobileLayoutWidget extends StatelessWidget {
 class HeroContentWidget extends StatelessWidget {
   final Function(int) onNavigateToSection;
 
-  const HeroContentWidget({
-    super.key,
-    required this.onNavigateToSection,
-  });
+  const HeroContentWidget({super.key, required this.onNavigateToSection});
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +188,7 @@ class HeroContentWidget extends StatelessWidget {
           ),
           textAlign: textAlign,
         ),
-        const SizedBox(height: 16),
+        SizedBoxCommon.height16,
         Text(
           l10n(context).kietNguyen,
           style: TextStyle(
@@ -199,13 +204,13 @@ class HeroContentWidget extends StatelessWidget {
           ),
           textAlign: textAlign,
         ),
-        const SizedBox(height: 24),
+        SizedBoxCommon.height24,
         const HeroAnimatedTextWidget(),
-        const SizedBox(height: 32),
+        SizedBoxCommon.height32,
         const HeroDescriptionWidget(),
-        const SizedBox(height: 40),
+        SizedBoxCommon.height40,
         HeroCTAButtonsWidget(onNavigateToSection: onNavigateToSection),
-        const SizedBox(height: 32),
+        SizedBoxCommon.height32,
         const HeroSocialLinksWidget(),
       ],
     );
@@ -221,7 +226,7 @@ class HeroAnimatedTextWidget extends StatelessWidget {
       height: ResponsiveHelper.isMobile(context) ? 60 : 80,
       child: AnimatedTextKit(
         animatedTexts:
-            [l10n(context).flutterDeveloper, l10n(context).mobileAppDeveloper, l10n(context).uiUxEnthusiast]
+            [l10n(context).flutterDeveloper, l10n(context).frontEndDeveloper]
                 .map(
                   (text) => TypewriterAnimatedText(
                     text,
@@ -269,9 +274,10 @@ class HeroDescriptionWidget extends StatelessWidget {
           color: AppColors.textSecondary,
           height: 1.6,
         ),
-        textAlign: ResponsiveHelper.isMobile(context)
-            ? TextAlign.center
-            : TextAlign.start,
+        textAlign:
+            ResponsiveHelper.isMobile(context)
+                ? TextAlign.center
+                : TextAlign.start,
       ),
     );
   }
@@ -280,10 +286,7 @@ class HeroDescriptionWidget extends StatelessWidget {
 class HeroCTAButtonsWidget extends StatelessWidget {
   final Function(int) onNavigateToSection;
 
-  const HeroCTAButtonsWidget({
-    super.key,
-    required this.onNavigateToSection,
-  });
+  const HeroCTAButtonsWidget({super.key, required this.onNavigateToSection});
 
   @override
   Widget build(BuildContext context) {
@@ -301,7 +304,7 @@ class HeroCTAButtonsWidget extends StatelessWidget {
               icon: Icons.work,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBoxCommon.height16,
           SizedBox(
             width: double.infinity,
             child: AnimatedButton(
@@ -317,20 +320,22 @@ class HeroCTAButtonsWidget extends StatelessWidget {
 
     return Row(
       children: [
-        AnimatedButton(
-          text: l10n(context).viewMyWork,
-          onPressed: () => onNavigateToSection(3),
-          isPrimary: true,
-          icon: Icons.work,
-          width: 180,
+        Flexible(
+          child: AnimatedButton(
+            text: l10n(context).viewMyWork,
+            onPressed: () => onNavigateToSection(3),
+            isPrimary: true,
+            icon: Icons.work,
+          ),
         ),
-        const SizedBox(width: 20),
-        AnimatedButton(
-          text: l10n(context).contactMe,
-          onPressed: () => onNavigateToSection(5),
-          isPrimary: false,
-          icon: Icons.mail,
-          width: 160,
+        SizedBoxCommon.width20,
+        Flexible(
+          child: AnimatedButton(
+            text: l10n(context).contactMe,
+            onPressed: () => onNavigateToSection(5),
+            isPrimary: false,
+            icon: Icons.mail,
+          ),
         ),
       ],
     );
@@ -343,9 +348,20 @@ class HeroSocialLinksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final socialLinks = [
-      {'icon': Icons.code, 'url': AppConstants.github, 'label': l10n(context).github},
-      {'icon': Icons.work, 'url': AppConstants.linkedin, 'label': l10n(context).linkedin},
       {
+        'iconType': 'svg',
+        'iconPath': 'assets/icons/github.svg',
+        'url': AppConstants.github,
+        'label': l10n(context).github,
+      },
+      {
+        'iconType': 'svg',
+        'iconPath': 'assets/icons/linkedin.svg',
+        'url': AppConstants.linkedin,
+        'label': l10n(context).linkedin,
+      },
+      {
+        'iconType': 'material',
         'icon': Icons.email,
         'url': 'mailto:${AppConstants.email}',
         'label': l10n(context).email,
@@ -354,28 +370,35 @@ class HeroSocialLinksWidget extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: socialLinks.map((social) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: HeroSocialLinkItemWidget(
-            icon: social['icon'] as IconData,
-            url: social['url'] as String,
-            label: social['label'] as String,
-          ),
-        );
-      }).toList(),
+      children:
+          socialLinks.map((social) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: HeroSocialLinkItemWidget(
+                iconType: social['iconType'] as String,
+                iconPath: social['iconPath'] as String?,
+                icon: social['icon'] as IconData?,
+                url: social['url'] as String,
+                label: social['label'] as String,
+              ),
+            );
+          }).toList(),
     );
   }
 }
 
 class HeroSocialLinkItemWidget extends HookWidget {
-  final IconData icon;
+  final String iconType;
+  final String? iconPath;
+  final IconData? icon;
   final String url;
   final String label;
 
   const HeroSocialLinkItemWidget({
     super.key,
-    required this.icon,
+    required this.iconType,
+    this.iconPath,
+    this.icon,
     required this.url,
     required this.label,
   });
@@ -391,19 +414,36 @@ class HeroSocialLinkItemWidget extends HookWidget {
       end: 1.1,
     ).animate(hoverController);
 
+    Future<void> launchUrlAction() async {
+      try {
+        final uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        } else {
+          // Fallback for email
+          if (url.startsWith('mailto:')) {
+            final emailUri = Uri(
+              scheme: 'mailto',
+              path: url.replaceAll('mailto:', ''),
+            );
+            await launchUrl(emailUri);
+          }
+        }
+      } catch (e) {
+        debugPrint('Could not launch $url: $e');
+      }
+    }
+
     return MouseRegion(
       onEnter: (_) => hoverController.forward(),
       onExit: (_) => hoverController.reverse(),
       child: AnimatedBuilder(
         animation: hoverAnimation,
-        builder: (context, child) => Transform.scale(
-          scale: hoverAnimation.value,
-          child: child,
-        ),
+        builder:
+            (context, child) =>
+                Transform.scale(scale: hoverAnimation.value, child: child),
         child: GestureDetector(
-          onTap: () {
-            // Handle URL launch
-          },
+          onTap: launchUrlAction,
           child: Container(
             width: 50,
             height: 50,
@@ -411,25 +451,34 @@ class HeroSocialLinkItemWidget extends HookWidget {
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(25),
               border: Border.all(
-                color: AppColors.accent.withAlpha(
-                  (0.2 * 255).round(),
-                ),
+                color: AppColors.accent.withAlpha((0.2 * 255).round()),
                 width: 1,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.accent.withAlpha(
-                    (0.1 * 255).round(),
-                  ),
+                  color: AppColors.accent.withAlpha((0.1 * 255).round()),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
               ],
             ),
-            child: Icon(
-              icon,
-              color: AppColors.accent,
-              size: 24,
+            child: Center(
+              child:
+                  iconType == 'svg' && iconPath != null
+                      ? SvgPicture.asset(
+                        iconPath!,
+                        width: 24,
+                        height: 24,
+                        colorFilter: ColorFilter.mode(
+                          AppColors.accent,
+                          BlendMode.srcIn,
+                        ),
+                      )
+                      : Icon(
+                        icon ?? Icons.help,
+                        color: AppColors.accent,
+                        size: 24,
+                      ),
             ),
           ),
         ),
@@ -445,21 +494,22 @@ class HeroAnimationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 500),
-      child: Lottie.asset(
-        'assets/animations/developer.json',
-        fit: BoxFit.contain,
-        repeat: true,
-        animate: true,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            height: 400,
-            decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Icon(Icons.animation, size: 100, color: AppColors.accent),
-          );
-        },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+          'assets/images/kiet.jpg',
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              height: 400,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Icon(Icons.person, size: 100, color: AppColors.accent),
+            );
+          },
+        ),
       ),
     );
   }

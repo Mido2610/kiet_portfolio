@@ -10,13 +10,13 @@
   "initializingPortfolio": "Đang khởi tạo Portfolio...",
   "failedToInitializeApp": "Không thể khởi tạo ứng dụng",
   "retry": "Thử lại",
-  
   "hiThereIm": "Xin chào! 👋 Tôi là",
-  "kietNguyen": "Kiệt Nguyễn",
+  "kietNguyen": "Nguyễn Tuấn Kiệt",
   "flutterDeveloper": "Lập trình viên Flutter",
   "mobileAppDeveloper": "Lập trình viên ứng dụng di động",
+  "frontEndDeveloper": "Lập trình viên FrontEnd",
   "uiUxEnthusiast": "Người đam mê UI/UX",
-  "heroDescription": "Tôi tạo ra những ứng dụng di động đẹp mắt, chức năng và thân thiện với người dùng bằng Flutter. Với niềm đam mê về code sạch và thiết kế hiện đại, tôi biến những ý tưởng thành hiện thực qua công nghệ.",
+  "heroDescription": "Tôi chuyên phát triển giao diện web bằng React và xây dựng ứng dụng di động đa nền tảng với Flutter",
   "viewMyWork": "Xem công việc của tôi",
   "contactMe": "Liên hệ với tôi",
   "github": "GitHub",
@@ -55,5 +55,8 @@
   
   "getInTouch": "Liên hệ với tôi",
   "contactDescription": "Tôi luôn sẵn sàng thảo luận về những cơ hội mới và dự án thú vị. Hãy liên hệ với tôi!",
-  "contactMeButton": "Liên hệ với tôi"
+  "contactMeButton": "Liên hệ với tôi",
+  
+  "englishLanguage": "Tiếng Anh",
+  "vietnameseLanguage": "Tiếng Việt"
 }

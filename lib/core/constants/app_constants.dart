@@ -1,9 +1,9 @@
 class AppConstants {
   static const String appName = 'Kiet Nguyen Portfolio';
-  static const String email = 'kiet.nguyen@example.com';
+  static const String email = 'ngtuankiet2610@gmail.com';
   static const String phone = '+84 123 456 789';
-  static const String linkedin = 'https://linkedin.com/in/kietnguyen';
-  static const String github = 'https://github.com/kietnguyen';
+  static const String linkedin = 'https://www.linkedin.com/in/nguyen-kiet-886554299/';
+  static const String github = 'https://github.com/Mido2610';
   
   // Animation Durations
   static const Duration fastDuration = Duration(milliseconds: 200);

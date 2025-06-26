@@ -8,7 +8,6 @@ class AnimatedButton extends HookWidget {
   final bool isPrimary;
   final IconData? icon;
   final double? width;
-  final double? height;
 
   const AnimatedButton({
     super.key,
@@ -17,80 +16,106 @@ class AnimatedButton extends HookWidget {
     this.isPrimary = true,
     this.icon,
     this.width,
-    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    final animationController = useAnimationController(
+    final hoverController = useAnimationController(
       duration: const Duration(milliseconds: 200),
     );
 
-    final scaleAnimation = useAnimation(
-      Tween<double>(begin: 1.0, end: 0.95).animate(
-        CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
-      ),
+    final isHovered = useState(false);
+
+    final scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+      CurvedAnimation(parent: hoverController, curve: Curves.easeInOut),
     );
 
-    return GestureDetector(
-      onTapDown: (_) => animationController.forward(),
-      onTapUp: (_) => animationController.reverse(),
-      onTapCancel: () => animationController.reverse(),
-      onTap: onPressed,
-      child: Transform.scale(
-        scale: scaleAnimation,
-        child: Container(
-          width: width,
-          height: height ?? 50,
-          decoration: BoxDecoration(
-            gradient:
-                isPrimary
-                    ? const LinearGradient(
-                      colors: [AppColors.accent, AppColors.accentLight],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    )
-                    : null,
-            border:
-                isPrimary
-                    ? null
-                    : Border.all(color: AppColors.accent, width: 2),
-            borderRadius: BorderRadius.circular(25),
-            boxShadow:
-                isPrimary
-                    ? [
-                      BoxShadow(
-                        color: AppColors.accent.withAlpha((0.3 * 255).round()),
-                        blurRadius: 15,
-                        offset: const Offset(0, 5),
+    return MouseRegion(
+      onEnter: (_) {
+        isHovered.value = true;
+        hoverController.forward();
+      },
+      onExit: (_) {
+        isHovered.value = false;
+        hoverController.reverse();
+      },
+      child: AnimatedBuilder(
+        animation: scaleAnimation,
+        builder:
+            (context, child) => Transform.scale(
+              scale: scaleAnimation.value,
+              child: Container(
+                width: width,
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient:
+                      isPrimary
+                          ? LinearGradient(
+                            colors: [
+                              AppColors.accent,
+                              AppColors.accent.withAlpha((0.8 * 255).round()),
+                            ],
+                          )
+                          : null,
+                  color: isPrimary ? AppColors.black : Colors.black,
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(color: AppColors.accent, width: 2),
+                  boxShadow:
+                      isHovered.value
+                          ? [
+                            BoxShadow(
+                              color: AppColors.accent.withAlpha(
+                                (0.3 * 255).round(),
+                              ),
+                              blurRadius: 15,
+                              offset: const Offset(0, 5),
+                            ),
+                          ]
+                          : [],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: onPressed,
+                    borderRadius: BorderRadius.circular(25),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
                       ),
-                    ]
-                    : null,
-          ),
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (icon != null) ...[
-                  Icon(
-                    icon,
-                    color: isPrimary ? AppColors.primary : AppColors.accent,
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                ],
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: isPrimary ? AppColors.primary : AppColors.accent,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (icon != null) ...[
+                            Icon(
+                              icon,
+                              size: 20,
+                              color:
+                                  isPrimary ? AppColors.blackText : AppColors.accent,
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          Flexible(
+                            child: Text(
+                              text,
+                              style: TextStyle(
+                                color:
+                                    isPrimary ? AppColors.blackText : AppColors.accent,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
       ),
     );
   }

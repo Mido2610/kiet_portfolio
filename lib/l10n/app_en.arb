@@ -10,13 +10,13 @@
   "initializingPortfolio": "Initializing Portfolio...",
   "failedToInitializeApp": "Failed to Initialize App",
   "retry": "Retry",
-  
   "hiThereIm": "Hi there! 👋 I'm",
-  "kietNguyen": "Kiet Nguyen",
+  "kietNguyen": "Nguyen Tuan Kiet",
   "flutterDeveloper": "Flutter Developer",
   "mobileAppDeveloper": "Mobile App Developer",
+  "frontEndDeveloper": "FrontEnd Developer",
   "uiUxEnthusiast": "UI/UX Enthusiast",
-  "heroDescription": "I create beautiful, functional, and user-friendly mobile applications using Flutter. With a passion for clean code and modern design, I bring ideas to life through technology.",
+  "heroDescription": "I craft responsive web interfaces using React and build cross-platform mobile apps with Flutter.",
   "viewMyWork": "View My Work",
   "contactMe": "Contact Me",
   "github": "GitHub",
@@ -55,5 +55,8 @@
   
   "getInTouch": "Get In Touch",
   "contactDescription": "I'm always open to discussing new opportunities and interesting projects. Feel free to reach out!",
-  "contactMeButton": "Contact Me"
+  "contactMeButton": "Contact Me",
+
+  "englishLanguage": "English",
+  "vietnameseLanguage": "Vietnamese"
 }

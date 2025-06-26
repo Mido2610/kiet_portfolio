@@ -36,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hiThereIm => 'Hi there! 👋 I\'m';
 
   @override
-  String get kietNguyen => 'Kiet Nguyen';
+  String get kietNguyen => 'Nguyen Tuan Kiet';
 
   @override
   String get flutterDeveloper => 'Flutter Developer';
@@ -45,10 +45,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mobileAppDeveloper => 'Mobile App Developer';
 
   @override
+  String get frontEndDeveloper => 'FrontEnd Developer';
+
+  @override
   String get uiUxEnthusiast => 'UI/UX Enthusiast';
 
   @override
-  String get heroDescription => 'I create beautiful, functional, and user-friendly mobile applications using Flutter. With a passion for clean code and modern design, I bring ideas to life through technology.';
+  String get heroDescription => 'I craft responsive web interfaces using React and build cross-platform mobile apps with Flutter.';
 
   @override
   String get viewMyWork => 'View My Work';
@@ -154,4 +157,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contactMeButton => 'Contact Me';
+
+  @override
+  String get englishLanguage => 'English';
+
+  @override
+  String get vietnameseLanguage => 'Vietnamese';
 }
