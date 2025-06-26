@@ -1,12 +1,11 @@
 import 'package:emailjs/emailjs.dart' as emailjs;
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EmailService {
-  static String get _serviceId => dotenv.env['EMAILJS_SERVICE_ID'] ?? '';
-  static String get _templateId => dotenv.env['EMAILJS_TEMPLATE_ID'] ?? '';
-  static String get _publicKey => dotenv.env['EMAILJS_PUBLIC_KEY'] ?? '';
-  static String get _privateKey => dotenv.env['EMAILJS_PRIVATE_KEY'] ?? '';
+  static const String _serviceId = 'service_varezm7';
+  static const String _templateId = 'template_9ilmvyl';
+  static const String _publicKey = 'QNZoT27CnFHgZrG6N';
+  static const String _privateKey = 'r04ySolP1UUMmNxKUuuh2';
 
   static Future<bool> sendContactEmail({
     required String name,
