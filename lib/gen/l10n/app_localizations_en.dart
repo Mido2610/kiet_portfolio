@@ -78,7 +78,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutDescription1 => 'I\'m a Frontend & Flutter Developer with a passion for coding and a love for creating practical, user-friendly web and mobile applications. I enjoy turning ideas into interactive interfaces and scalable apps that solve real-world problems and deliver real value to users.';
 
   @override
-  String get aboutDescription2 => 'I have experience working with JavaScript (React/Next.js), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.';
+  String get aboutDescription2 => 'I have experience working with JavaScript (React), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.';
 
   @override
   String get aboutDescription3 => 'I\'m particularly interested in the intersection of design, performance, and user experience — aiming to build technology that empowers people to work better, not replaces them.';
@@ -174,7 +174,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workExperience => 'Work Experience';
 
   @override
-  String get experienceCompanyDescription => 'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized user interface based on real customer feedback\n• Integrated RESTful API & gRPC with Node.js backend\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care';
+  String get experienceCompanyDescription => 'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized software based on real customer feedback\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care';
 
   @override
   String get yourName => 'Your Name';

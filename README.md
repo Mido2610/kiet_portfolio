@@ -230,12 +230,6 @@ Please follow the existing code style and conventions.
 
 Thanks to everyone who supported this project and the amazing Flutter community.
 
-## 📜 License
-
-This project is licensed under the MIT License.  
-MIT [©kietnguyen.dev](https://kietnguyen.dev)  
-See the license file for details: [LICENSE](LICENSE)
-
 ## 👨‍💻 Developed By
 
 **Kiet Nguyen**  
@@ -250,7 +244,7 @@ Flutter Developer
 Feel free to reach out for collaboration, questions, or just to say hi!
 
 **Email**: [ngtuankiet2610@gmail.com](mailto:ngtuankiet2610@gmail.com)  
-**GitHub**: [@kietnguyen](https://github.com/Mido2610)
+**GitHub**: [@mido2610](https://github.com/Mido2610)
 
 ---
 

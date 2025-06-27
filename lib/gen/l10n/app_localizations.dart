@@ -236,7 +236,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutDescription2.
   ///
   /// In en, this message translates to:
-  /// **'I have experience working with JavaScript (React/Next.js), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.'**
+  /// **'I have experience working with JavaScript (React), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.'**
   String get aboutDescription2;
 
   /// No description provided for @aboutDescription3.
@@ -428,7 +428,7 @@ abstract class AppLocalizations {
   /// No description provided for @experienceCompanyDescription.
   ///
   /// In en, this message translates to:
-  /// **'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized user interface based on real customer feedback\n• Integrated RESTful API & gRPC with Node.js backend\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care'**
+  /// **'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized software based on real customer feedback\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care'**
   String get experienceCompanyDescription;
 
   /// No description provided for @yourName.

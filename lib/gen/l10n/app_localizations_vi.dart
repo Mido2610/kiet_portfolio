@@ -174,7 +174,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get workExperience => 'Kinh nghiệm làm việc';
 
   @override
-  String get experienceCompanyDescription => 'Tham gia phát triển và bảo trì ứng dụng F&B (đã triển khai thực tế) cùng với các hệ thống nội bộ như HRM và CRM. Làm việc trực tiếp với team backend (Node.js) và UI/UX để đảm bảo tính ổn định và trải nghiệm người dùng.\n\n• Phát triển và cải tiến các tính năng frontend (React, Flutter) cho app F&B đang hoạt động\n• Fix bug và tối ưu giao diện người dùng dựa trên phản hồi thực tế từ khách hàng\n• Tích hợp RESTful API & gRPC với backend Node.js\n• Phối hợp xây dựng từ đầu các hệ thống HRM, CRM nội bộ nhằm hỗ trợ quản lý nhân sự và chăm sóc khách hàng';
+  String get experienceCompanyDescription => 'Tham gia phát triển và bảo trì ứng dụng F&B (đã triển khai thực tế) cùng với các hệ thống nội bộ như HRM và CRM. Làm việc trực tiếp với team backend (Node.js) và UI/UX để đảm bảo tính ổn định và trải nghiệm người dùng.\n\n• Phát triển và cải tiến các tính năng frontend (React, Flutter) cho app F&B đang hoạt động\n• Fix bug và tối ưu phần mềm dựa trên phản hồi thực tế từ khách hàng\n• Phối hợp xây dựng từ đầu các hệ thống HRM, CRM nội bộ nhằm hỗ trợ quản lý nhân sự và chăm sóc khách hàng';
 
   @override
   String get yourName => 'Tên của bạn';
