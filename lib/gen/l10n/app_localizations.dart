@@ -418,6 +418,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vietnamese'**
   String get vietnameseLanguage;
+
+  /// No description provided for @workExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Experience'**
+  String get workExperience;
+
+  /// No description provided for @experienceCompanyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized user interface based on real customer feedback\n• Integrated RESTful API & gRPC with Node.js backend\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care'**
+  String get experienceCompanyDescription;
+
+  /// No description provided for @yourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Name'**
+  String get yourName;
+
+  /// No description provided for @enterYourFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name'**
+  String get enterYourFullName;
+
+  /// No description provided for @pleaseEnterYourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name'**
+  String get pleaseEnterYourName;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get emailAddress;
+
+  /// No description provided for @enterYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enterYourEmail;
+
+  /// No description provided for @pleaseEnterYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get pleaseEnterYourEmail;
+
+  /// No description provided for @pleaseEnterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get pleaseEnterValidEmail;
+
+  /// No description provided for @subject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get subject;
+
+  /// No description provided for @whatIsThisMessageAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'What is this message about?'**
+  String get whatIsThisMessageAbout;
+
+  /// No description provided for @pleaseEnterSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a subject'**
+  String get pleaseEnterSubject;
+
+  /// No description provided for @tellMeAboutYourProject.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell me about your project or question...'**
+  String get tellMeAboutYourProject;
+
+  /// No description provided for @pleaseEnterYourMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your message'**
+  String get pleaseEnterYourMessage;
+
+  /// No description provided for @messageTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Message should be at least 10 characters long'**
+  String get messageTooShort;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get sendMessage;
+
+  /// No description provided for @emailSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Email sent successfully! 🎉'**
+  String get emailSentSuccessfully;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

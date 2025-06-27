@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:kiet_portfolio/core/themes/app_colors.dart';
+import 'package:kiet_portfolio/core/utils/common.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/glass_morphism_container.dart';
 import '../../../core/utils/responsive_utils.dart';
 import '../../../data/models/experience_model.dart';
@@ -74,7 +75,7 @@ class ExperienceTimelineMobileCardWidget extends StatelessWidget {
     return Row(
       children: [
         ExperienceTimelineNodeWidget(glowAnimation: glowAnimation),
-        SizedBox(width: isMobile ? 12 : 20),
+        SizedBox(width: isMobile ? 16 : 24),
         Expanded(
           child: ExperienceCardContentWidget(
             experience: experience,
@@ -102,7 +103,7 @@ class ExperienceTimelineDesktopCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = ResponsiveUtils.isTablet(context);
     final isDesktop = ResponsiveUtils.isDesktop(context);
-    final spacing = isDesktop ? 40.0 : (isTablet ? 24.0 : 16.0);
+    final spacing = isDesktop ? 50.0 : (isTablet ? 32.0 : 20.0);
     
     return Row(
       children: isLeft
@@ -147,19 +148,24 @@ class ExperienceTimelineNodeWidget extends StatelessWidget {
     return AnimatedBuilder(
       animation: glowAnimation,
       builder: (context, child) {
+        final isMobile = ResponsiveUtils.isMobile(context);
+        final nodeSize = isMobile ? 32.0 : 36.0;
+        final coreSize = isMobile ? 18.0 : 22.0;
+        final dotSize = isMobile ? 7.0 : 8.0;
+        
         return Stack(
           alignment: Alignment.center,
           children: [
             // Outer glow ring
             Container(
-              width: 30 + (10 * glowAnimation.value),
-              height: 30 + (10 * glowAnimation.value),
+              width: nodeSize + (12 * glowAnimation.value),
+              height: nodeSize + (12 * glowAnimation.value),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
                     AppColors.accent.withAlpha((0.3 * 255 * glowAnimation.value).round()),
-                    AppColors.accentLight.withAlpha((0.1 * 255 * glowAnimation.value).round()),
+                    AppColors.accentLight.withAlpha((0.15 * 255 * glowAnimation.value).round()),
                     Colors.transparent,
                   ],
                 ),
@@ -168,19 +174,19 @@ class ExperienceTimelineNodeWidget extends StatelessWidget {
             
             // Middle ring
             Container(
-              width: 24,
-              height: 24,
+              width: nodeSize - 4,
+              height: nodeSize - 4,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.accent.withAlpha((0.6 * 255).round()),
-                  width: 2,
+                  color: AppColors.accent.withAlpha((0.7 * 255).round()),
+                  width: 2.5,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.accent.withAlpha((0.4 * 255 * glowAnimation.value).round()),
-                    blurRadius: 8 + (8 * glowAnimation.value),
-                    spreadRadius: 1 + (2 * glowAnimation.value),
+                    color: AppColors.accent.withAlpha((0.5 * 255 * glowAnimation.value).round()),
+                    blurRadius: 10 + (10 * glowAnimation.value),
+                    spreadRadius: 2 + (3 * glowAnimation.value),
                   ),
                 ],
               ),
@@ -188,8 +194,8 @@ class ExperienceTimelineNodeWidget extends StatelessWidget {
             
             // Inner core
             Container(
-              width: 16,
-              height: 16,
+              width: coreSize,
+              height: coreSize,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [AppColors.accent, AppColors.accentLight],
@@ -200,7 +206,7 @@ class ExperienceTimelineNodeWidget extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.accent.withAlpha((0.8 * 255).round()),
-                    blurRadius: 4,
+                    blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
                 ],
@@ -209,8 +215,8 @@ class ExperienceTimelineNodeWidget extends StatelessWidget {
             
             // Central dot
             Container(
-              width: 6,
-              height: 6,
+              width: dotSize,
+              height: dotSize,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -236,6 +242,7 @@ class ExperienceCardContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveUtils.isMobile(context);
+    final isTablet = ResponsiveUtils.isTablet(context);
     
     return AnimatedBuilder(
       animation: glowAnimation,
@@ -244,26 +251,25 @@ class ExperienceCardContentWidget extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: AppColors.accentLight.withAlpha(
-                ((0.1 * 255).round() * glowAnimation.value).round(),
+                ((0.15 * 255).round() * glowAnimation.value).round(),
               ),
-              blurRadius: 20 * glowAnimation.value,
-              spreadRadius: 2 * glowAnimation.value,
+              blurRadius: 25 * glowAnimation.value,
+              spreadRadius: 3 * glowAnimation.value,
             ),
           ],
           child: Padding(
-            padding: EdgeInsets.all(isMobile ? 16 : 20),
+            padding: EdgeInsets.all(isMobile ? 20 : (isTablet ? 24 : 28)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ExperienceCardHeaderWidget(experience: experience),
-                SizedBox(height: isMobile ? 8 : 12),
+                SizedBox(height: isMobile ? 10 : (isTablet ? 14 : 16)),
                 ExperiencePositionWidget(position: experience.position),
-                SizedBox(height: isMobile ? 6 : 8),
+                SizedBox(height: isMobile ? 8 : (isTablet ? 10 : 12)),
                 ExperienceDurationWidget(duration: experience.duration),
-                SizedBox(height: isMobile ? 12 : 16),
-                ExperienceDescriptionWidget(description: experience.description),
-                SizedBox(height: isMobile ? 12 : 16),
-                ExperienceTechnologiesWidget(technologies: experience.technologies),
+                SizedBox(height: isMobile ? 16 : (isTablet ? 20 : 24)),
+                ExperienceDescriptionWidget(),
+                SizedBox(height: isMobile ? 16 : (isTablet ? 20 : 24)),
               ],
             ),
           ),
@@ -288,9 +294,9 @@ class ExperienceCardHeaderWidget extends StatelessWidget {
     
     final fontSize = ResponsiveUtils.getResponsiveFontSize(
       context,
-      mobile: 16,
-      tablet: 18,
-      desktop: 20,
+      mobile: 18,
+      tablet: 20,
+      desktop: 22,
     );
     
     return Row(
@@ -298,9 +304,9 @@ class ExperienceCardHeaderWidget extends StatelessWidget {
         if (experience.logoUrl.isNotEmpty) ...[
           ExperienceCompanyLogoWidget(
             logoUrl: experience.logoUrl,
-            size: isMobile ? 36 : (isTablet ? 42 : 48),
+            size: isMobile ? 42 : (isTablet ? 48 : 54),
           ),
-          SizedBox(width: isMobile ? 8 : 12),
+          SizedBox(width: isMobile ? 10 : (isTablet ? 14 : 16)),
         ],
         Expanded(
           child: Text(
@@ -309,6 +315,7 @@ class ExperienceCardHeaderWidget extends StatelessWidget {
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               color: AppColors.textPrimary,
+              letterSpacing: 0.5,
             ),
             maxLines: isMobile ? 2 : 1,
             overflow: TextOverflow.ellipsis,
@@ -366,9 +373,9 @@ class ExperiencePositionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final fontSize = ResponsiveUtils.getResponsiveFontSize(
       context,
-      mobile: 14,
-      tablet: 15,
-      desktop: 16,
+      mobile: 15,
+      tablet: 16,
+      desktop: 17,
     );
     
     return Text(
@@ -377,6 +384,7 @@ class ExperiencePositionWidget extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: FontWeight.w600,
         color: AppColors.accent,
+        letterSpacing: 0.3,
       ),
     );
   }
@@ -392,13 +400,23 @@ class ExperienceDurationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = ResponsiveUtils.isMobile(context);
+    
     return Row(
       children: [
-        const Icon(Icons.access_time, size: 16, color: AppColors.textTertiary),
-        const SizedBox(width: 4),
+        Icon(
+          Icons.access_time, 
+          size: isMobile ? 18 : 20, 
+          color: AppColors.textTertiary,
+        ),
+        const SizedBox(width: 6),
         Text(
           duration,
-          style: const TextStyle(fontSize: 14, color: AppColors.textTertiary),
+          style: TextStyle(
+            fontSize: isMobile ? 14 : 15,
+            color: AppColors.textTertiary,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ],
     );
@@ -406,12 +424,45 @@ class ExperienceDurationWidget extends StatelessWidget {
 }
 
 class ExperienceDescriptionWidget extends StatelessWidget {
-  final String description;
 
   const ExperienceDescriptionWidget({
     super.key,
-    required this.description,
   });
+
+  List<TextSpan> _parseDescriptionText(String text, TextStyle baseStyle) {
+    final lines = text.split('\n');
+    List<TextSpan> spans = [];
+    
+    for (int i = 0; i < lines.length; i++) {
+      final line = lines[i].trim();
+      if (line.isEmpty) continue;
+      
+      if (line.startsWith('•')) {
+        // Add bullet point in black color
+        spans.add(TextSpan(
+          text: '• ',
+          style: baseStyle.copyWith(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w600,
+          ),
+        ));
+        
+        // Add the rest of the text in normal style
+        spans.add(TextSpan(
+          text: '${line.substring(1).trim()}\n',
+          style: baseStyle,
+        ));
+      } else {
+        // Regular paragraph text
+        spans.add(TextSpan(
+          text: '$line${i < lines.length - 1 ? '\n' : ''}',
+          style: baseStyle,
+        ));
+      }
+    }
+    
+    return spans;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -423,74 +474,20 @@ class ExperienceDescriptionWidget extends StatelessWidget {
       desktop: 14,
     );
     
-    return Text(
-      description,
-      style: TextStyle(
-        fontSize: fontSize,
-        color: AppColors.textSecondary,
-        height: 1.5,
-      ),
-      maxLines: isMobile ? 3 : 4,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-}
-
-class ExperienceTechnologiesWidget extends StatelessWidget {
-  final List<String> technologies;
-
-  const ExperienceTechnologiesWidget({
-    super.key,
-    required this.technologies,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: technologies.map((tech) {
-        return ExperienceTechnologyChipWidget(technology: tech);
-      }).toList(),
-    );
-  }
-}
-
-class ExperienceTechnologyChipWidget extends StatelessWidget {
-  final String technology;
-
-  const ExperienceTechnologyChipWidget({
-    super.key,
-    required this.technology,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isMobile = ResponsiveUtils.isMobile(context);
-    final fontSize = isMobile ? 10.0 : 12.0;
-    final padding = EdgeInsets.symmetric(
-      horizontal: isMobile ? 6 : 8, 
-      vertical: isMobile ? 3 : 4,
+    final baseStyle = TextStyle(
+      fontSize: fontSize,
+      color: AppColors.textSecondary,
+      height: 1.5,
     );
     
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        color: AppColors.accent.withAlpha((0.1 * 255).round()),
-        borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
-        border: Border.all(
-          color: AppColors.accent.withAlpha((0.3 * 255).round()),
-          width: 1,
-        ),
+    final descriptionText = l10n(context).experienceCompanyDescription;
+    
+    return RichText(
+      text: TextSpan(
+        children: _parseDescriptionText(descriptionText, baseStyle),
       ),
-      child: Text(
-        technology,
-        style: TextStyle(
-          color: AppColors.accent,
-          fontSize: fontSize,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      maxLines: isMobile ? 6 : 8,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

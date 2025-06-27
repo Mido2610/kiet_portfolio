@@ -169,4 +169,55 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get vietnameseLanguage => 'Tiếng Việt';
+
+  @override
+  String get workExperience => 'Kinh nghiệm làm việc';
+
+  @override
+  String get experienceCompanyDescription => 'Tham gia phát triển và bảo trì ứng dụng F&B (đã triển khai thực tế) cùng với các hệ thống nội bộ như HRM và CRM. Làm việc trực tiếp với team backend (Node.js) và UI/UX để đảm bảo tính ổn định và trải nghiệm người dùng.\n\n• Phát triển và cải tiến các tính năng frontend (React, Flutter) cho app F&B đang hoạt động\n• Fix bug và tối ưu giao diện người dùng dựa trên phản hồi thực tế từ khách hàng\n• Tích hợp RESTful API & gRPC với backend Node.js\n• Phối hợp xây dựng từ đầu các hệ thống HRM, CRM nội bộ nhằm hỗ trợ quản lý nhân sự và chăm sóc khách hàng';
+
+  @override
+  String get yourName => 'Tên của bạn';
+
+  @override
+  String get enterYourFullName => 'Nhập họ tên đầy đủ';
+
+  @override
+  String get pleaseEnterYourName => 'Vui lòng nhập tên của bạn';
+
+  @override
+  String get emailAddress => 'Địa chỉ Email';
+
+  @override
+  String get enterYourEmail => 'Nhập email của bạn';
+
+  @override
+  String get pleaseEnterYourEmail => 'Vui lòng nhập email của bạn';
+
+  @override
+  String get pleaseEnterValidEmail => 'Vui lòng nhập email hợp lệ';
+
+  @override
+  String get subject => 'Chủ đề';
+
+  @override
+  String get whatIsThisMessageAbout => 'Tin nhắn này về vấn đề gì?';
+
+  @override
+  String get pleaseEnterSubject => 'Vui lòng nhập chủ đề';
+
+  @override
+  String get tellMeAboutYourProject => 'Hãy cho tôi biết về dự án hoặc câu hỏi của bạn...';
+
+  @override
+  String get pleaseEnterYourMessage => 'Vui lòng nhập tin nhắn của bạn';
+
+  @override
+  String get messageTooShort => 'Tin nhắn phải có ít nhất 10 ký tự';
+
+  @override
+  String get sendMessage => 'Gửi tin nhắn';
+
+  @override
+  String get emailSentSuccessfully => 'Email đã được gửi thành công! 🎉';
 }

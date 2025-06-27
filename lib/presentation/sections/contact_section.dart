@@ -33,10 +33,10 @@ class ContactSection extends HookConsumerWidget {
         messageController.clear();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email sent successfully! 🎉'),
+          SnackBar(
+            content: Text(l10n(context).emailSentSuccessfully),
             backgroundColor: AppColors.accent,
-            duration: Duration(seconds: 3),
+            duration: const Duration(seconds: 3),
           ),
         );
 
@@ -125,11 +125,11 @@ class ContactSection extends HookConsumerWidget {
                           Expanded(
                             child: TextFormFieldWidget(
                               controller: nameController,
-                              label: 'Your Name',
-                              hint: 'Enter your full name',
+                              label: l10n(context).yourName,
+                              hint: l10n(context).enterYourFullName,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
+                                  return l10n(context).pleaseEnterYourName;
                                 }
                                 return null;
                               },
@@ -139,17 +139,17 @@ class ContactSection extends HookConsumerWidget {
                           Expanded(
                             child: TextFormFieldWidget(
                               controller: emailController,
-                              label: 'Email Address',
-                              hint: 'Enter your email',
+                              label: l10n(context).emailAddress,
+                              hint: l10n(context).enterYourEmail,
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
+                                  return l10n(context).pleaseEnterYourEmail;
                                 }
                                 if (!RegExp(
                                   r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                                 ).hasMatch(value)) {
-                                  return 'Please enter a valid email';
+                                  return l10n(context).pleaseEnterValidEmail;
                                 }
                                 return null;
                               },
@@ -160,11 +160,11 @@ class ContactSection extends HookConsumerWidget {
                       const SizedBox(height: 20),
                       TextFormFieldWidget(
                         controller: subjectController,
-                        label: 'Subject',
-                        hint: 'What is this message about?',
+                        label: l10n(context).subject,
+                        hint: l10n(context).whatIsThisMessageAbout,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a subject';
+                            return l10n(context).pleaseEnterSubject;
                           }
                           return null;
                         },
@@ -172,15 +172,15 @@ class ContactSection extends HookConsumerWidget {
                       const SizedBox(height: 20),
                       TextFormFieldWidget(
                         controller: messageController,
-                        label: 'Message',
-                        hint: 'Tell me about your project or question...',
+                        label: l10n(context).message,
+                        hint: l10n(context).tellMeAboutYourProject,
                         maxLines: 6,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your message';
+                            return l10n(context).pleaseEnterYourMessage;
                           }
                           if (value.length < 10) {
-                            return 'Message should be at least 10 characters long';
+                            return l10n(context).messageTooShort;
                           }
                           return null;
                         },
@@ -211,9 +211,9 @@ class ContactSection extends HookConsumerWidget {
                                       ),
                                     ),
                                   )
-                                  : const Text(
-                                    'Send Message',
-                                    style: TextStyle(
+                                  : Text(
+                                    l10n(context).sendMessage,
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),

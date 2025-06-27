@@ -60,5 +60,24 @@
   "contactMeButton": "Contact Me",
 
   "englishLanguage": "English",
-  "vietnameseLanguage": "Vietnamese"
+  "vietnameseLanguage": "Vietnamese",
+
+  "workExperience": "Work Experience",
+  "experienceCompanyDescription": "Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized user interface based on real customer feedback\n• Integrated RESTful API & gRPC with Node.js backend\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care",
+
+  "yourName": "Your Name",
+  "enterYourFullName": "Enter your full name",
+  "pleaseEnterYourName": "Please enter your name",
+  "emailAddress": "Email Address",
+  "enterYourEmail": "Enter your email",
+  "pleaseEnterYourEmail": "Please enter your email",
+  "pleaseEnterValidEmail": "Please enter a valid email",
+  "subject": "Subject",
+  "whatIsThisMessageAbout": "What is this message about?",
+  "pleaseEnterSubject": "Please enter a subject",
+  "tellMeAboutYourProject": "Tell me about your project or question...",
+  "pleaseEnterYourMessage": "Please enter your message",
+  "messageTooShort": "Message should be at least 10 characters long",
+  "sendMessage": "Send Message",
+  "emailSentSuccessfully": "Email sent successfully! 🎉"
 }

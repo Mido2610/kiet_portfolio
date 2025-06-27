@@ -7,6 +7,7 @@ import 'package:kiet_portfolio/presentation/sections/work_experience_section.dar
 import 'package:kiet_portfolio/presentation/widgets/navigation/horizontal_navigation_bar.dart';
 import 'package:kiet_portfolio/presentation/widgets/navigation/vertical_navigation_menu.dart';
 import 'package:kiet_portfolio/presentation/widgets/common/scroll_to_top_button.dart';
+import 'package:kiet_portfolio/presentation/animations/scroll_reveal_animation.dart';
 import '../sections/hero_section.dart';
 import '../sections/skills_section.dart';
 import '../../core/themes/app_colors.dart';
@@ -73,19 +74,52 @@ class PortfolioHomePage extends HookConsumerWidget {
                   ),
 
                   // Section 1: About Me
-                  Container(key: sectionKeys[1], child: const AboutSection()),
+                  Container(
+                    key: sectionKeys[1], 
+                    child: AnimatedSection(
+                      sectionName: 'about',
+                      animationType: AnimationType.fadeInUp,
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 200),
+                      child: const AboutSection(),
+                    ),
+                  ),
 
                   // Section 2: Skills
-                  Container(key: sectionKeys[2], child: const SkillsSection()),
+                  Container(
+                    key: sectionKeys[2], 
+                    child: AnimatedSection(
+                      sectionName: 'skills',
+                      animationType: AnimationType.fadeInScale,
+                      duration: const Duration(milliseconds: 1200),
+                      delay: const Duration(milliseconds: 300),
+                      child: const SkillsSection(),
+                    ),
+                  ),
 
                   // Section 3: Experience
                   Container(
                     key: sectionKeys[3],
-                    child: const WorkExperienceSection(),
+                    child: AnimatedSection(
+                      sectionName: 'experience',
+                      animationType: AnimationType.fadeInLeft,
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 400),
+                      child: const WorkExperienceSection(),
+                    ),
                   ),
 
                   // Section 4: Contact
-                  Container(key: sectionKeys[4], child: const ContactSection()),
+                  Container(
+                    key: sectionKeys[4], 
+                    child: AnimatedSection(
+                      sectionName: 'contact',
+                      animationType: AnimationType.fadeInUp,
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 300),
+                      child: const ContactSection(),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'package:kiet_portfolio/presentation/cards/experience_timeline_card.dart';
 import 'package:kiet_portfolio/core/themes/app_colors.dart';
 import 'package:kiet_portfolio/core/utils/responsive_utils.dart';
+import 'package:kiet_portfolio/core/utils/common.dart';
 import '../providers/work_expericen_provider.dart';
 import '../animations/parallax_widget.dart';
 
@@ -122,7 +123,7 @@ class WorkExperienceSection extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Work Experience',
+                        l10n(context).workExperience,
                         style: TextStyle(
                           fontSize: ResponsiveUtils.getResponsiveFontSize(
                             context,
@@ -156,7 +157,7 @@ class WorkExperienceSection extends HookConsumerWidget {
           // Timeline Container with enhanced effects
           if (experiences.isNotEmpty)
             SizedBox(
-              height: experiences.length * (isMobile ? 320.0 : 350),
+              height: experiences.length * (isMobile ? 420.0 : 500.0),
               child: Stack(
                 children: [
                   // Background gradient overlay
@@ -185,11 +186,11 @@ class WorkExperienceSection extends HookConsumerWidget {
                           children: [
                             // Base line
                             Container(
-                              width: 4,
-                              height: experiences.length * (isMobile ? 320.0 : 350),
+                              width: isMobile ? 4 : 6,
+                              height: experiences.length * (isMobile ? 420.0 : 500.0),
                               decoration: BoxDecoration(
                                 color: AppColors.accent.withAlpha((0.2 * 255).round()),
-                                borderRadius: BorderRadius.circular(2),
+                                borderRadius: BorderRadius.circular(3),
                               ),
                             ),
                             
@@ -197,8 +198,8 @@ class WorkExperienceSection extends HookConsumerWidget {
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 800),
                               curve: Curves.easeOutCubic,
-                              width: 4,
-                              height: (experiences.length * (isMobile ? 320.0 : 350.0)) * lineGrowRatio,
+                              width: isMobile ? 4 : 6,
+                              height: (experiences.length * (isMobile ? 420.0 : 500.0)) * lineGrowRatio,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
@@ -214,12 +215,12 @@ class WorkExperienceSection extends HookConsumerWidget {
                                     1.0,
                                   ],
                                 ),
-                                borderRadius: BorderRadius.circular(2),
+                                borderRadius: BorderRadius.circular(3),
                                 boxShadow: [
                                   BoxShadow(
                                     color: AppColors.accent.withAlpha((0.4 * 255).round()),
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
+                                    blurRadius: 12,
+                                    spreadRadius: 2,
                                   ),
                                 ],
                               ),
@@ -231,11 +232,11 @@ class WorkExperienceSection extends HookConsumerWidget {
                                 animation: pulseAnimation,
                                 builder: (context, child) {
                                   return Positioned(
-                                    top: ((experiences.length * (isMobile ? 320.0 : 300.0)) * lineGrowRatio) - 20,
-                                    left: -8,
+                                    top: ((experiences.length * (isMobile ? 420.0 : 500.0)) * lineGrowRatio) - 24,
+                                    left: isMobile ? -10 : -12,
                                     child: Container(
-                                      width: 20,
-                                      height: 20,
+                                      width: isMobile ? 24 : 30,
+                                      height: isMobile ? 24 : 30,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         gradient: RadialGradient(
@@ -286,7 +287,7 @@ class WorkExperienceSection extends HookConsumerWidget {
                             ..translate(
                               visibleItems.contains(index) 
                                 ? 0.0 
-                                : (isLeft ? -100.0 : 100.0),
+                                : (isLeft ? -150.0 : 150.0),
                               0.0,
                             ),
                           child: AnimatedOpacity(
@@ -296,8 +297,8 @@ class WorkExperienceSection extends HookConsumerWidget {
                             child: TweenAnimationBuilder<double>(
                               duration: Duration(milliseconds: 1000 + delay.toInt()),
                               tween: Tween<double>(
-                                begin: 0.8,
-                                end: visibleItems.contains(index) ? 1.0 : 0.8,
+                                begin: 0.85,
+                                end: visibleItems.contains(index) ? 1.0 : 0.85,
                               ),
                               curve: Curves.elasticOut,
                               builder: (context, scale, child) {
@@ -305,34 +306,36 @@ class WorkExperienceSection extends HookConsumerWidget {
                                   scale: scale,
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(
-                                      vertical: isMobile ? 25 : 20,
+                                      vertical: isMobile ? 35 : 40,
+                                      horizontal: isMobile ? 16 : 24,
                                     ),
                                     child: Stack(
                                       children: [
-                                        // Floating particles effect
+                                        // Enhanced floating particles effect
                                         if (visibleItems.contains(index))
-                                          ...List.generate(3, (particleIndex) {
+                                          ...List.generate(5, (particleIndex) {
                                             return TweenAnimationBuilder<double>(
                                               duration: Duration(
-                                                milliseconds: 2000 + (particleIndex * 500),
+                                                milliseconds: 2500 + (particleIndex * 400),
                                               ),
                                               tween: Tween<double>(begin: 0.0, end: 1.0),
                                               builder: (context, value, child) {
                                                 return Positioned(
-                                                  left: (particleIndex * 100.0) + (value * 50),
-                                                  top: 10 + (particleIndex * 15.0) - (value * 20),
+                                                  left: (particleIndex * 80.0) + (value * 60),
+                                                  top: 15 + (particleIndex * 12.0) - (value * 25),
                                                   child: Opacity(
-                                                    opacity: (1.0 - value) * 0.6,
+                                                    opacity: (1.0 - value) * 0.7,
                                                     child: Container(
-                                                      width: 4,
-                                                      height: 4,
+                                                      width: isMobile ? 5 : 6,
+                                                      height: isMobile ? 5 : 6,
                                                       decoration: BoxDecoration(
                                                         color: AppColors.accentLight,
                                                         shape: BoxShape.circle,
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: AppColors.accentLight.withAlpha((0.5 * 255).round()),
-                                                            blurRadius: 4,
+                                                            color: AppColors.accentLight.withAlpha((0.6 * 255).round()),
+                                                            blurRadius: 6,
+                                                            spreadRadius: 1,
                                                           ),
                                                         ],
                                                       ),

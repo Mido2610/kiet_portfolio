@@ -169,4 +169,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vietnameseLanguage => 'Vietnamese';
+
+  @override
+  String get workExperience => 'Work Experience';
+
+  @override
+  String get experienceCompanyDescription => 'Participated in developing and maintaining F&B applications (deployed in production) along with internal systems such as HRM and CRM. Worked directly with backend team (Node.js) and UI/UX to ensure stability and user experience.\n\n• Developed and improved frontend features (React, Flutter) for active F&B app\n• Fixed bugs and optimized user interface based on real customer feedback\n• Integrated RESTful API & gRPC with Node.js backend\n• Collaborated in building HRM, CRM internal systems from scratch to support HR management and customer care';
+
+  @override
+  String get yourName => 'Your Name';
+
+  @override
+  String get enterYourFullName => 'Enter your full name';
+
+  @override
+  String get pleaseEnterYourName => 'Please enter your name';
+
+  @override
+  String get emailAddress => 'Email Address';
+
+  @override
+  String get enterYourEmail => 'Enter your email';
+
+  @override
+  String get pleaseEnterYourEmail => 'Please enter your email';
+
+  @override
+  String get pleaseEnterValidEmail => 'Please enter a valid email';
+
+  @override
+  String get subject => 'Subject';
+
+  @override
+  String get whatIsThisMessageAbout => 'What is this message about?';
+
+  @override
+  String get pleaseEnterSubject => 'Please enter a subject';
+
+  @override
+  String get tellMeAboutYourProject => 'Tell me about your project or question...';
+
+  @override
+  String get pleaseEnterYourMessage => 'Please enter your message';
+
+  @override
+  String get messageTooShort => 'Message should be at least 10 characters long';
+
+  @override
+  String get sendMessage => 'Send Message';
+
+  @override
+  String get emailSentSuccessfully => 'Email sent successfully! 🎉';
 }
