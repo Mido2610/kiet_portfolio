@@ -75,10 +75,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passionateFlutterDeveloper => 'Passionate Flutter Developer';
 
   @override
-  String get aboutDescription1 => 'I\'m a dedicated Flutter developer with over 3 years of experience creating beautiful, performant mobile applications. My journey started with a fascination for clean code and pixel-perfect designs, and has evolved into a passion for building user-centric digital experiences.';
+  String get aboutDescription1 => 'I\'m a Frontend & Flutter Developer with a passion for coding and a love for creating practical, user-friendly web and mobile applications. I enjoy turning ideas into interactive interfaces and scalable apps that solve real-world problems and deliver real value to users.';
 
   @override
-  String get aboutDescription2 => 'I specialize in cross-platform mobile development, state management, and creating seamless user interfaces. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.';
+  String get aboutDescription2 => 'I have experience working with JavaScript (React/Next.js), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.';
+
+  @override
+  String get aboutDescription3 => 'I\'m particularly interested in the intersection of design, performance, and user experience — aiming to build technology that empowers people to work better, not replaces them.';
+
+  @override
+  String get aboutDescription4 => 'Outside of work, I actively explore new technologies and keep up with the latest trends in software development.';
 
   @override
   String get yearsExperience => '1+ Years';
@@ -120,13 +126,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languages => 'Languages';
 
   @override
-  String get languagesValue => 'Vietnamese, English';
+  String get languagesValue => 'Vietnamese, English, Japanese';
 
   @override
   String get interests => 'Interests';
 
   @override
-  String get interestsValue => 'Technology, Design, Travel';
+  String get interestsValue => 'Technology, Travel';
 
   @override
   String get status => 'Status';

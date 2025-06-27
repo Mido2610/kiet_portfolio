@@ -230,14 +230,26 @@ abstract class AppLocalizations {
   /// No description provided for @aboutDescription1.
   ///
   /// In en, this message translates to:
-  /// **'I\'m a dedicated Flutter developer with over 3 years of experience creating beautiful, performant mobile applications. My journey started with a fascination for clean code and pixel-perfect designs, and has evolved into a passion for building user-centric digital experiences.'**
+  /// **'I\'m a Frontend & Flutter Developer with a passion for coding and a love for creating practical, user-friendly web and mobile applications. I enjoy turning ideas into interactive interfaces and scalable apps that solve real-world problems and deliver real value to users.'**
   String get aboutDescription1;
 
   /// No description provided for @aboutDescription2.
   ///
   /// In en, this message translates to:
-  /// **'I specialize in cross-platform mobile development, state management, and creating seamless user interfaces. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.'**
+  /// **'I have experience working with JavaScript (React/Next.js), Dart (Flutter), and integrating systems through RESTful APIs and gRPC. I\'m also familiar with cloud services like Firebase to build fully functional and production-ready solutions.'**
   String get aboutDescription2;
+
+  /// No description provided for @aboutDescription3.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m particularly interested in the intersection of design, performance, and user experience — aiming to build technology that empowers people to work better, not replaces them.'**
+  String get aboutDescription3;
+
+  /// No description provided for @aboutDescription4.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside of work, I actively explore new technologies and keep up with the latest trends in software development.'**
+  String get aboutDescription4;
 
   /// No description provided for @yearsExperience.
   ///
@@ -320,7 +332,7 @@ abstract class AppLocalizations {
   /// No description provided for @languagesValue.
   ///
   /// In en, this message translates to:
-  /// **'Vietnamese, English'**
+  /// **'Vietnamese, English, Japanese'**
   String get languagesValue;
 
   /// No description provided for @interests.
@@ -332,7 +344,7 @@ abstract class AppLocalizations {
   /// No description provided for @interestsValue.
   ///
   /// In en, this message translates to:
-  /// **'Technology, Design, Travel'**
+  /// **'Technology, Travel'**
   String get interestsValue;
 
   /// No description provided for @status.

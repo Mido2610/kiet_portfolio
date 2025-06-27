@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:kiet_portfolio/presentation/animations/fade_in_up.dart';
 import 'package:kiet_portfolio/presentation/animations/slide_in_left.dart';
 import 'package:kiet_portfolio/presentation/animations/typing_animation.dart';
@@ -121,27 +120,32 @@ class AboutImageSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            // Profile Image - Replaced with placeholder
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  color: AppColors.accent.withAlpha((0.3 * 255).round()),
-                  child: const Center(
-                    child: Icon(
-                      Icons.person,
-                      size: 100,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
+                child: Image.asset(
+                  'assets/images/kiet2.jpg',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: AppColors.accent.withAlpha((0.3 * 255).round()),
+                      child: const Center(
+                        child: Icon(
+                          Icons.person,
+                          size: 100,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-            // Glass Overlay
+            // Glass Overlay với độ mờ giảm
             Positioned.fill(
               child: GlassContainer(
-                opacity: 0.1,
-                blur: 5,
+                opacity: 0.05, // Giảm từ 0.1 xuống 0.05
+                blur: 2, // Giảm từ 5 xuống 2
                 borderRadius: BorderRadius.circular(20),
                 child: const SizedBox(),
               ),
@@ -172,19 +176,6 @@ class AboutFloatingElements extends StatelessWidget {
               icon: Icons.work_history,
               text: l10n(context).yearsExperience,
               subtitle: l10n(context).experienceLabel,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 20,
-          left: 20,
-          child: SlideInLeft(
-            delay: const Duration(milliseconds: 1200),
-            duration: const Duration(milliseconds: 800),
-            child: AboutFloatingCard(
-              icon: Icons.code,
-              text: l10n(context).technologiesCount,
-              subtitle: l10n(context).technologies,
             ),
           ),
         ),
@@ -272,11 +263,6 @@ class AboutContentSection extends StatelessWidget {
         ),
         const SizedBox(height: 40),
         FadeInUp(
-          delay: const Duration(milliseconds: 800),
-          child: _HightlightsWidget(),
-        ),
-        const SizedBox(height: 40),
-        FadeInUp(
           delay: const Duration(milliseconds: 1000),
           child: _PersonalInfoWidget(),
         ),
@@ -333,20 +319,6 @@ class _DescriptionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n(context).passionateFlutterDeveloper,
-          style: TextStyle(
-            fontSize: ResponsiveUtils.getResponsiveFontSize(
-              context,
-              mobile: 20,
-              tablet: 24,
-              desktop: 28,
-            ),
-            fontWeight: FontWeight.w600,
-            color: AppColors.accent,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
           l10n(context).aboutDescription1,
           style: TextStyle(
             fontSize: ResponsiveUtils.getResponsiveFontSize(
@@ -373,98 +345,21 @@ class _DescriptionWidget extends StatelessWidget {
             height: 1.6,
           ),
         ),
-      ],
-    );
-  }
-}
-
-class _HightlightsWidget extends StatelessWidget {
-  const _HightlightsWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    final highlights = [
-      {'icon': Icons.mobile_friendly, 'text': l10n(context).crossPlatformDevelopment},
-      {'icon': Icons.speed, 'text': l10n(context).performanceOptimization},
-      {'icon': Icons.design_services, 'text': l10n(context).uiUxImplementation},
-      {'icon': Icons.cloud, 'text': l10n(context).backendIntegration},
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+        const SizedBox(height: 16),
         Text(
-          l10n(context).whatIDooBest,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
-          ),
-        ),
-        const SizedBox(height: 20),
-        AnimationLimiter(
-          child: Column(
-            children:
-                highlights.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final highlight = entry.value;
-
-                  return AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: const Duration(milliseconds: 300),
-                    child: SlideAnimation(
-                      verticalOffset: 20,
-                      child: FadeInAnimation(
-                        child: _HighlightItemWidget(
-                          icon: highlight['icon'] as IconData,
-                          text: highlight['text'] as String,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
+          l10n(context).aboutDescription4,
+          style: TextStyle(
+            fontSize: ResponsiveUtils.getResponsiveFontSize(
+              context,
+              mobile: 16,
+              tablet: 18,
+              desktop: 18,
+            ),
+            color: AppColors.textSecondary,
+            height: 1.6,
           ),
         ),
       ],
-    );
-  }
-}
-
-class _HighlightItemWidget extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const _HighlightItemWidget({required this.icon, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [AppColors.accent, AppColors.accentLight],
-              ),
-              borderRadius: BorderRadius.circular(6),
-            ),
-          ),
-          const SizedBox(width: 16),
-          Icon(icon, color: AppColors.accent, size: 20),
-          const SizedBox(width: 12),
-          Text(
-            text,
-            style: const TextStyle(
-              color: AppColors.textPrimary,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -478,7 +373,6 @@ class _PersonalInfoWidget extends StatelessWidget {
       {'label': l10n(context).location, 'value': l10n(context).locationValue},
       {'label': l10n(context).languages, 'value': l10n(context).languagesValue},
       {'label': l10n(context).interests, 'value': l10n(context).interestsValue},
-      {'label': l10n(context).status, 'value': l10n(context).statusValue},
     ];
 
     return GlassContainer(

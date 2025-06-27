@@ -51,7 +51,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get uiUxEnthusiast => 'Người đam mê UI/UX';
 
   @override
-  String get heroDescription => 'Tôi chuyên phát triển giao diện web bằng React và xây dựng ứng dụng di động đa nền tảng với Flutter';
+  String get heroDescription => 'Tôi phát triển giao diện web bằng React và xây dựng ứng dụng di động đa nền tảng với Flutter';
 
   @override
   String get viewMyWork => 'Xem công việc của tôi';
@@ -75,10 +75,16 @@ class AppLocalizationsVi extends AppLocalizations {
   String get passionateFlutterDeveloper => 'Lập trình viên Flutter đầy đam mê';
 
   @override
-  String get aboutDescription1 => 'Tôi là một lập trình viên Flutter tận tâm với hơn 3 năm kinh nghiệm tạo ra những ứng dụng di động đẹp mắt và hiệu suất cao. Hành trình của tôi bắt đầu từ sự say mê với code sạch và thiết kế hoàn hảo từng pixel, và đã phát triển thành niềm đam mê xây dựng những trải nghiệm số lấy người dùng làm trung tâm.';
+  String get aboutDescription1 => 'Tôi là lập trình viên Frontend & Flutter, đam mê lập trình và yêu thích việc tạo ra những sản phẩm web và mobile hữu ích, dễ sử dụng và có tính ứng dụng cao. Mình thích biến ý tưởng thành những giao diện tương tác và ứng dụng có tính mở rộng, giải quyết vấn đề thực tế và tạo ra giá trị cho người dùng.';
 
   @override
-  String get aboutDescription2 => 'Tôi chuyên về phát triển ứng dụng di động đa nền tảng, quản lý trạng thái và tạo ra giao diện người dùng mượt mà. Khi không lập trình, bạn sẽ thấy tôi khám phá các công nghệ mới, đóng góp cho các dự án mã nguồn mở hoặc chia sẻ kiến thức với cộng đồng lập trình viên.';
+  String get aboutDescription2 => 'Tôi có kinh nghiệm sử dụng JavaScript, TypeScript (React), Dart (Flutter), và tích hợp hệ thống thông qua RESTful API và gRPC. Đồng thời, mình cũng quen thuộc với các dịch vụ cloud như Firebase để xây dựng giải pháp đầy đủ tính năng.';
+
+  @override
+  String get aboutDescription3 => 'Tôi đặc biệt quan tâm đến sự kết hợp giữa thiết kế, hiệu năng và trải nghiệm người dùng – hướng đến việc tạo ra công nghệ giúp con người làm việc tốt hơn, thay vì thay thế họ.';
+
+  @override
+  String get aboutDescription4 => 'Ngoài công việc, tôi thường xuyên tìm hiểu công nghệ mới và khám phá các xu hướng mới trong lĩnh vực phần mềm';
 
   @override
   String get yearsExperience => '1+ Năm';
@@ -120,13 +126,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get languages => 'Ngôn ngữ';
 
   @override
-  String get languagesValue => 'Tiếng Việt, Tiếng Anh';
+  String get languagesValue => 'Tiếng Việt, Tiếng Anh, Tiếng Nhật';
 
   @override
   String get interests => 'Sở thích';
 
   @override
-  String get interestsValue => 'Công nghệ, Thiết kế, Du lịch';
+  String get interestsValue => 'Công nghệ, Du lịch';
 
   @override
   String get status => 'Trạng thái';
